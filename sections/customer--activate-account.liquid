@@ -2,11 +2,7 @@
   <div class="max-w-screen-sm w-full scroll-mt-[350px]">
 
     {% assign activateAccountString = 'customer.activate_account.title' | t %}
-    {% render 'armament-heading' with tag: 'h2'
-      , heading_content: activateAccountString
-      , heading_type: 'heading-2'
-      , data_aid: "activate-acc-heading"
-      , classes: 'text-center mb-4 md:mb-6' %}
+    {% render 'armament-heading' with tag, tag: 'h2', heading_content: activateAccountString, heading_type: 'heading-2', data_aid: "activate-acc-heading", classes: 'text-center mb-4 md:mb-6' %}
 
     {%- form 'activate_customer_password' -%}
       {%- if form.errors -%}
@@ -28,17 +24,7 @@
           aria-invalid="true"
         {% endif %}
       {% endcapture %}
-      {% render 'armament-input' with type: "password"
-        , has_label: true
-        , animate_label: true
-        , label_text: "Password"
-        , id: "password"
-        , placeholder: "Password"
-        , name: "customer[password]"
-        , required: true
-        , attributes: password_attr
-        , container_classes: 'mb-3 md:mb-4 text-body'
-        , classes: 'w-full' %}
+      {% render 'armament-input' with type, type: "password", has_label: true, animate_label: true, label_text: "Password", id: "password", placeholder: "Password", name: "customer[password]", required: true, attributes: password_attr, container_classes: 'mb-3 md:mb-4 text-body', classes: 'w-full' %}
 
       {% capture confirm_password_attr %}
         autocomplete="new-password"
@@ -46,32 +32,83 @@
           aria-invalid="true"
         {% endif %}
       {% endcapture %}
-      {% render 'armament-input' with type: "password"
-        , has_label: true
-        , animate_label: true
-        , label_text: "Confirm password"
-        , id: "password_confirmation"
-        , placeholder: "Confirm password"
-        , name: "customer[password_confirmation]"
-        , required: true
-        , attributes: confirm_password_attr
-        , container_classes: 'mb-3 md:mb-4 text-body'
-        , classes: 'w-full' %}
+      {% render 'armament-input' with type, type: "password", has_label: true, animate_label: true, label_text: "Confirm password", id: "password_confirmation", placeholder: "Confirm password", name: "customer[password_confirmation]", required: true, attributes: confirm_password_attr, container_classes: 'mb-3 md:mb-4 text-body', classes: 'w-full' %}
 
       {% assign submitString = 'customer.login_page.submit' | t %}
-      {% render 'armament-button' with content: submitString
-        , style: 'filled'
-        , classes: 'mb-3 md:mb-4 w-full'
-        , data_aid: 'submit-btn' %}
+      {% render 'armament-button' with content, content: submitString, style: 'filled', classes: 'mb-3 md:mb-4 w-full', data_aid: 'submit-btn' %}
 
       {% assign cancelString = 'customer.register.cancel' | t %}
-      {% render 'armament-button' with url: routes.account_register_url
-        , content: cancelString
-        , style: 'outline'
-        , classes: 'w-full'
-        , data_aid: 'cancel-btn' %}
+      {% render 'armament-button' with url, url: routes.account_register_url, content: cancelString, style: 'outline', classes: 'w-full', data_aid: 'cancel-btn' %}
 
     {%- endform -%}
 
   </div>
-</div>
+</div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with tag: 'h2'
+          , heading_content: activateAccountString
+          , heading_type: 'heading-2'
+          , data_aid: "activate-acc-heading"
+          , classes: 'text-center mb-4 md:mb-6' %}
+  to: '{% render ''armament-heading'' with tag, tag: ''h2'', heading_content: activateAccountString,
+    heading_type: ''heading-2'', data_aid: "activate-acc-heading", classes: ''text-center
+    mb-4 md:mb-6'' %}'
+  position: 211..400
+- from: |-
+    {% render 'armament-input' with type: "password"
+            , has_label: true
+            , animate_label: true
+            , label_text: "Password"
+            , id: "password"
+            , placeholder: "Password"
+            , name: "customer[password]"
+            , required: true
+            , attributes: password_attr
+            , container_classes: 'mb-3 md:mb-4 text-body'
+            , classes: 'w-full' %}
+  to: '{% render ''armament-input'' with type, type: "password", has_label: true,
+    animate_label: true, label_text: "Password", id: "password", placeholder: "Password",
+    name: "customer[password]", required: true, attributes: password_attr, container_classes:
+    ''mb-3 md:mb-4 text-body'', classes: ''w-full'' %}'
+  position: 1093..1388
+- from: |-
+    {% render 'armament-input' with type: "password"
+            , has_label: true
+            , animate_label: true
+            , label_text: "Confirm password"
+            , id: "password_confirmation"
+            , placeholder: "Confirm password"
+            , name: "customer[password_confirmation]"
+            , required: true
+            , attributes: confirm_password_attr
+            , container_classes: 'mb-3 md:mb-4 text-body'
+            , classes: 'w-full' %}
+  to: '{% render ''armament-input'' with type, type: "password", has_label: true,
+    animate_label: true, label_text: "Confirm password", id: "password_confirmation",
+    placeholder: "Confirm password", name: "customer[password_confirmation]", required:
+    true, attributes: confirm_password_attr, container_classes: ''mb-3 md:mb-4 text-body'',
+    classes: ''w-full'' %}'
+  position: 1596..1941
+- from: |-
+    {% render 'armament-button' with content: submitString
+            , style: 'filled'
+            , classes: 'mb-3 md:mb-4 w-full'
+            , data_aid: 'submit-btn' %}
+  to: "{% render 'armament-button' with content, content: submitString, style: 'filled',
+    classes: 'mb-3 md:mb-4 w-full', data_aid: 'submit-btn' %}"
+  position: 2016..2155
+- from: |-
+    {% render 'armament-button' with url: routes.account_register_url
+            , content: cancelString
+            , style: 'outline'
+            , classes: 'w-full'
+            , data_aid: 'cancel-btn' %}
+  to: "{% render 'armament-button' with url, url: routes.account_register_url, content:
+    cancelString, style: 'outline', classes: 'w-full', data_aid: 'cancel-btn' %}"
+  position: 2228..2385
+{%- endcomment -%}

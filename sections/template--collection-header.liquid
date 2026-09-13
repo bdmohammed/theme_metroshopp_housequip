@@ -54,7 +54,7 @@
 >
   {% if show_img and collection.image != blank %}
     <div class="{{ img_container_height }} col-start-1 col-end-2 {% if content_over_image %}row-start-1 row-end-3{% else %}row-start-1 row-end-2{% endif %}">
-      {% render 'armament-image' with image: collection.image, classes: img_height, alt: collection.image.alt, sizes: '100vw' %}
+      {% render 'armament-image' with image, image: collection.image, classes: img_height, alt: collection.image.alt, sizes: '100vw' %}
     </div>
   {% endif %}
   {% if show_title %}
@@ -64,7 +64,7 @@
       {{ overlay_bg }}
     >
       <div class="text-{{ section.settings.text_align }}">
-        {% render 'armament-heading' with tag: 'h2', heading_type: 'heading-3', heading_content: collection.title, data_aid: 'collection-title' %}
+        {% render 'armament-heading' with tag, tag: 'h2', heading_type: 'heading-3', heading_content: collection.title, data_aid: 'collection-title' %}
       </div>
     </div>
   {% endif %}
@@ -195,3 +195,20 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-image' with image: collection.image, classes: img_height,
+    alt: collection.image.alt, sizes: '100vw' %}"
+  to: "{% render 'armament-image' with image, image: collection.image, classes: img_height,
+    alt: collection.image.alt, sizes: '100vw' %}"
+  position: 2326..2455
+- from: "{% render 'armament-heading' with tag: 'h2', heading_type: 'heading-3', heading_content:
+    collection.title, data_aid: 'collection-title' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_type: 'heading-3',
+    heading_content: collection.title, data_aid: 'collection-title' %}"
+  position: 3106..3249
+{% endcomment %}

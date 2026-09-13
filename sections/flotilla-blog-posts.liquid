@@ -13,19 +13,7 @@
 
 {% capture placeholder_post %}
   <div loadin-animation-elm loadin-animation-delay data-color-scheme={{ section.settings.content_color_scheme }}>
-    {% render 'ship-image-and-text-card' with
-      placeholder_image: true,
-      image_size: section.settings.image_size,
-      date: "today",
-      show_date: section.settings.show_date,
-      author: "Author",
-      show_author: section.settings.show_author,
-      text_alignment: section.settings.text_alignment,
-      read_more: true,
-      heading: "Blog post title",
-      text: "Use this space to show excerpts from your articles. Change excerpts by editing your blog posts.",
-      border: border
-    %}
+    {% render 'ship-image-and-text-card' with placeholder_image, placeholder_image: true, image_size: section.settings.image_size, date: "today", show_date: section.settings.show_date, author: "Author", show_author: section.settings.show_author, text_alignment: section.settings.text_alignment, read_more: true, heading: "Blog post title", text: "Use this space to show excerpts from your articles. Change excerpts by editing your blog posts.", border: border %}
   </div>
 {% endcapture %}
 <section data-color-scheme={{ section.settings.bg_color_scheme }} class="text-body bg-page py-5 px-4 md:p-6">
@@ -37,17 +25,10 @@
   {% if section.settings.subheading != blank or section.settings.heading != blank %}
     <div class="pb-4 px-4 md:px-6 md:pb-5 text-center">
       {% if section.settings.subheading != blank %}
-        {% render 'armament-heading' with tag: 'h4'
-          , heading_content: section.settings.subheading
-          , heading_type: 'heading-4'
-          , classes: 'mb-2 md:mb-3'
-          , data_aid: 'blog-posts-subheading' %}
+        {% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading, heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'blog-posts-subheading' %}
       {% endif %}
       {% if section.settings.heading != blank %}
-        {% render 'armament-heading' with tag: 'h2'
-          , heading_content: section.settings.heading
-          , heading_type: 'section-heading'
-          , data_aid: 'blog-posts-subheading' %}
+        {% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading, heading_type: 'section-heading', data_aid: 'blog-posts-subheading' %}
       {% endif %}
     </div>
   {% endif %}
@@ -78,19 +59,7 @@
                 loadin-animation-elm
                 loadin-animation-delay
                 data-color-scheme={{ section.settings.content_color_scheme }}>
-                {% render 'ship-image-and-text-card' with image: article.image
-                  , image_size: section.settings.image_size
-                  , url: article.url
-                  , date: article.published_at
-                  , show_date: section.settings.show_date
-                  , author: article.author
-                  , show_author: section.settings.show_author
-                  , heading: article.title
-                  , text: text
-                  , text_alignment: section.settings.text_alignment
-                  , read_more: true
-                  , border: border
-                %}
+                {% render 'ship-image-and-text-card' with image, image: article.image, image_size: section.settings.image_size, url: article.url, date: article.published_at, show_date: section.settings.show_date, author: article.author, show_author: section.settings.show_author, heading: article.title, text: text, text_alignment: section.settings.text_alignment, read_more: true, border: border %}
               </div>
             {% endfor %}
           {% else %}
@@ -111,19 +80,7 @@
                 loadin-animation-elm
                 loadin-animation-delay
                 data-color-scheme={{ section.settings.content_color_scheme }}>
-                {% render 'ship-image-and-text-card' with image: current_post.image
-                  , image_size: section.settings.image_size
-                  , url: current_post.url
-                  , date: current_post.published_at
-                  , show_date: section.settings.show_date
-                  , author: current_post.author
-                  , show_author: section.settings.show_author
-                  , heading: current_post.title
-                  , text: text
-                  , text_alignment: section.settings.text_alignment
-                  , read_more: true
-                  , border: border
-                %}
+                {% render 'ship-image-and-text-card' with image, image: current_post.image, image_size: section.settings.image_size, url: current_post.url, date: current_post.published_at, show_date: section.settings.show_date, author: current_post.author, show_author: section.settings.show_author, heading: current_post.title, text: text, text_alignment: section.settings.text_alignment, read_more: true, border: border %}
               </div>
             {% else %}
               {{ placeholder_post }}
@@ -350,4 +307,89 @@
       "groups": ["header", "footer", "custom.overlay"]
     }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'ship-image-and-text-card' with
+          placeholder_image: true,
+          image_size: section.settings.image_size,
+          date: "today",
+          show_date: section.settings.show_date,
+          author: "Author",
+          show_author: section.settings.show_author,
+          text_alignment: section.settings.text_alignment,
+          read_more: true,
+          heading: "Blog post title",
+          text: "Use this space to show excerpts from your articles. Change excerpts by editing your blog posts.",
+          border: border
+        %}
+  to: '{% render ''ship-image-and-text-card'' with placeholder_image, placeholder_image:
+    true, image_size: section.settings.image_size, date: "today", show_date: section.settings.show_date,
+    author: "Author", show_author: section.settings.show_author, text_alignment: section.settings.text_alignment,
+    read_more: true, heading: "Blog post title", text: "Use this space to show excerpts
+    from your articles. Change excerpts by editing your blog posts.", border: border
+    %}'
+  position: 438..896
+- from: |-
+    {% render 'armament-heading' with tag: 'h4'
+              , heading_content: section.settings.subheading
+              , heading_type: 'heading-4'
+              , classes: 'mb-2 md:mb-3'
+              , data_aid: 'blog-posts-subheading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'blog-posts-subheading'
+    %}"
+  position: 1311..1495
+- from: |-
+    {% render 'armament-heading' with tag: 'h2'
+              , heading_content: section.settings.heading
+              , heading_type: 'section-heading'
+              , data_aid: 'blog-posts-subheading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading,
+    heading_type: 'section-heading', data_aid: 'blog-posts-subheading' %}"
+  position: 1571..1733
+- from: |-
+    {% render 'ship-image-and-text-card' with image: article.image
+                      , image_size: section.settings.image_size
+                      , url: article.url
+                      , date: article.published_at
+                      , show_date: section.settings.show_date
+                      , author: article.author
+                      , show_author: section.settings.show_author
+                      , heading: article.title
+                      , text: text
+                      , text_alignment: section.settings.text_alignment
+                      , read_more: true
+                      , border: border
+                    %}
+  to: "{% render 'ship-image-and-text-card' with image, image: article.image, image_size:
+    section.settings.image_size, url: article.url, date: article.published_at, show_date:
+    section.settings.show_date, author: article.author, show_author: section.settings.show_author,
+    heading: article.title, text: text, text_alignment: section.settings.text_alignment,
+    read_more: true, border: border %}"
+  position: 2881..3264
+- from: |-
+    {% render 'ship-image-and-text-card' with image: current_post.image
+                      , image_size: section.settings.image_size
+                      , url: current_post.url
+                      , date: current_post.published_at
+                      , show_date: section.settings.show_date
+                      , author: current_post.author
+                      , show_author: section.settings.show_author
+                      , heading: current_post.title
+                      , text: text
+                      , text_alignment: section.settings.text_alignment
+                      , read_more: true
+                      , border: border
+                    %}
+  to: "{% render 'ship-image-and-text-card' with image, image: current_post.image,
+    image_size: section.settings.image_size, url: current_post.url, date: current_post.published_at,
+    show_date: section.settings.show_date, author: current_post.author, show_author:
+    section.settings.show_author, heading: current_post.title, text: text, text_alignment:
+    section.settings.text_alignment, read_more: true, border: border %}"
+  position: 4081..4489
+{%- endcomment -%}

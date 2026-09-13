@@ -70,7 +70,7 @@
         {% assign attrs = attrs | append: ' data-product-form-block="true"' %}
       {% endif %}
 
-      {% render 'armament-button' with type: 'submit', content: button_text, attributes: attrs, classes: 'w-full', style: button_style %}
+      {% render 'armament-button' with type, type: 'submit', content: button_text, attributes: attrs, classes: 'w-full', style: button_style %}
     </div>
 
     {% if dynamic_buttons %}
@@ -78,4 +78,15 @@
         {{ form | payment_button }}
     {% endif %}
   {% endform %}
-</div>
+</div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-button' with type: 'submit', content: button_text, attributes:
+    attrs, classes: 'w-full', style: button_style %}"
+  to: "{% render 'armament-button' with type, type: 'submit', content: button_text,
+    attributes: attrs, classes: 'w-full', style: button_style %}"
+  position: 2852..2989
+{%- endcomment -%}

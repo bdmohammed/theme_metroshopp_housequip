@@ -43,15 +43,10 @@
     {% if section.settings.subheading != blank or section.settings.heading != blank %}
       <div class="pb-4 px-4 md:px-6 md:pb-5 text-center">
         {% if section.settings.subheading != blank %}
-          {% render 'armament-heading' with tag: 'h4'
-            , heading_content: section.settings.subheading
-            , heading_type: 'heading-4'
-            , classes: 'mb-2 md:mb-3' %}
+          {% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading, heading_type: 'heading-4', classes: 'mb-2 md:mb-3' %}
         {% endif %}
         {% if section.settings.heading != blank %}
-          {% render 'armament-heading' with tag: 'h2'
-            , heading_content: section.settings.heading
-            , heading_type: 'section-heading' %}
+          {% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading, heading_type: 'section-heading' %}
         {% endif %}
       </div>
     {% endif %}
@@ -80,17 +75,7 @@
               {{ block.shopify_attributes }}
               data-block-id="{{ block.id }}">
               <div class="w-full md:mr-1">
-                {% render 'ship-image-and-text-card' with image: block.settings.image
-                  , image_size: section.settings.image_size
-                  , text_alignment: section.settings.text_alignment
-                  , placeholder_image: true
-                  , heading: block.settings.heading
-                  , text: block.settings.text
-                  , url: block.settings.link
-                  , button_label: block.settings.button_text
-                  , button_style: block.settings.button_style
-                  , border: border
-                %}
+                {% render 'ship-image-and-text-card' with image, image: block.settings.image, image_size: section.settings.image_size, text_alignment: section.settings.text_alignment, placeholder_image: true, heading: block.settings.heading, text: block.settings.text, url: block.settings.link, button_label: block.settings.button_text, button_style: block.settings.button_style, border: border %}
               </div>
             </li>
           {% endfor %}
@@ -99,16 +84,9 @@
 
       <template>
         {% capture svg_colors %}data-color-scheme="{{ section.settings.bg_color_scheme }}"{% endcapture %}
-        {% render 'armament-slider-arrows' with hide_on_mobile: true
-          , classes: arrow_class
-          , border: border
-          , attributes: svg_colors %}
+        {% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true, classes: arrow_class, border: border, attributes: svg_colors %}
         <div data-name="mobile-indicator" class="block md:hidden">
-          {% render 'armament-scroll-bar' with classes: 'py-4'
-            , item_count: section.blocks.size
-            , parent: 'slider-engine'
-            , target: 'slider'
-            , indicator: 'progress' %}
+          {% render 'armament-scroll-bar' with classes, classes: 'py-4', item_count: section.blocks.size, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
         </div>
       </template>
     </slider-engine>
@@ -325,4 +303,61 @@
       "groups": ["header", "custom.overlay"]
     }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with tag: 'h4'
+                , heading_content: section.settings.subheading
+                , heading_type: 'heading-4'
+                , classes: 'mb-2 md:mb-3' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3' %}"
+  position: 1391..1540
+- from: |-
+    {% render 'armament-heading' with tag: 'h2'
+                , heading_content: section.settings.heading
+                , heading_type: 'section-heading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading,
+    heading_type: 'section-heading' %}"
+  position: 1622..1749
+- from: |-
+    {% render 'ship-image-and-text-card' with image: block.settings.image
+                      , image_size: section.settings.image_size
+                      , text_alignment: section.settings.text_alignment
+                      , placeholder_image: true
+                      , heading: block.settings.heading
+                      , text: block.settings.text
+                      , url: block.settings.link
+                      , button_label: block.settings.button_text
+                      , button_style: block.settings.button_style
+                      , border: border
+                    %}
+  to: "{% render 'ship-image-and-text-card' with image, image: block.settings.image,
+    image_size: section.settings.image_size, text_alignment: section.settings.text_alignment,
+    placeholder_image: true, heading: block.settings.heading, text: block.settings.text,
+    url: block.settings.link, button_label: block.settings.button_text, button_style:
+    block.settings.button_style, border: border %}"
+  position: 2744..3125
+- from: |-
+    {% render 'armament-slider-arrows' with hide_on_mobile: true
+              , classes: arrow_class
+              , border: border
+              , attributes: svg_colors %}
+  to: "{% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true,
+    classes: arrow_class, border: border, attributes: svg_colors %}"
+  position: 3348..3489
+- from: |-
+    {% render 'armament-scroll-bar' with classes: 'py-4'
+                , item_count: section.blocks.size
+                , parent: 'slider-engine'
+                , target: 'slider'
+                , indicator: 'progress' %}
+  to: "{% render 'armament-scroll-bar' with classes, classes: 'py-4', item_count:
+    section.blocks.size, parent: 'slider-engine', target: 'slider', indicator: 'progress'
+    %}"
+  position: 3567..3730
+{%- endcomment -%}

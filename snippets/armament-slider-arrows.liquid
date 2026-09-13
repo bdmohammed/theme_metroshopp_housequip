@@ -46,10 +46,10 @@
   {% if attributes %}{{ attributes }}{% endif %}
 >
   <div class="w-44 h-44 flex items-center justify-center shrink-0">
-    {% render 'armament-icon' with icon: 'arrow-left', no_animation: true %}
+    {% render 'armament-icon' with icon, icon: 'arrow-left', no_animation: true %}
   </div>
   <div class="w-44 h-44 flex items-center justify-center shrink-0 animate-slide-left">
-    {% render 'armament-icon' with icon: 'arrow-left', no_animation: true %}
+    {% render 'armament-icon' with icon, icon: 'arrow-left', no_animation: true %}
   </div>
 </div>
 <div
@@ -60,9 +60,32 @@
   {% if attributes %}{{ attributes }}{% endif %}
 >
   <div class="w-44 h-44 flex items-center justify-center shrink-0 animate-slide-right">
-    {% render 'armament-icon' with icon: 'arrow-right', no_animation: true %}
+    {% render 'armament-icon' with icon, icon: 'arrow-right', no_animation: true %}
   </div>
   <div class="w-44 h-44 flex items-center justify-center shrink-0">
-    {% render 'armament-icon' with icon: 'arrow-right', no_animation: true %}
+    {% render 'armament-icon' with icon, icon: 'arrow-right', no_animation: true %}
   </div>
 </div>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-icon' with icon: 'arrow-left', no_animation: true %}"
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-left', no_animation: true
+    %}"
+  position: 2006..2084
+- from: "{% render 'armament-icon' with icon: 'arrow-left', no_animation: true %}"
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-left', no_animation: true
+    %}"
+  position: 2185..2263
+- from: "{% render 'armament-icon' with icon: 'arrow-right', no_animation: true %}"
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-right', no_animation: true
+    %}"
+  position: 2571..2650
+- from: "{% render 'armament-icon' with icon: 'arrow-right', no_animation: true %}"
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-right', no_animation: true
+    %}"
+  position: 2732..2811
+{% endcomment %}

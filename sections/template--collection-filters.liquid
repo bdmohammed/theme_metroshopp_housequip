@@ -29,12 +29,12 @@
       style="display:flex;"
     {% endif %}
   >
-    {% render 'ship-filter-dropdown-trigger' with show_filter: true, enable_filtering: section.settings.enable_filtering, show_sort: true, enable_sorting: section.settings.enable_sorting, results: collection, filtering_position: section.settings.filtering_position %}
+    {% render 'ship-filter-dropdown-trigger' with show_filter, show_filter: true, enable_filtering: section.settings.enable_filtering, show_sort: true, enable_sorting: section.settings.enable_sorting, results: collection, filtering_position: section.settings.filtering_position %}
   </div>
 
   {% if section.settings.filtering_position == 'sidebar' %}
     <div data-armada-selector="filter-sidebar-container" class="hidden lg:block">
-      {% render 'flotilla-filter-form' with results: collection, product_count: collection.products_count, enable_sorting: section.settings.enable_sorting, filter_position: section.settings.filtering_position, data-aid="collection_sidebar_filter_form", filter_classes: filter_classes, form_id: 'filter_form', enable_filtering: section.settings.enable_filtering, attributes: 'data-armada-selector="filter-sidebar-form"' %}
+      {% render 'flotilla-filter-form' with results, results: collection, product_count: collection.products_count, enable_sorting: section.settings.enable_sorting, filter_position: section.settings.filtering_position, filter_classes: filter_classes, form_id: 'filter_form', enable_filtering: section.settings.enable_filtering, attributes: 'data-armada-selector="filter-sidebar-form"' %}
     </div>
   {% endif %}
 </section>
@@ -49,12 +49,12 @@
         style="display:flex;"
       {% endif %}
     >
-      {% render 'ship-filter-dropdown-trigger' with show_filter: true, enable_filtering: section.settings.enable_filtering, show_sort: true, enable_sorting: section.settings.enable_sorting, results: collection, filtering_position: section.settings.filtering_position %}
+      {% render 'ship-filter-dropdown-trigger' with show_filter, show_filter: true, enable_filtering: section.settings.enable_filtering, show_sort: true, enable_sorting: section.settings.enable_sorting, results: collection, filtering_position: section.settings.filtering_position %}
     </div>
 
     {% if section.settings.enable_filtering and section.settings.filtering_position == 'sidebar' %}
       <div data-armada-selector="filter-sidebar-container">
-        {% render 'flotilla-filter-form' with results: collection, product_count: collection.products_count, enable_sorting: section.settings.enable_sorting, filter_position: section.settings.filtering_position, data-aid="collection_sidebar_filter_form", filter_classes: filter_classes, form_id: 'filter_form', enable_filtering: section.settings.enable_filtering, attributes: 'data-armada-selector="filter-sidebar-form"' %}
+        {% render 'flotilla-filter-form' with results, results: collection, product_count: collection.products_count, enable_sorting: section.settings.enable_sorting, filter_position: section.settings.filtering_position, filter_classes: filter_classes, form_id: 'filter_form', enable_filtering: section.settings.enable_filtering, attributes: 'data-armada-selector="filter-sidebar-form"' %}
       </div>
     {% endif %}
   </section>
@@ -66,12 +66,12 @@
     data-armada-selector="collection-top-bar-facets"
   >
     <div class="col-start-2 col-end-3 row-start-1 row-end-2">
-      {% render 'ship-filter-active-facets' with results: collection, product_count: collection.products_count, filter_position: section.settings.filtering_position, enable_sorting: section.settings.enable_sorting, classes: active_facet_classes %}
+      {% render 'ship-filter-active-facets' with results, results: collection, product_count: collection.products_count, filter_position: section.settings.filtering_position, enable_sorting: section.settings.enable_sorting, classes: active_facet_classes %}
     </div>
 
     {% if section.settings.enable_sorting %}
       <div class="col-start-2 col-end-3 row-start-1 row-end-2 justify-self-end lg:max-w-[330px]">
-        {% render 'ship-filter-dropdown-trigger' with show_filter: false, enable_filtering: section.settings.enable_filtering, show_sort: true, enable_sorting: section.settings.enable_sorting, results: collection, filtering_position: section.settings.filtering_position, enable_border_bottom: false, classes: 'sidebar-sort-dropdown' %}
+        {% render 'ship-filter-dropdown-trigger' with show_filter, show_filter: false, enable_filtering: section.settings.enable_filtering, show_sort: true, enable_sorting: section.settings.enable_sorting, results: collection, filtering_position: section.settings.filtering_position, enable_border_bottom: false, classes: 'sidebar-sort-dropdown' %}
       </div>
     {% endif %}
   </section>
@@ -82,7 +82,7 @@
       class="hidden relative lg:grid grid-cols-[minmax(0,270px),1fr,minmax(0,auto)] grid-rows-1 items-baseline bg-page text-body min-h-[60px]"
     >
       <div class="col-start-1 col-end-2 row-start-1 row-end-2">
-        {% render 'ship-filter-active-facets' with results: collection, product_count: collection.products_count, filter_position: section.settings.filtering_position, enable_sorting: section.settings.enable_sorting, classes: active_facet_classes %}
+        {% render 'ship-filter-active-facets' with results, results: collection, product_count: collection.products_count, filter_position: section.settings.filtering_position, enable_sorting: section.settings.enable_sorting, classes: active_facet_classes %}
       </div>
 
       <div class="col-start-2 col-end-3 row-start-1 row-end-2 justify-self-end lg:max-w-[330px]"></div>
@@ -154,3 +154,75 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'ship-filter-dropdown-trigger' with show_filter: true, enable_filtering:
+    section.settings.enable_filtering, show_sort: true, enable_sorting: section.settings.enable_sorting,
+    results: collection, filtering_position: section.settings.filtering_position %}"
+  to: "{% render 'ship-filter-dropdown-trigger' with show_filter, show_filter: true,
+    enable_filtering: section.settings.enable_filtering, show_sort: true, enable_sorting:
+    section.settings.enable_sorting, results: collection, filtering_position: section.settings.filtering_position
+    %}"
+  position: 1193..1469
+- from: '{% render ''flotilla-filter-form'' with results: collection, product_count:
+    collection.products_count, enable_sorting: section.settings.enable_sorting, filter_position:
+    section.settings.filtering_position, data-aid="collection_sidebar_filter_form",
+    filter_classes: filter_classes, form_id: ''filter_form'', enable_filtering: section.settings.enable_filtering,
+    attributes: ''data-armada-selector="filter-sidebar-form"'' %}'
+  to: '{% render ''flotilla-filter-form'' with results, results: collection, product_count:
+    collection.products_count, enable_sorting: section.settings.enable_sorting, filter_position:
+    section.settings.filtering_position, filter_classes: filter_classes, form_id:
+    ''filter_form'', enable_filtering: section.settings.enable_filtering, attributes:
+    ''data-armada-selector="filter-sidebar-form"'' %}'
+  position: 1628..2009
+- from: "{% render 'ship-filter-dropdown-trigger' with show_filter: true, enable_filtering:
+    section.settings.enable_filtering, show_sort: true, enable_sorting: section.settings.enable_sorting,
+    results: collection, filtering_position: section.settings.filtering_position %}"
+  to: "{% render 'ship-filter-dropdown-trigger' with show_filter, show_filter: true,
+    enable_filtering: section.settings.enable_filtering, show_sort: true, enable_sorting:
+    section.settings.enable_sorting, results: collection, filtering_position: section.settings.filtering_position
+    %}"
+  position: 2563..2839
+- from: '{% render ''flotilla-filter-form'' with results: collection, product_count:
+    collection.products_count, enable_sorting: section.settings.enable_sorting, filter_position:
+    section.settings.filtering_position, data-aid="collection_sidebar_filter_form",
+    filter_classes: filter_classes, form_id: ''filter_form'', enable_filtering: section.settings.enable_filtering,
+    attributes: ''data-armada-selector="filter-sidebar-form"'' %}'
+  to: '{% render ''flotilla-filter-form'' with results, results: collection, product_count:
+    collection.products_count, enable_sorting: section.settings.enable_sorting, filter_position:
+    section.settings.filtering_position, filter_classes: filter_classes, form_id:
+    ''filter_form'', enable_filtering: section.settings.enable_filtering, attributes:
+    ''data-armada-selector="filter-sidebar-form"'' %}'
+  position: 3020..3401
+- from: "{% render 'ship-filter-active-facets' with results: collection, product_count:
+    collection.products_count, filter_position: section.settings.filtering_position,
+    enable_sorting: section.settings.enable_sorting, classes: active_facet_classes
+    %}"
+  to: "{% render 'ship-filter-active-facets' with results, results: collection, product_count:
+    collection.products_count, filter_position: section.settings.filtering_position,
+    enable_sorting: section.settings.enable_sorting, classes: active_facet_classes
+    %}"
+  position: 3872..4122
+- from: "{% render 'ship-filter-dropdown-trigger' with show_filter: false, enable_filtering:
+    section.settings.enable_filtering, show_sort: true, enable_sorting: section.settings.enable_sorting,
+    results: collection, filtering_position: section.settings.filtering_position,
+    enable_border_bottom: false, classes: 'sidebar-sort-dropdown' %}"
+  to: "{% render 'ship-filter-dropdown-trigger' with show_filter, show_filter: false,
+    enable_filtering: section.settings.enable_filtering, show_sort: true, enable_sorting:
+    section.settings.enable_sorting, results: collection, filtering_position: section.settings.filtering_position,
+    enable_border_bottom: false, classes: 'sidebar-sort-dropdown' %}"
+  position: 4286..4626
+- from: "{% render 'ship-filter-active-facets' with results: collection, product_count:
+    collection.products_count, filter_position: section.settings.filtering_position,
+    enable_sorting: section.settings.enable_sorting, classes: active_facet_classes
+    %}"
+  to: "{% render 'ship-filter-active-facets' with results, results: collection, product_count:
+    collection.products_count, filter_position: section.settings.filtering_position,
+    enable_sorting: section.settings.enable_sorting, classes: active_facet_classes
+    %}"
+  position: 4986..5236
+{% endcomment %}

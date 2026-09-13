@@ -1,22 +1,14 @@
 <customer-addresses data-aid="customer-addresses" class="block p-4 md:p-6">
   <div data-aid="customer-addresses-inner" class="max-w-screen-xl mx-auto">
     {% assign addressesString = 'customer.addresses.title' | t %}
-    {% render 'armament-heading' with tag: 'h2'
-      , heading_content: addressesString
-      , heading_type: 'heading-2'
-      , data_aid: "customer-addresses-heading"
-      , classes: 'text-center mb-4 md:mb-6' %}
+    {% render 'armament-heading' with tag, tag: 'h2', heading_content: addressesString, heading_type: 'heading-2', data_aid: "customer-addresses-heading", classes: 'text-center mb-4 md:mb-6' %}
 
     <div class="md:flex mb-3 md:mb-4">
       <div class="mr-3 mb-3 md:mr-4 md:mb-0 w-full md:w-auto" data-aid="return-btn-container">
         {% capture btn_content %}
-            <span class="inline-block relative -top-[1px]">{% render 'armament-icon' with icon: 'arrow-left', margin: '0 10px 0 0', classes: 'inline-block', no_animation: true %}</span>{{ 'customer.account.return' | t }}
+            <span class="inline-block relative -top-[1px]">{% render 'armament-icon' with icon, icon: 'arrow-left', margin: '0 10px 0 0', classes: 'inline-block', no_animation: true %}</span>{{ 'customer.account.return' | t }}
           {% endcapture %}
-        {% render 'armament-button' with url: routes.account_url
-          , content: btn_content
-          , classes: 'w-full'
-          , style: 'outline'
-          , data_aid: 'return-btn' %}
+        {% render 'armament-button' with url, url: routes.account_url, content: btn_content, classes: 'w-full', style: 'outline', data_aid: 'return-btn' %}
       </div>
 
       <div class="w-full md:w-auto">
@@ -25,11 +17,7 @@
           class="flex justify-center md:justify-end"
           data-aid="new-address-btn-container">
           {% assign newAddressString = 'customer.addresses.add_new' | t %}
-          {% render 'armament-button' with content: newAddressString
-            , style: 'filled'
-            , classes: 'w-full'
-            , attributes: 'data-armada-selector="modal-open"'
-            , data_aid: 'new-address-btn' %}
+          {% render 'armament-button' with content, content: newAddressString, style: 'filled', classes: 'w-full', attributes: 'data-armada-selector="modal-open"', data_aid: 'new-address-btn' %}
         </armada-modal-open>
         <armada-modal
           data-modal-id="address-form--new"
@@ -37,7 +25,7 @@
           data-modal-heading="{{ 'customer.addresses.add_new' | t }}"
           data-modal-underlay-classes="bg-black opacity-60"
           class="invisible opacity-0">
-          {% render 'ship-address-form' with parameter: 'new' %}
+          {% render 'ship-address-form' with parameter, parameter: 'new' %}
         </armada-modal>
         <safe-load-scripts>
           <script
@@ -63,8 +51,7 @@
         data-armada-selector="addresses-card-list"
         class="sm:mx-4 md:mx-0 grid gap-1 grid-cols-1 md:grid-cols-6">
         {%- for address in customer.addresses -%}
-          {% render 'ship-address-card' with address: address
-            , isLi: true %}
+          {% render 'ship-address-card' with address, address: address, isLi: true %}
         {%- endfor -%}
       </ul>
       {% render 'ship-pagination'
@@ -79,4 +66,52 @@
     src="{{ 'component-customer-addresses.min.js' | asset_url }}"
     defer="defer"
     type="module"></script>
-</safe-load-scripts>
+</safe-load-scripts>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with tag: 'h2'
+          , heading_content: addressesString
+          , heading_type: 'heading-2'
+          , data_aid: "customer-addresses-heading"
+          , classes: 'text-center mb-4 md:mb-6' %}
+  to: '{% render ''armament-heading'' with tag, tag: ''h2'', heading_content: addressesString,
+    heading_type: ''heading-2'', data_aid: "customer-addresses-heading", classes:
+    ''text-center mb-4 md:mb-6'' %}'
+  position: 222..411
+- from: "{% render 'armament-icon' with icon: 'arrow-left', margin: '0 10px 0 0',
+    classes: 'inline-block', no_animation: true %}"
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-left', margin: '0 10px 0
+    0', classes: 'inline-block', no_animation: true %}"
+  position: 640..765
+- from: |-
+    {% render 'armament-button' with url: routes.account_url
+              , content: btn_content
+              , classes: 'w-full'
+              , style: 'outline'
+              , data_aid: 'return-btn' %}
+  to: "{% render 'armament-button' with url, url: routes.account_url, content: btn_content,
+    classes: 'w-full', style: 'outline', data_aid: 'return-btn' %}"
+  position: 843..990
+- from: |-
+    {% render 'armament-button' with content: newAddressString
+                , style: 'filled'
+                , classes: 'w-full'
+                , attributes: 'data-armada-selector="modal-open"'
+                , data_aid: 'new-address-btn' %}
+  to: '{% render ''armament-button'' with content, content: newAddressString, style:
+    ''filled'', classes: ''w-full'', attributes: ''data-armada-selector="modal-open"'',
+    data_aid: ''new-address-btn'' %}'
+  position: 1299..1483
+- from: "{% render 'ship-address-form' with parameter: 'new' %}"
+  to: "{% render 'ship-address-form' with parameter, parameter: 'new' %}"
+  position: 1798..1863
+- from: |-
+    {% render 'ship-address-card' with address: address
+                , isLi: true %}
+  to: "{% render 'ship-address-card' with address, address: address, isLi: true %}"
+  position: 2671..2746
+{%- endcomment -%}

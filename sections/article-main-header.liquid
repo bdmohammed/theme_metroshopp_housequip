@@ -24,7 +24,7 @@
 
       {% if article.image != blank %}
         <div class="aspect-{{ block.settings.article_image_aspect_ratio }} relative w-full" {{ block.shopify_attributes }}>
-          {% render 'armament-image' with image: article.image, alt: article.image.alt, classes: classes, sizes: '100vw' %}
+          {% render 'armament-image' with image, image: article.image, alt: article.image.alt, classes: classes, sizes: '100vw' %}
         </div>
       {% endif %}
     {% endif %}
@@ -40,12 +40,12 @@
         {% for block in section.blocks %}
           {% if block.type == 'article_subtitle' %}
             <div class="flex flex-col items-center justify-center first:mb-2 first:md:mb-3" {{ block.shopify_attributes }}>
-              {% render 'armament-heading' with tag: 'h4', heading_content: blog.title, heading_type: 'heading-4', data_aid: 'article-blog-title' %}
+              {% render 'armament-heading' with tag, tag: 'h4', heading_content: blog.title, heading_type: 'heading-4', data_aid: 'article-blog-title' %}
             </div>
           {% endif %}
           {% if block.type == 'article_title' %}
             <div class="flex flex-col items-center justify-center first:mb-2 first:md:mb-3" {{ block.shopify_attributes }}>
-              {% render 'armament-heading' with tag: 'h2', heading_content: article.title, heading_type: 'heading-2', data_aid: 'article-title' %}
+              {% render 'armament-heading' with tag, tag: 'h2', heading_content: article.title, heading_type: 'heading-2', data_aid: 'article-title' %}
             </div>
           {% endif %}
         {% endfor %}
@@ -179,4 +179,25 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-image' with image: article.image, alt: article.image.alt,
+    classes: classes, sizes: '100vw' %}"
+  to: "{% render 'armament-image' with image, image: article.image, alt: article.image.alt,
+    classes: classes, sizes: '100vw' %}"
+  position: 1087..1207
+- from: "{% render 'armament-heading' with tag: 'h4', heading_content: blog.title,
+    heading_type: 'heading-4', data_aid: 'article-blog-title' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h4', heading_content: blog.title,
+    heading_type: 'heading-4', data_aid: 'article-blog-title' %}"
+  position: 1851..1990
+- from: "{% render 'armament-heading' with tag: 'h2', heading_content: article.title,
+    heading_type: 'heading-2', data_aid: 'article-title' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: article.title,
+    heading_type: 'heading-2', data_aid: 'article-title' %}"
+  position: 2219..2356
+{%- endcomment -%}

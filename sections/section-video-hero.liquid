@@ -76,25 +76,25 @@
   class="bg-page text-body grid grid-cols-1 grid-rows-[repeat(2,minmax(0,auto))] lg:grid-cols-1 lg:grid-rows-1 {{ section_heights }}"
 >
   {% if section.settings.video %}
-    {% render 'armament-video' with video: section.settings.video, poster: section.settings.fallback_image, autoplay: true, loop: true, is_hero: true, classes: video_classes, iframe_classes: iframe_classes, attributes: 'data-aid="video-hero"', button_classes: button_classes, image_classes: image_classes %}
+    {% render 'armament-video' with video, video: section.settings.video, poster: section.settings.fallback_image, autoplay: true, loop: true, is_hero: true, classes: video_classes, iframe_classes: iframe_classes, attributes: 'data-aid="video-hero"', button_classes: button_classes, image_classes: image_classes %}
   {% elsif section.settings.video_url != blank %}
-    {% render 'armament-video' with url: section.settings.video_url, poster: section.settings.fallback_image, autoplay: true, loop: true, is_hero: true, classes: video_classes, iframe_classes: iframe_classes, attributes: 'data-aid="video-hero"', button_classes: button_classes, image_classes: image_classes %}
+    {% render 'armament-video' with url, url: section.settings.video_url, poster: section.settings.fallback_image, autoplay: true, loop: true, is_hero: true, classes: video_classes, iframe_classes: iframe_classes, attributes: 'data-aid="video-hero"', button_classes: button_classes, image_classes: image_classes %}
   {% endif %}
   <div class="col-start-1 col-end-2 row-start-1 row-end-2 z-20"></div>
   {% if section.settings.section_heading != blank or buttons_enabled %}
     <div class="flex items-center justify-center flex-col lg:self-end {{ caption_align }} {{ caption_size }} p-4 border-t-4 col-start-1 col-end-2 row-start-2 row-end-3 lg:row-start-1 lg:row-end-2 z-30 lg:my-5 lg:mx-5 bg-page max-w-full lg:max-w-max shadow-lg lg:shadow-none">
       {% if section.settings.section_heading != blank %}
-        {% render 'armament-heading' with heading_content: section.settings.section_heading, tag: 'h3', heading_type: 'heading-3', classes: 'text-center', data_aid: 'video-hero-heading' %}
+        {% render 'armament-heading' with heading_content, heading_content: section.settings.section_heading, tag: 'h3', heading_type: 'heading-3', classes: 'text-center', data_aid: 'video-hero-heading' %}
       {% endif %}
 
       {% if buttons_enabled %}
         <div class="flex flex-row{% if section.settings.section_heading != blank %} mt-3 md:mt-4{% endif %}">
           {% if section.settings.button_1_link != blank and section.settings.button_1_text != blank %}
-            {% render 'armament-button' with url: section.settings.button_1_link, content: section.settings.button_1_text, style: section.settings.button_1_style, classes: button_spacing, data_aid: "button-1" %}
+            {% render 'armament-button' with url, url: section.settings.button_1_link, content: section.settings.button_1_text, style: section.settings.button_1_style, classes: button_spacing, data_aid: "button-1" %}
           {% endif %}
 
           {% if section.settings.button_2_link != blank and section.settings.button_2_text != blank %}
-            {% render 'armament-button' with url: section.settings.button_2_link, content: section.settings.button_2_text, style: section.settings.button_2_style, data_aid: "button-2" %}
+            {% render 'armament-button' with url, url: section.settings.button_2_link, content: section.settings.button_2_text, style: section.settings.button_2_style, data_aid: "button-2" %}
           {% endif %}
         </div>
       {% endif %}
@@ -327,3 +327,49 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render ''armament-video'' with video: section.settings.video, poster:
+    section.settings.fallback_image, autoplay: true, loop: true, is_hero: true, classes:
+    video_classes, iframe_classes: iframe_classes, attributes: ''data-aid="video-hero"'',
+    button_classes: button_classes, image_classes: image_classes %}'
+  to: '{% render ''armament-video'' with video, video: section.settings.video, poster:
+    section.settings.fallback_image, autoplay: true, loop: true, is_hero: true, classes:
+    video_classes, iframe_classes: iframe_classes, attributes: ''data-aid="video-hero"'',
+    button_classes: button_classes, image_classes: image_classes %}'
+  position: 3078..3388
+- from: '{% render ''armament-video'' with url: section.settings.video_url, poster:
+    section.settings.fallback_image, autoplay: true, loop: true, is_hero: true, classes:
+    video_classes, iframe_classes: iframe_classes, attributes: ''data-aid="video-hero"'',
+    button_classes: button_classes, image_classes: image_classes %}'
+  to: '{% render ''armament-video'' with url, url: section.settings.video_url, poster:
+    section.settings.fallback_image, autoplay: true, loop: true, is_hero: true, classes:
+    video_classes, iframe_classes: iframe_classes, attributes: ''data-aid="video-hero"'',
+    button_classes: button_classes, image_classes: image_classes %}'
+  position: 3443..3753
+- from: "{% render 'armament-heading' with heading_content: section.settings.section_heading,
+    tag: 'h3', heading_type: 'heading-3', classes: 'text-center', data_aid: 'video-hero-heading'
+    %}"
+  to: "{% render 'armament-heading' with heading_content, heading_content: section.settings.section_heading,
+    tag: 'h3', heading_type: 'heading-3', classes: 'text-center', data_aid: 'video-hero-heading'
+    %}"
+  position: 4252..4449
+- from: '{% render ''armament-button'' with url: section.settings.button_1_link, content:
+    section.settings.button_1_text, style: section.settings.button_1_style, classes:
+    button_spacing, data_aid: "button-1" %}'
+  to: '{% render ''armament-button'' with url, url: section.settings.button_1_link,
+    content: section.settings.button_1_text, style: section.settings.button_1_style,
+    classes: button_spacing, data_aid: "button-1" %}'
+  position: 4725..4929
+- from: '{% render ''armament-button'' with url: section.settings.button_2_link, content:
+    section.settings.button_2_text, style: section.settings.button_2_style, data_aid:
+    "button-2" %}'
+  to: '{% render ''armament-button'' with url, url: section.settings.button_2_link,
+    content: section.settings.button_2_text, style: section.settings.button_2_style,
+    data_aid: "button-2" %}'
+  position: 5068..5247
+{% endcomment %}

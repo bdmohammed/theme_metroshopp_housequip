@@ -26,19 +26,11 @@
   {% if recommendations.performed and recommendations.products_count > 0 %}
     <div class="{{ section.settings.heading_alignment }} px-4 md:px-0" data-aid="product-recommendations-header">
       {% if section.settings.product_recommendations_subheading != blank %}
-        {% render 'armament-heading' with tag: 'h3'
-          , heading_content: section.settings.product_recommendations_subheading
-          , heading_type: 'section-subheading'
-          , classes: 'text-body mb-2 md:mb-3 z-40'
-          , data_aid: 'product-recommendations-subheading' %}
+        {% render 'armament-heading' with tag, tag: 'h3', heading_content: section.settings.product_recommendations_subheading, heading_type: 'section-subheading', classes: 'text-body mb-2 md:mb-3 z-40', data_aid: 'product-recommendations-subheading' %}
       {% endif %}
 
       {% if section.settings.product_recommendations_heading != blank %}
-        {% render 'armament-heading' with tag: 'h2'
-          , heading_content: section.settings.product_recommendations_heading
-          , heading_type: 'section-heading'
-          , classes: 'text-body mb-4 md:mb-5 z-40'
-          , data_aid: 'product-recommendations-heading' %}
+        {% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.product_recommendations_heading, heading_type: 'section-heading', classes: 'text-body mb-4 md:mb-5 z-40', data_aid: 'product-recommendations-heading' %}
       {% endif %}
     </div>
 
@@ -53,15 +45,9 @@
       {% for recommendation in recommendations.products %}
         <li class="block relative pr-2 md:flex-1 {{ card_max_width }} {{ card_width_mobile }}" data-aid="product-recommendations-item">
           <div loadin-animation-elm loadin-animation-delay>
-            {% render 'ship-product-card' with card_product: recommendation
-              , gallery: settings.collection_hover_effect
-              , align: settings.product_info_position
-              , aspect_ratio: settings.product_cards_aspect_ratio
-              , quick_view_button_only: true
-            %}
+            {% render 'ship-product-card' with card_product, card_product: recommendation, gallery: settings.collection_hover_effect, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio, quick_view_button_only: true %}
           </div>
-          {% render 'ship-quick-view' with quick_view_product: recommendation
-            , modal_only: true %}
+          {% render 'ship-quick-view' with quick_view_product, quick_view_product: recommendation, modal_only: true %}
         </li>
       {% endfor %}
     </ul>
@@ -177,4 +163,48 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with tag: 'h3'
+              , heading_content: section.settings.product_recommendations_subheading
+              , heading_type: 'section-subheading'
+              , classes: 'text-body mb-2 md:mb-3 z-40'
+              , data_aid: 'product-recommendations-subheading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h3', heading_content: section.settings.product_recommendations_subheading,
+    heading_type: 'section-subheading', classes: 'text-body mb-2 md:mb-3 z-40', data_aid:
+    'product-recommendations-subheading' %}"
+  position: 1106..1351
+- from: |-
+    {% render 'armament-heading' with tag: 'h2'
+              , heading_content: section.settings.product_recommendations_heading
+              , heading_type: 'section-heading'
+              , classes: 'text-body mb-4 md:mb-5 z-40'
+              , data_aid: 'product-recommendations-heading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.product_recommendations_heading,
+    heading_type: 'section-heading', classes: 'text-body mb-4 md:mb-5 z-40', data_aid:
+    'product-recommendations-heading' %}"
+  position: 1452..1688
+- from: |-
+    {% render 'ship-product-card' with card_product: recommendation
+                  , gallery: settings.collection_hover_effect
+                  , align: settings.product_info_position
+                  , aspect_ratio: settings.product_cards_aspect_ratio
+                  , quick_view_button_only: true
+                %}
+  to: "{% render 'ship-product-card' with card_product, card_product: recommendation,
+    gallery: settings.collection_hover_effect, align: settings.product_info_position,
+    aspect_ratio: settings.product_cards_aspect_ratio, quick_view_button_only: true
+    %}"
+  position: 2191..2434
+- from: |-
+    {% render 'ship-quick-view' with quick_view_product: recommendation
+                , modal_only: true %}
+  to: "{% render 'ship-quick-view' with quick_view_product, quick_view_product: recommendation,
+    modal_only: true %}"
+  position: 2462..2570
+{%- endcomment -%}

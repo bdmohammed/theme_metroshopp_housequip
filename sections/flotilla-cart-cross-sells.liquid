@@ -47,12 +47,7 @@
   data-color-scheme="{{ section.settings.section_color_scheme }}">
   <div>
     {% if section.settings.heading != blank %}
-      {% render 'armament-heading' with tag: 'h3'
-        , heading_type: 'heading-3'
-        , heading_content: section.settings.heading
-        , classes: 'text-body mb-3 lg:mb-5 invisible'
-        , data_aid: 'cart-cross-sells-heading'
-        , attributes: 'data-armada-selector="cart-cross-sells-heading"' %}
+      {% render 'armament-heading' with tag, tag: 'h3', heading_type: 'heading-3', heading_content: section.settings.heading, classes: 'text-body mb-3 lg:mb-5 invisible', data_aid: "cart-cross-sells-heading", attributes: 'data-armada-selector="cart-cross-sells-heading"' %}
     {% endif %}
 
     <div data-armada-selector="cart-cross-sell-recommendations">
@@ -82,20 +77,7 @@
                   slide-num="{{ forloop.index }}"
                   class="block relative place-content-center cart-cross-sell-slide"
                   data-aid="product-recommendations-item">
-                  {% render 'ship-product-card' with card_product: recommendation
-                    , block_order: block_order
-                    , gallery: false
-                    , align: settings.product_info_position
-                    , aspect_ratio: settings.product_cards_aspect_ratio
-                    , classes: product_card_classes
-                    , disable_quick_view: true
-                    , block_attr_image: img_block_attr
-                    , block_attr_title: title_block_attr
-                    , block_attr_price: price_block_attr
-                    , block_attr_swatch: swatch_block_attr
-                    , block_attr_quick_add: quick_add_block_attr
-                    ,
-                  %}
+                  {% render 'ship-product-card' with card_product, card_product: recommendation, block_order: block_order, gallery: false, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio, classes: product_card_classes, disable_quick_view: true, block_attr_image: img_block_attr, block_attr_title: title_block_attr, block_attr_price: price_block_attr, block_attr_swatch: swatch_block_attr, block_attr_quick_add: quick_add_block_attr %}
                 </li>
               {% endfor %}
 
@@ -108,14 +90,7 @@
                   slide-num="{{ forloop.index }}"
                   class="block relative cart-cross-sell-fallback-slide js-invisible"
                   data-aid="product-recommendations-fallback-item">
-                  {% render 'ship-product-card' with card_product: fallback_product
-                    , block_order: block_order
-                    , gallery: false
-                    , align: settings.product_info_position
-                    , aspect_ratio: settings.product_cards_aspect_ratio
-                    , classes: product_card_classes
-                    , disable_quick_view: true
-                  %}
+                  {% render 'ship-product-card' with card_product, card_product: fallback_product, block_order: block_order, gallery: false, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio, classes: product_card_classes, disable_quick_view: true %}
                 </li>
               {% endfor %}
 
@@ -128,14 +103,7 @@
                   slide-num="{{ forloop.index }}"
                   class="block relative cart-cross-sell-fallback-slide js-invisible"
                   data-aid="product-recommendations-fallback-item">
-                  {% render 'ship-product-card' with card_product: random_product
-                    , block_order: block_order
-                    , gallery: false
-                    , align: settings.product_info_position
-                    , aspect_ratio: settings.product_cards_aspect_ratio
-                    , classes: product_card_classes
-                    , disable_quick_view: true
-                  %}
+                  {% render 'ship-product-card' with card_product, card_product: random_product, block_order: block_order, gallery: false, align: settings.product_info_position, aspect_ratio: settings.product_cards_aspect_ratio, classes: product_card_classes, disable_quick_view: true %}
                 </li>
               {% endfor %}
 
@@ -150,12 +118,9 @@
             {% assign item_count = section.settings.products_total | minus: 1 %}
           {% endif %}
 
-          {% render 'armament-slider-arrows' with hide_on_mobile: true %}
+          {% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true %}
           <div data-name="mobile-indicator" class="block md:hidden bg-white">
-            {% render 'armament-scroll-bar' with item_count: item_count
-              , parent: 'slider-engine'
-              , target: 'slider-wrap'
-              , indicator: 'progress' %}
+            {% render 'armament-scroll-bar' with item_count, item_count: item_count, parent: 'slider-engine', target: 'slider-wrap', indicator: 'progress' %}
           </div>
         </template>
       </slider-engine>
@@ -295,4 +260,84 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with tag: 'h3'
+            , heading_type: 'heading-3'
+            , heading_content: section.settings.heading
+            , classes: 'text-body mb-3 lg:mb-5 invisible'
+            , data_aid: 'cart-cross-sells-heading'
+            , attributes: 'data-armada-selector="cart-cross-sells-heading"' %}
+  to: '{% render ''armament-heading'' with tag, tag: ''h3'', heading_type: ''heading-3'',
+    heading_content: section.settings.heading, classes: ''text-body mb-3 lg:mb-5 invisible'',
+    data_aid: "cart-cross-sells-heading", attributes: ''data-armada-selector="cart-cross-sells-heading"''
+    %}'
+  position: 1669..1936
+- from: |-
+    {% render 'ship-product-card' with card_product: recommendation
+                        , block_order: block_order
+                        , gallery: false
+                        , align: settings.product_info_position
+                        , aspect_ratio: settings.product_cards_aspect_ratio
+                        , classes: product_card_classes
+                        , disable_quick_view: true
+                        , block_attr_image: img_block_attr
+                        , block_attr_title: title_block_attr
+                        , block_attr_price: price_block_attr
+                        , block_attr_swatch: swatch_block_attr
+                        , block_attr_quick_add: quick_add_block_attr
+                        ,
+                      %}
+  to: "{% render 'ship-product-card' with card_product, card_product: recommendation,
+    block_order: block_order, gallery: false, align: settings.product_info_position,
+    aspect_ratio: settings.product_cards_aspect_ratio, classes: product_card_classes,
+    disable_quick_view: true, block_attr_image: img_block_attr, block_attr_title:
+    title_block_attr, block_attr_price: price_block_attr, block_attr_swatch: swatch_block_attr,
+    block_attr_quick_add: quick_add_block_attr %}"
+  position: 3215..3672
+- from: |-
+    {% render 'ship-product-card' with card_product: fallback_product
+                        , block_order: block_order
+                        , gallery: false
+                        , align: settings.product_info_position
+                        , aspect_ratio: settings.product_cards_aspect_ratio
+                        , classes: product_card_classes
+                        , disable_quick_view: true
+                      %}
+  to: "{% render 'ship-product-card' with card_product, card_product: fallback_product,
+    block_order: block_order, gallery: false, align: settings.product_info_position,
+    aspect_ratio: settings.product_cards_aspect_ratio, classes: product_card_classes,
+    disable_quick_view: true %}"
+  position: 4316..4587
+- from: |-
+    {% render 'ship-product-card' with card_product: random_product
+                        , block_order: block_order
+                        , gallery: false
+                        , align: settings.product_info_position
+                        , aspect_ratio: settings.product_cards_aspect_ratio
+                        , classes: product_card_classes
+                        , disable_quick_view: true
+                      %}
+  to: "{% render 'ship-product-card' with card_product, card_product: random_product,
+    block_order: block_order, gallery: false, align: settings.product_info_position,
+    aspect_ratio: settings.product_cards_aspect_ratio, classes: product_card_classes,
+    disable_quick_view: true %}"
+  position: 5109..5378
+- from: "{% render 'armament-slider-arrows' with hide_on_mobile: true %}"
+  to: "{% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true
+    %}"
+  position: 5754..5833
+- from: |-
+    {% render 'armament-scroll-bar' with item_count: item_count
+                  , parent: 'slider-engine'
+                  , target: 'slider-wrap'
+                  , indicator: 'progress' %}
+  to: "{% render 'armament-scroll-bar' with item_count, item_count: item_count, parent:
+    'slider-engine', target: 'slider-wrap', indicator: 'progress' %}"
+  position: 5924..6069
+{%- endcomment -%}

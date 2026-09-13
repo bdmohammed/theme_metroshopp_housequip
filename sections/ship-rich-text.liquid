@@ -18,14 +18,14 @@
         {% when 'subheading' %}
           {% unless block.settings.subheading == blank %}
             <div class="rich-text-item-subheading my-2 md:my-3 first:mt-0 last:mb-0" {{ block.shopify_attributes }}>
-              {% render 'armament-heading' with tag: 'h4', heading_type: 'section-subheading', heading_content: block.settings.subheading, data-aid: 'rich-text-subheading' %}
+              {% render 'armament-heading' with tag, tag: 'h4', heading_type: 'section-subheading', heading_content: block.settings.subheading, data-aid: 'rich-text-subheading' %}
             </div>
           {% endunless %}
 
         {% when 'heading' %}
           {% unless block.settings.heading == blank %}
             <div class="rich-text-item-heading my-2 md:my-3 first:mt-0 last:mb-0" {{ block.shopify_attributes }}>
-              {% render 'armament-heading' with tag: 'h2', heading_type: 'section-heading', heading_content: block.settings.heading, data-aid: 'rich-text-heading' %}
+              {% render 'armament-heading' with tag, tag: 'h2', heading_type: 'section-heading', heading_content: block.settings.heading, data-aid: 'rich-text-heading' %}
             </div>
           {% endunless %}
 
@@ -42,7 +42,7 @@
               endcase
             -%}
             <div class="rich-text-item my-3 md:my-4 first:mt-0 last:mb-0" {{ block.shopify_attributes }}>
-              {% render 'armament-rich-text' with content: block.settings.text, align: align %}
+              {% render 'armament-rich-text' with content, content: block.settings.text, align: align %}
             </div>
           {% endunless %}
 
@@ -50,11 +50,11 @@
           <div class="block rich-text-item my-3 md:my-4 first:mt-0 last:mb-0" {{ block.shopify_attributes }}>
             <div class="my-0 md:my-0 flex flex-col {{ section.settings.horizontal_alignment }} md:flex-row space-y-3 space-x-0 md:space-x-4 md:space-y-0">
               {% if block.settings.button_1_text != blank %}
-                {% render 'armament-button' with url: block.settings.button_1_link, content: block.settings.button_1_text, style: block.settings.button_1_style, classes: 'w-full md:w-auto', type: 'button', data_aid: 'rich-text-button-1' %}
+                {% render 'armament-button' with url, url: block.settings.button_1_link, content: block.settings.button_1_text, style: block.settings.button_1_style, classes: 'w-full md:w-auto', type: 'button', data_aid: 'rich-text-button-1' %}
               {% endif %}
 
               {% if block.settings.button_2_text != blank %}
-                {% render 'armament-button' with url: block.settings.button_2_link, content: block.settings.button_2_text, style: block.settings.button_2_style, classes: 'w-full md:w-auto', type: 'button', data_aid: 'rich-text-button-2' %}
+                {% render 'armament-button' with url, url: block.settings.button_2_link, content: block.settings.button_2_text, style: block.settings.button_2_style, classes: 'w-full md:w-auto', type: 'button', data_aid: 'rich-text-button-2' %}
               {% endif %}
             </div>
           </div>
@@ -257,3 +257,39 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-heading' with tag: 'h4', heading_type: 'section-subheading',
+    heading_content: block.settings.subheading, data-aid: 'rich-text-subheading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h4', heading_type: 'section-subheading',
+    heading_content: block.settings.subheading, data-aid: 'rich-text-subheading' %}"
+  position: 817..982
+- from: "{% render 'armament-heading' with tag: 'h2', heading_type: 'section-heading',
+    heading_content: block.settings.heading, data-aid: 'rich-text-heading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_type: 'section-heading',
+    heading_content: block.settings.heading, data-aid: 'rich-text-heading' %}"
+  position: 1241..1397
+- from: "{% render 'armament-rich-text' with content: block.settings.text, align:
+    align %}"
+  to: "{% render 'armament-rich-text' with content, content: block.settings.text,
+    align: align %}"
+  position: 2026..2116
+- from: "{% render 'armament-button' with url: block.settings.button_1_link, content:
+    block.settings.button_1_text, style: block.settings.button_1_style, classes: 'w-full
+    md:w-auto', type: 'button', data_aid: 'rich-text-button-1' %}"
+  to: "{% render 'armament-button' with url, url: block.settings.button_1_link, content:
+    block.settings.button_1_text, style: block.settings.button_1_style, classes: 'w-full
+    md:w-auto', type: 'button', data_aid: 'rich-text-button-1' %}"
+  position: 2534..2762
+- from: "{% render 'armament-button' with url: block.settings.button_2_link, content:
+    block.settings.button_2_text, style: block.settings.button_2_style, classes: 'w-full
+    md:w-auto', type: 'button', data_aid: 'rich-text-button-2' %}"
+  to: "{% render 'armament-button' with url, url: block.settings.button_2_link, content:
+    block.settings.button_2_text, style: block.settings.button_2_style, classes: 'w-full
+    md:w-auto', type: 'button', data_aid: 'rich-text-button-2' %}"
+  position: 2867..3095
+{% endcomment %}

@@ -22,11 +22,11 @@
   data-color-scheme="{{ section.settings.section_color_scheme }}"
 >
   <template>
-    {% render 'ship-toast-item' with type: 'form-submit', icon: 'tick', duration: duration %}
-    {% render 'ship-toast-item' with type: 'error', icon: 'exclamation', duration: duration, color: section.settings.error_color %}
-    {% render 'ship-toast-item' with type: 'email', icon: 'warning', duration: duration, color: section.settings.error_color %}
-    {% render 'ship-toast-item' with type: 'atc', icon: 'tick', duration: duration %}
-    {% render 'ship-toast-item' with type: 'html', duration: duration %}
+    {% render 'ship-toast-item' with type, type: 'form-submit', icon: 'tick', duration: duration %}
+    {% render 'ship-toast-item' with type, type: 'error', icon: 'exclamation', duration: duration, color: section.settings.error_color %}
+    {% render 'ship-toast-item' with type, type: 'email', icon: 'warning', duration: duration, color: section.settings.error_color %}
+    {% render 'ship-toast-item' with type, type: 'atc', icon: 'tick', duration: duration %}
+    {% render 'ship-toast-item' with type, type: 'html', duration: duration %}
   </template>
 </armada-toast>
 
@@ -127,3 +127,33 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'ship-toast-item' with type: 'form-submit', icon: 'tick', duration:
+    duration %}"
+  to: "{% render 'ship-toast-item' with type, type: 'form-submit', icon: 'tick', duration:
+    duration %}"
+  position: 977..1072
+- from: "{% render 'ship-toast-item' with type: 'error', icon: 'exclamation', duration:
+    duration, color: section.settings.error_color %}"
+  to: "{% render 'ship-toast-item' with type, type: 'error', icon: 'exclamation',
+    duration: duration, color: section.settings.error_color %}"
+  position: 1077..1210
+- from: "{% render 'ship-toast-item' with type: 'email', icon: 'warning', duration:
+    duration, color: section.settings.error_color %}"
+  to: "{% render 'ship-toast-item' with type, type: 'email', icon: 'warning', duration:
+    duration, color: section.settings.error_color %}"
+  position: 1215..1344
+- from: "{% render 'ship-toast-item' with type: 'atc', icon: 'tick', duration: duration
+    %}"
+  to: "{% render 'ship-toast-item' with type, type: 'atc', icon: 'tick', duration:
+    duration %}"
+  position: 1349..1436
+- from: "{% render 'ship-toast-item' with type: 'html', duration: duration %}"
+  to: "{% render 'ship-toast-item' with type, type: 'html', duration: duration %}"
+  position: 1441..1515
+{% endcomment %}

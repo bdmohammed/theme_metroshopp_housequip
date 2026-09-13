@@ -3,16 +3,16 @@
     <div data-armada-selector="toast-cart-item--{{ item.id }}--{{ item.selling_plan_allocation.selling_plan.id }}">
       <div class="hidden md:flex mb-4">
         {% if item.image %}
-          {% render 'armament-thumbnail' with url: item.image, alt: item.image.alt, class: 'mr-3', width: 100 %}
+          {% render 'armament-thumbnail' with url, url: item.image, alt: item.image.alt, class: 'mr-3', width: 100 %}
         {% endif %}
         <div>
-          {% render 'armament-heading' with tag: 'h3', heading_type: 'heading-6', heading_content: item.product.title %}
+          {% render 'armament-heading' with tag, tag: 'h3', heading_type: 'heading-6', heading_content: item.product.title %}
 
           {% if item.product.has_only_default_variant == false %}
             <p>{{ item.variant.title }}</p>
           {% endif %}
 
-          {% render 'armament-price' with manual_price: item.final_price, manual_compare_at_price: item.original_price, cart_line_item: item, price_product: false, discount_type: settings.show_discount_savings %}
+          {% render 'armament-price' with manual_price, manual_price: item.final_price, manual_compare_at_price: item.original_price, cart_line_item: item, price_product: false, discount_type: settings.show_discount_savings %}
 
           {% if item.selling_plan_allocation %}
             <p>
@@ -40,3 +40,27 @@
     </div>
   {% endfor %}
 {% endif %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-thumbnail' with url: item.image, alt: item.image.alt,
+    class: 'mr-3', width: 100 %}"
+  to: "{% render 'armament-thumbnail' with url, url: item.image, alt: item.image.alt,
+    class: 'mr-3', width: 100 %}"
+  position: 248..355
+- from: "{% render 'armament-heading' with tag: 'h3', heading_type: 'heading-6', heading_content:
+    item.product.title %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h3', heading_type: 'heading-6',
+    heading_content: item.product.title %}"
+  position: 400..515
+- from: "{% render 'armament-price' with manual_price: item.final_price, manual_compare_at_price:
+    item.original_price, cart_line_item: item, price_product: false, discount_type:
+    settings.show_discount_savings %}"
+  to: "{% render 'armament-price' with manual_price, manual_price: item.final_price,
+    manual_compare_at_price: item.original_price, cart_line_item: item, price_product:
+    false, discount_type: settings.show_discount_savings %}"
+  position: 660..876
+{% endcomment %}

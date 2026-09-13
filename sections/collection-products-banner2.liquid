@@ -225,7 +225,7 @@
       {%- endfor -%}
         <div class="col-item col">
     {% endif %}
-  {%- render 'section_tophead',se_stts:se_stts,se_stts.heading_align:"text-left",heading_height:se_stts.heading_height -%}
+  {%- render 'section_tophead', se_stts: se_stts, heading_align: "text-left", heading_height: se_stts.heading_height -%}
   {%- if layout_des == "1" -%} 
     {{ 'button-style.css' | asset_url | stylesheet_tag }}
     <link href="{{ 'custom-effect.css' | asset_url }}" rel="stylesheet" media="print" onload="this.media='all'">
@@ -3772,4 +3772,15 @@
       }
     ]
   }
-{%- endschema -%}
+{%- endschema -%}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{%- render ''section_tophead'',se_stts:se_stts,se_stts.heading_align:"text-left",heading_height:se_stts.heading_height
+    -%}'
+  to: '{%- render ''section_tophead'', se_stts: se_stts, heading_align: "text-left",
+    heading_height: se_stts.heading_height -%}'
+  position: 15044..15162
+{%- endcomment -%}

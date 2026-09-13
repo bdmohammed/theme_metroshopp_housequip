@@ -10,7 +10,7 @@
 >
   <template>
     <pickup-availability-preview>
-      {% render 'armament-icon' with icon: 'exclamation' %}
+      {% render 'armament-icon' with icon, icon: 'exclamation' %}
       <div>
         <p>{{ 'products.product.pickup_availability.unavailable' | t }}</p>
         <button data-armada-selector="pickup-refresh">{{ 'products.product.pickup_availability.refresh' | t }}</button>
@@ -21,3 +21,13 @@
 <safe-load-scripts>
   <script src="{{ 'component-pickup-availability.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="pickup-availability"></script>
 </safe-load-scripts>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-icon' with icon: 'exclamation' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'exclamation' %}"
+  position: 618..677
+{% endcomment %}

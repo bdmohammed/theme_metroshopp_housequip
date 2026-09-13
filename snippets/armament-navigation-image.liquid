@@ -30,7 +30,7 @@
 <div class="row-start-1 overflow-hidden{% if classes %} {{ classes }}{% endif %}">
   <div class="relative aspect-square overflow-hidden{% if aspect == 'original' %} lg:pb-0{% endif %}{% if image_link %} hover:scale-105 transition-transform ease-[cubic-bezier(0.165, 0.84, 0.44, 1)] duration-500{% endif %}">
     <div class="absolute{% if aspect == 'original' %} lg:static{% endif %} w-full h-full {{ image_container_classes }}">
-      {% render 'armament-image' with image: image, classes: image_classes %}
+      {% render 'armament-image' with image, image: image, classes: image_classes %}
     </div>
     <div class="{{ overlay_bg }} absolute top-0 w-full h-full" {{ bg_opacity }}></div>
     {% if image_link %}
@@ -50,3 +50,14 @@
     {% endif %}
   </div>
 </div>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-image' with image: image, classes: image_classes %}"
+  to: "{% render 'armament-image' with image, image: image, classes: image_classes
+    %}"
+  position: 1367..1445
+{% endcomment %}

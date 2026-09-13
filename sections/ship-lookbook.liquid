@@ -70,10 +70,10 @@
 
                                       {% if block.settings.image != blank %}
                                       <div>
-                                          {% render 'armament-image' with image: block.settings.image, classes: img_classes, zoomout_animation: true %}
+                                          {% render 'armament-image' with image, image: block.settings.image, classes: img_classes, zoomout_animation: true %}
                                       </div>
                                       {% else %}
-                                          {% render 'armament-placeholder' with name: 'collection-1', classes: placeholder_classes %}
+                                          {% render 'armament-placeholder' with name, name: 'collection-1', classes: placeholder_classes %}
                                       {% endif %}
                               </div>
 
@@ -85,15 +85,15 @@
                                   <div {% if settings.enable_animations %}data-fadeup-animation {% endif %}class="{{ block.settings.text_alignment }} p-4 mx-4">
                                       {% liquid
                                           if block.settings.subheading != blank
-                                              render 'armament-heading' with tag: 'h4', heading_content: block.settings.subheading, heading_type: 'heading-4', classes: 'pb-2 md:pb-3', data_aid: 'lookbook-subheading'
+                                              render 'armament-heading' with tag, tag: 'h4', heading_content: block.settings.subheading, heading_type: 'heading-4', classes: 'pb-2 md:pb-3', data_aid: 'lookbook-subheading'
                                           endif
 
                                           if block.settings.heading != blank
-                                              render 'armament-heading' with tag: 'h3', heading_content: block.settings.heading, heading_type: 'heading-3', classes: 'pb-3 md:pb-4', data_aid: 'lookbook-heading'
+                                              render 'armament-heading' with tag, tag: 'h3', heading_content: block.settings.heading, heading_type: 'heading-3', classes: 'pb-3 md:pb-4', data_aid: 'lookbook-heading'
                                           endif
 
                                           if block.settings.button_link != blank and block.settings.button_text != blank
-                                              render 'armament-button' with url: block.settings.button_link, content: block.settings.button_text, style: block.settings.button_style, classes: "leading-none", data_aid: "lookbook-button"
+                                              render 'armament-button' with url, url: block.settings.button_link, content: block.settings.button_text, style: block.settings.button_style, classes: "leading-none", data_aid: "lookbook-button"
                                           endif
                                       %}
                                   </div>
@@ -131,9 +131,9 @@
                     </div>
                 </div>
                 {% capture svg_colors %}data-color-scheme="{{ section.settings.bg_color_scheme }}"{% endcapture %}
-                {% render 'armament-slider-arrows' with hide_on_mobile: true, border: border, attributes: svg_colors %}
+                {% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true, border: border, attributes: svg_colors %}
                 <div data-name="mobile-indicator" class="mt-4 md:mt-5">
-                    {% render 'armament-scroll-bar' with item_count: section.blocks.size, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
+                    {% render 'armament-scroll-bar' with item_count, item_count: section.blocks.size, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
                 </div>
             </template>
         </slider-engine>
@@ -353,4 +353,51 @@
     ]
   }
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-image' with image: block.settings.image, classes: img_classes,
+    zoomout_animation: true %}"
+  to: "{% render 'armament-image' with image, image: block.settings.image, classes:
+    img_classes, zoomout_animation: true %}"
+  position: 3382..3498
+- from: "{% render 'armament-placeholder' with name: 'collection-1', classes: placeholder_classes
+    %}"
+  to: "{% render 'armament-placeholder' with name, name: 'collection-1', classes:
+    placeholder_classes %}"
+  position: 3635..3732
+- from: "                                              render 'armament-heading' with
+    tag: 'h4', heading_content: block.settings.subheading, heading_type: 'heading-4',
+    classes: 'pb-2 md:pb-3', data_aid: 'lookbook-subheading'"
+  to: "                                              render 'armament-heading' with
+    tag, tag: 'h4', heading_content: block.settings.subheading, heading_type: 'heading-4',
+    classes: 'pb-2 md:pb-3', data_aid: 'lookbook-subheading'"
+  position: 4405..4625
+- from: "                                              render 'armament-heading' with
+    tag: 'h3', heading_content: block.settings.heading, heading_type: 'heading-3',
+    classes: 'pb-3 md:pb-4', data_aid: 'lookbook-heading'"
+  to: "                                              render 'armament-heading' with
+    tag, tag: 'h3', heading_content: block.settings.heading, heading_type: 'heading-3',
+    classes: 'pb-3 md:pb-4', data_aid: 'lookbook-heading'"
+  position: 4752..4966
+- from: '                                              render ''armament-button''
+    with url: block.settings.button_link, content: block.settings.button_text, style:
+    block.settings.button_style, classes: "leading-none", data_aid: "lookbook-button"'
+  to: '                                              render ''armament-button'' with
+    url, url: block.settings.button_link, content: block.settings.button_text, style:
+    block.settings.button_style, classes: "leading-none", data_aid: "lookbook-button"'
+  position: 5137..5376
+- from: "{% render 'armament-slider-arrows' with hide_on_mobile: true, border: border,
+    attributes: svg_colors %}"
+  to: "{% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true,
+    border: border, attributes: svg_colors %}"
+  position: 6698..6817
+- from: "{% render 'armament-scroll-bar' with item_count: section.blocks.size, parent:
+    'slider-engine', target: 'slider', indicator: 'progress' %}"
+  to: "{% render 'armament-scroll-bar' with item_count, item_count: section.blocks.size,
+    parent: 'slider-engine', target: 'slider', indicator: 'progress' %}"
+  position: 6910..7059
+{%- endcomment -%}

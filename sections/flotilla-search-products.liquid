@@ -3,16 +3,12 @@
 {% if search.results.size > 0 %}
   <section data-color-scheme="{{ section.settings.section_color_scheme }}" class="bg-page text-body relative w-screen section-collection-grid">
     {% if search_type == 'product' %}
-      {% render 'flotilla-search-products-grid' with products_per_row: section.settings.products_per_row
-        , products_per_row_mobile: section.settings.products_per_row_mobile
-        , products_per_page: section.settings.products_per_page
-        , has_pagination: true
-        , loadin_animation_threshold: "0" %}
+      {% render 'flotilla-search-products-grid' with products_per_row, products_per_row: section.settings.products_per_row, products_per_row_mobile: section.settings.products_per_row_mobile, products_per_page: section.settings.products_per_page, has_pagination: true, loadin_animation_threshold: "0" %}
     {% endif %}
   </section>
 {% else %}
   {% if search_type == 'product' %}
-    {% render 'ship-search-no-results' with type: 'product' %}
+    {% render 'ship-search-no-results' with type, type: 'product' %}
   {% endif %}
 {% endif %}
 
@@ -84,4 +80,24 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'flotilla-search-products-grid' with products_per_row: section.settings.products_per_row
+            , products_per_row_mobile: section.settings.products_per_row_mobile
+            , products_per_page: section.settings.products_per_page
+            , has_pagination: true
+            , loadin_animation_threshold: "0" %}
+  to: '{% render ''flotilla-search-products-grid'' with products_per_row, products_per_row:
+    section.settings.products_per_row, products_per_row_mobile: section.settings.products_per_row_mobile,
+    products_per_page: section.settings.products_per_page, has_pagination: true, loadin_animation_threshold:
+    "0" %}'
+  position: 273..569
+- from: "{% render 'ship-search-no-results' with type: 'product' %}"
+  to: "{% render 'ship-search-no-results' with type, type: 'product' %}"
+  position: 650..714
+{%- endcomment -%}

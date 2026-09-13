@@ -1,11 +1,7 @@
 <div>
   <section class="text-body bg-page pb-4 md:pb-5 md:px-6">
     {% paginate blog.articles by section.settings.articles_per_page %}
-      {% render 'flotilla-blog-grid' with collage: true
-        , paginate: paginate
-        , articles: blog.articles
-        , section: section
-        , loadin_animation_threshold: "0" %}
+      {% render 'flotilla-blog-grid' with collage, collage: true, paginate: paginate, articles: blog.articles, section: section, loadin_animation_threshold: "0" %}
     {% endpaginate %}
   </section>
 </div>
@@ -78,4 +74,19 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'flotilla-blog-grid' with collage: true
+            , paginate: paginate
+            , articles: blog.articles
+            , section: section
+            , loadin_animation_threshold: "0" %}
+  to: '{% render ''flotilla-blog-grid'' with collage, collage: true, paginate: paginate,
+    articles: blog.articles, section: section, loadin_animation_threshold: "0" %}'
+  position: 142..299
+{%- endcomment -%}

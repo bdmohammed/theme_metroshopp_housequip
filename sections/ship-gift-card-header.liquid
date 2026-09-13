@@ -1,5 +1,5 @@
 <header class="flex relative py-3 px-4 lg:px-5 xl:px-6 lg:py-4 justify-center {% if section.settings.logo_alignment == 'left' %} lg:justify-start{% endif %}">
-  {% render 'armament-logo' with section_id: section.id, logo_image: section.settings.header_logo, width_desktop: section.settings.logo_width_desktop, width_mobile: section.settings.logo_width_mobile, tag: 'h1', text_classes: 'text-h5', image_classes: 'logo min-w-[50px] lg:min-w-[80px]' %}
+  {% render 'armament-logo' with section_id, section_id: section.id, logo_image: section.settings.header_logo, width_desktop: section.settings.logo_width_desktop, width_mobile: section.settings.logo_width_mobile, tag: 'h1', text_classes: 'text-h5', image_classes: 'logo min-w-[50px] lg:min-w-[80px]' %}
 </header>
 {% schema %}
 {
@@ -49,3 +49,19 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-logo' with section_id: section.id, logo_image: section.settings.header_logo,
+    width_desktop: section.settings.logo_width_desktop, width_mobile: section.settings.logo_width_mobile,
+    tag: 'h1', text_classes: 'text-h5', image_classes: 'logo min-w-[50px] lg:min-w-[80px]'
+    %}"
+  to: "{% render 'armament-logo' with section_id, section_id: section.id, logo_image:
+    section.settings.header_logo, width_desktop: section.settings.logo_width_desktop,
+    width_mobile: section.settings.logo_width_mobile, tag: 'h1', text_classes: 'text-h5',
+    image_classes: 'logo min-w-[50px] lg:min-w-[80px]' %}"
+  position: 161..461
+{% endcomment %}

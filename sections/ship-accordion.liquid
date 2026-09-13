@@ -6,10 +6,10 @@
     data-color-scheme="{{ section.settings.bg_color_scheme }}"
   >
     {% if section.settings.subheading != blank %}
-      {% render 'armament-heading' with tag: 'h4', heading_content: section.settings.subheading, heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'blog-posts-subheading' %}
+      {% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading, heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'blog-posts-subheading' %}
     {% endif %}
     {% if section.settings.heading != blank %}
-      {% render 'armament-heading' with tag: 'h2', heading_content: section.settings.heading, heading_type: 'section-heading', data_aid: 'blog-posts-subheading' %}
+      {% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading, heading_type: 'section-heading', data_aid: 'blog-posts-subheading' %}
     {% endif %}
   </div>
 {% endif %}
@@ -27,7 +27,7 @@
         {% else %}
           {% assign summary_class = '' %}
         {% endif %}
-        {% render 'armament-accordion' with details_class: 'text-body', summary_class: summary_class, summary_header: block.settings.tab_item_header, summary_content: block.settings.tab_item_content, prose: true, shopify_attributes: block.shopify_attributes, block_id: block.id %}
+        {% render 'armament-accordion' with details_class, details_class: 'text-body', summary_class: summary_class, summary_header: block.settings.tab_item_header, summary_content: block.settings.tab_item_content, prose: true, shopify_attributes: block.shopify_attributes, block_id: block.id %}
       {% endfor %}
     {% endif %}
   </div>
@@ -118,3 +118,31 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-heading' with tag: 'h4', heading_content: section.settings.subheading,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'blog-posts-subheading'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'blog-posts-subheading'
+    %}"
+  position: 369..553
+- from: "{% render 'armament-heading' with tag: 'h2', heading_content: section.settings.heading,
+    heading_type: 'section-heading', data_aid: 'blog-posts-subheading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading,
+    heading_type: 'section-heading', data_aid: 'blog-posts-subheading' %}"
+  position: 623..785
+- from: "{% render 'armament-accordion' with details_class: 'text-body', summary_class:
+    summary_class, summary_header: block.settings.tab_item_header, summary_content:
+    block.settings.tab_item_content, prose: true, shopify_attributes: block.shopify_attributes,
+    block_id: block.id %}"
+  to: "{% render 'armament-accordion' with details_class, details_class: 'text-body',
+    summary_class: summary_class, summary_header: block.settings.tab_item_header,
+    summary_content: block.settings.tab_item_content, prose: true, shopify_attributes:
+    block.shopify_attributes, block_id: block.id %}"
+  position: 1351..1638
+{% endcomment %}

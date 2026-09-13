@@ -47,16 +47,9 @@
         class="bg-page text-body col-start-1 col-end-2 row-start-1 row-end-2 md:row-start-1 md:row-end-2 {{ img_col_pos }} relative overflow-hidden grid grid-cols-1 grid-rows-1{% if border %} border{% endif %}"
       >
         {% if section.settings.main_image != blank %}
-          {%
-            render 'armament-image' with image: section.settings.main_image
-            , classes: 'h-full w-full object-cover col-start-1 col-end-2 row-start-1 row-end-2 max-h-screen'
-            , zoomout_animation: true
-          %}
+          {% render 'armament-image' with image, image: section.settings.main_image, classes: 'h-full w-full object-cover col-start-1 col-end-2 row-start-1 row-end-2 max-h-screen', zoomout_animation: true %}
         {% else %}
-          {%
-            render 'armament-placeholder' with name: 'collection-1'
-            , classes: 'col-start-1 col-end-2 row-start-1 row-end-2'
-          %}
+          {% render 'armament-placeholder' with name, name: 'collection-1', classes: 'col-start-1 col-end-2 row-start-1 row-end-2' %}
         {% endif %}
         <div
           class="bg-page text-body col-start-1 col-end-2 row-start-1 row-end-2 w-full h-full {{ overlay_bg }}"
@@ -88,17 +81,7 @@
             assign image_alt = 'data-armada-image-alt="' | append: stl_product_img_alt | append: '"'
             assign attributes = product_title | append: product_price | append: product_url | append: image_alt | append: markerAttr | append: image_id
           %}
-          {%
-            render 'armament-marker' with index: forloop.index
-            , labelledBy: label
-            , top: marker_top
-            , left: marker_left
-            , attributes: attributes
-            , classes: 'before:block before:absolute before:h-44 before:w-44'
-            , span_attributes: closeIconAttr
-            , shopify_attributes: block.shopify_attributes
-            , block_id: block.id
-          %}
+          {% render 'armament-marker' with index, index: forloop.index, labelledBy: label, top: marker_top, left: marker_left, attributes: attributes, classes: 'before:block before:absolute before:h-44 before:w-44', span_attributes: closeIconAttr, shopify_attributes: block.shopify_attributes, block_id: block.id %}
         {% endfor %}
       </div>
       <div
@@ -111,13 +94,13 @@
         {% endif %}
         {% liquid
           if section.settings.subheading != blank
-            render 'armament-heading' with heading_content: section.settings.subheading, tag: 'h3', heading_type: 'heading-4', classes: 'mb-3', data_aid: 'stl-subheading'
+            render 'armament-heading' with heading_content, heading_content: section.settings.subheading, tag: 'h3', heading_type: 'heading-4', classes: 'mb-3', data_aid: 'stl-subheading'
           endif
           if section.settings.heading != blank
-            render 'armament-heading' with heading_content: section.settings.heading, tag: 'h3', heading_type: 'heading-3', classes: 'mb-4', data_aid: 'stl-heading'
+            render 'armament-heading' with heading_content, heading_content: section.settings.heading, tag: 'h3', heading_type: 'heading-3', classes: 'mb-4', data_aid: 'stl-heading'
           endif
           if section.settings.button_text != blank and section.settings.button_link != blank
-            render 'armament-button' with content: section.settings.button_text, url: section.settings.button_link, data_aid: 'stl-shop-now', style: section.settings.button_style
+            render 'armament-button' with content, content: section.settings.button_text, url: section.settings.button_link, data_aid: 'stl-shop-now', style: section.settings.button_style
           endif
         %}
         {% if settings.enable_animations %}
@@ -139,11 +122,7 @@
                 | append: '"'
               %}
               {% assign img_attrs = 'data-armada-product-img ' | append: img_id %}
-              {%
-                render 'armament-image' with image: block.settings.product.featured_media.preview_image
-                , classes: 'object-cover object-center w-full h-full col-start-1 col-end-2 row-start-1 row-end-2 opacity-0 z-0 transition-opacity delay-100 duration-300'
-                , attributes: img_attrs
-              %}
+              {% render 'armament-image' with image, image: block.settings.product.featured_media.preview_image, classes: 'object-cover object-center w-full h-full col-start-1 col-end-2 row-start-1 row-end-2 opacity-0 z-0 transition-opacity delay-100 duration-300', attributes: img_attrs %}
             {% else %}
               {% assign img_id = forloop.index %}
               <div
@@ -151,7 +130,7 @@
                 class="w-full h-full col-start-1 col-end-2 row-start-1 row-end-2 opacity-0 z-0 transition-opacity delay-100 duration-300"
                 data-armada-product-img
               >
-                {% render 'armament-placeholder' with name: 'product-1' %}
+                {% render 'armament-placeholder' with name, name: 'product-1' %}
               </div>
             {% endif %}
           {% endfor %}
@@ -161,10 +140,7 @@
           data-armada-close-btn
           data-aid="stl-close-button"
         >
-          {%
-            render 'armament-icon' with icon: 'cancel'
-            , classes: 'cursor-pointer'
-          %}
+          {% render 'armament-icon' with icon, icon: 'cancel', classes: 'cursor-pointer' %}
         </button>
         <div
           data-armada-stl-action
@@ -181,10 +157,7 @@
               class="text-h6 leading-none col-start-1 col-end-2 row-start-1 row-end-2 heading-case font-semibold"
             ></h4>
             <h5 data-armada-item-price class="col-start-1 col-end-2 row-start-2 row-end-3"></h5>
-            {%
-              render 'armament-icon' with icon: 'arrow-right'
-              , classes: 'col-start-2 col-end-3 row-start-1 row-end-3'
-            %}
+            {% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'col-start-2 col-end-3 row-start-1 row-end-3' %}
           </a>
         </div>
       </div>
@@ -199,12 +172,7 @@
           {{ closeIconAttr }}
           data-armada-item-price
         ></h5>
-        {%
-          render 'armament-button' with content: CTABtnText
-          , url: section.settings.button_link
-          , attributes: closeIconAttr
-          , style: section.settings.button_style
-        %}
+        {% render 'armament-button' with content, content: CTABtnText, url: section.settings.button_link, attributes: closeIconAttr, style: section.settings.button_style %}
       </div>
     </shop-the-look>
   </div>
@@ -465,3 +433,102 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%
+                render 'armament-image' with image: section.settings.main_image
+                , classes: 'h-full w-full object-cover col-start-1 col-end-2 row-start-1 row-end-2 max-h-screen'
+                , zoomout_animation: true
+              %}
+  to: "{% render 'armament-image' with image, image: section.settings.main_image,
+    classes: 'h-full w-full object-cover col-start-1 col-end-2 row-start-1 row-end-2
+    max-h-screen', zoomout_animation: true %}"
+  position: 2041..2238
+- from: |-
+    {%
+                render 'armament-placeholder' with name: 'collection-1'
+                , classes: 'col-start-1 col-end-2 row-start-1 row-end-2'
+              %}
+  to: "{% render 'armament-placeholder' with name, name: 'collection-1', classes:
+    'col-start-1 col-end-2 row-start-1 row-end-2' %}"
+  position: 2268..2391
+- from: |-
+    {%
+                render 'armament-marker' with index: forloop.index
+                , labelledBy: label
+                , top: marker_top
+                , left: marker_left
+                , attributes: attributes
+                , classes: 'before:block before:absolute before:h-44 before:w-44'
+                , span_attributes: closeIconAttr
+                , shopify_attributes: block.shopify_attributes
+                , block_id: block.id
+              %}
+  to: "{% render 'armament-marker' with index, index: forloop.index, labelledBy: label,
+    top: marker_top, left: marker_left, attributes: attributes, classes: 'before:block
+    before:absolute before:h-44 before:w-44', span_attributes: closeIconAttr, shopify_attributes:
+    block.shopify_attributes, block_id: block.id %}"
+  position: 4322..4627
+- from: "            render 'armament-heading' with heading_content: section.settings.subheading,
+    tag: 'h3', heading_type: 'heading-4', classes: 'mb-3', data_aid: 'stl-subheading'"
+  to: "            render 'armament-heading' with heading_content, heading_content:
+    section.settings.subheading, tag: 'h3', heading_type: 'heading-4', classes: 'mb-3',
+    data_aid: 'stl-subheading'"
+  position: 5256..5443
+- from: "            render 'armament-heading' with heading_content: section.settings.heading,
+    tag: 'h3', heading_type: 'heading-3', classes: 'mb-4', data_aid: 'stl-heading'"
+  to: "            render 'armament-heading' with heading_content, heading_content:
+    section.settings.heading, tag: 'h3', heading_type: 'heading-3', classes: 'mb-4',
+    data_aid: 'stl-heading'"
+  position: 5507..5688
+- from: "            render 'armament-button' with content: section.settings.button_text,
+    url: section.settings.button_link, data_aid: 'stl-shop-now', style: section.settings.button_style"
+  to: "            render 'armament-button' with content, content: section.settings.button_text,
+    url: section.settings.button_link, data_aid: 'stl-shop-now', style: section.settings.button_style"
+  position: 5798..5985
+- from: |-
+    {%
+                    render 'armament-image' with image: block.settings.product.featured_media.preview_image
+                    , classes: 'object-cover object-center w-full h-full col-start-1 col-end-2 row-start-1 row-end-2 opacity-0 z-0 transition-opacity delay-100 duration-300'
+                    , attributes: img_attrs
+                  %}
+  to: "{% render 'armament-image' with image, image: block.settings.product.featured_media.preview_image,
+    classes: 'object-cover object-center w-full h-full col-start-1 col-end-2 row-start-1
+    row-end-2 opacity-0 z-0 transition-opacity delay-100 duration-300', attributes:
+    img_attrs %}"
+  position: 6974..7250
+- from: "{% render 'armament-placeholder' with name: 'product-1' %}"
+  to: "{% render 'armament-placeholder' with name, name: 'product-1' %}"
+  position: 7596..7660
+- from: |-
+    {%
+                render 'armament-icon' with icon: 'cancel'
+                , classes: 'cursor-pointer'
+              %}
+  to: "{% render 'armament-icon' with icon, icon: 'cancel', classes: 'cursor-pointer'
+    %}"
+  position: 8001..8082
+- from: |-
+    {%
+                  render 'armament-icon' with icon: 'arrow-right'
+                  , classes: 'col-start-2 col-end-3 row-start-1 row-end-3'
+                %}
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'col-start-2
+    col-end-3 row-start-1 row-end-3' %}"
+  position: 8974..9089
+- from: |-
+    {%
+              render 'armament-button' with content: CTABtnText
+              , url: section.settings.button_link
+              , attributes: closeIconAttr
+              , style: section.settings.button_style
+            %}
+  to: "{% render 'armament-button' with content, content: CTABtnText, url: section.settings.button_link,
+    attributes: closeIconAttr, style: section.settings.button_style %}"
+  position: 9712..9876
+{% endcomment %}

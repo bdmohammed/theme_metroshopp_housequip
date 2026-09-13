@@ -23,7 +23,21 @@
     %}
 
     <a href="{{ item.url }}" aria-label="{{ item.title }}" class="pr-3 pb-2 lg:pr-5 last:pr-0">
-      {% render 'armament-heading' with tag: 'h5', heading_content: item.title, heading_type: "section-subheading", classes: class, data_aid: 'nav-banner-heading' %}
+      {% render 'armament-heading' with tag, tag: 'h5', heading_content: item.title, heading_type: "section-subheading", classes: class, data_aid: 'nav-banner-heading' %}
     </a>
   {% endfor %}
 </navigation-banner>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render ''armament-heading'' with tag: ''h5'', heading_content: item.title,
+    heading_type: "section-subheading", classes: class, data_aid: ''nav-banner-heading''
+    %}'
+  to: '{% render ''armament-heading'' with tag, tag: ''h5'', heading_content: item.title,
+    heading_type: "section-subheading", classes: class, data_aid: ''nav-banner-heading''
+    %}'
+  position: 1188..1352
+{% endcomment %}

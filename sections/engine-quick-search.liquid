@@ -1,5 +1,5 @@
 <section class="relative">
-  {% render 'ship-search-bar' with section: section %}
+  {% render 'ship-search-bar' with section, section: section %}
 </section>
 
 {% schema %}
@@ -80,4 +80,13 @@
       ]
     }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'ship-search-bar' with section: section %}"
+  to: "{% render 'ship-search-bar' with section, section: section %}"
+  position: 29..90
+{%- endcomment -%}

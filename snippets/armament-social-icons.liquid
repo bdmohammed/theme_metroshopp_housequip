@@ -45,7 +45,7 @@
               assign fill = 'white'
             endif
           -%}
-          {% render 'armament-icon' with icon: 'facebook', fill: fill %}
+          {% render 'armament-icon' with icon, icon: 'facebook', fill: fill %}
         </div>
 
     {% when 'instagram' %}
@@ -55,7 +55,7 @@
               assign fill = 'black'
             endif
           -%}
-          {% render 'armament-icon' with icon: 'instagram', fill: fill %}
+          {% render 'armament-icon' with icon, icon: 'instagram', fill: fill %}
         </div>
 
     {% when 'pinterest' %}
@@ -67,7 +67,7 @@
               assign fill = 'white'
             endif
           -%}
-          {% render 'armament-icon' with icon: 'pinterest', fill: fill %}
+          {% render 'armament-icon' with icon, icon: 'pinterest', fill: fill %}
         </div>
 
     {% when 'snapchat' %}
@@ -77,15 +77,15 @@
               assign fill = 'black'
             endif
           -%}
-          {% render 'armament-icon' with icon: 'snapchat', fill: fill %}
+          {% render 'armament-icon' with icon, icon: 'snapchat', fill: fill %}
         </div>
 
     {% when 'tiktok' %}
         <div class="{{ bg_classes }}{{ icons_classes }}" {% if original_icons and icons_shape != 'floating' %}style="background-color: white;"{% endif %}>
           {% if original_icons %}
-            {% render 'armament-icon' with icon: 'tiktok-original' %}
+            {% render 'armament-icon' with icon, icon: 'tiktok-original' %}
           {% else %}
-            {% render 'armament-icon' with icon: 'tiktok' %}
+            {% render 'armament-icon' with icon, icon: 'tiktok' %}
           {% endif %}
         </div>
 
@@ -96,7 +96,7 @@
               assign fill = '#6441A5'
             endif
           -%}
-          {% render 'armament-icon' with icon: 'twitch', fill: fill %}
+          {% render 'armament-icon' with icon, icon: 'twitch', fill: fill %}
         </div>
 
     {% when 'twitter' %}
@@ -108,7 +108,7 @@
               assign fill = '#55ACEE'
             endif
           -%}
-          {% render 'armament-icon' with icon: 'twitter', fill: fill %}
+          {% render 'armament-icon' with icon, icon: 'twitter', fill: fill %}
         </div>
 
     {% when 'youtube' %}
@@ -118,7 +118,41 @@
               assign fill = '#FF0000'
             endif
           -%}
-          {% render 'armament-icon' with icon: 'youtube', fill: fill %}
+          {% render 'armament-icon' with icon, icon: 'youtube', fill: fill %}
         </div>
 
 {% endcase %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-icon' with icon: 'facebook', fill: fill %}"
+  to: "{% render 'armament-icon' with icon, icon: 'facebook', fill: fill %}"
+  position: 1830..1898
+- from: "{% render 'armament-icon' with icon: 'instagram', fill: fill %}"
+  to: "{% render 'armament-icon' with icon, icon: 'instagram', fill: fill %}"
+  position: 2320..2389
+- from: "{% render 'armament-icon' with icon: 'pinterest', fill: fill %}"
+  to: "{% render 'armament-icon' with icon, icon: 'pinterest', fill: fill %}"
+  position: 2944..3013
+- from: "{% render 'armament-icon' with icon: 'snapchat', fill: fill %}"
+  to: "{% render 'armament-icon' with icon, icon: 'snapchat', fill: fill %}"
+  position: 3436..3504
+- from: "{% render 'armament-icon' with icon: 'tiktok-original' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'tiktok-original' %}"
+  position: 3746..3809
+- from: "{% render 'armament-icon' with icon: 'tiktok' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'tiktok' %}"
+  position: 3843..3897
+- from: "{% render 'armament-icon' with icon: 'twitch', fill: fill %}"
+  to: "{% render 'armament-icon' with icon, icon: 'twitch', fill: fill %}"
+  position: 4342..4408
+- from: "{% render 'armament-icon' with icon: 'twitter', fill: fill %}"
+  to: "{% render 'armament-icon' with icon, icon: 'twitter', fill: fill %}"
+  position: 4931..4998
+- from: "{% render 'armament-icon' with icon: 'youtube', fill: fill %}"
+  to: "{% render 'armament-icon' with icon, icon: 'youtube', fill: fill %}"
+  position: 5420..5487
+{% endcomment %}

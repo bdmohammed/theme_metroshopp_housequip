@@ -25,9 +25,9 @@
 
 <a href="{{ routes.root_url }}"{% if attributes %} {{ attributes }}{% endif %}{% if link_classes %} class="{{ link_classes }}"{% endif %} id="{{ section_id }}">
   {%- if logo_image != blank %}
-    {% render 'armament-image' with image: logo_image, alt: shop.name, classes: image_classes, sizes: '(min-width: 1200px) calc(100vw / 3), (min-width: 1000px) calc(100vw / 2), (min-width: 750px) calc(100vw / 1.5), 100vw' %}
+    {% render 'armament-image' with image, image: logo_image, alt: shop.name, classes: image_classes, sizes: '(min-width: 1200px) calc(100vw / 3), (min-width: 1000px) calc(100vw / 2), (min-width: 750px) calc(100vw / 1.5), 100vw' %}
   {% else %}
-    {% render 'armament-heading' with tag: heading_tag, heading_content: shop.name, section_subheading: true, classes: text_classes, data_aid: 'text-logo-heading' %}
+    {% render 'armament-heading' with tag, tag: heading_tag, heading_content: shop.name, section_subheading: true, classes: text_classes, data_aid: 'text-logo-heading' %}
   {% endif -%}
 </a>
 
@@ -45,4 +45,24 @@
       }
     }
   {% endif %}
-</style>
+</style>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-image' with image: logo_image, alt: shop.name, classes:
+    image_classes, sizes: '(min-width: 1200px) calc(100vw / 3), (min-width: 1000px)
+    calc(100vw / 2), (min-width: 750px) calc(100vw / 1.5), 100vw' %}"
+  to: "{% render 'armament-image' with image, image: logo_image, alt: shop.name, classes:
+    image_classes, sizes: '(min-width: 1200px) calc(100vw / 3), (min-width: 1000px)
+    calc(100vw / 2), (min-width: 750px) calc(100vw / 1.5), 100vw' %}"
+  position: 1271..1498
+- from: "{% render 'armament-heading' with tag: heading_tag, heading_content: shop.name,
+    section_subheading: true, classes: text_classes, data_aid: 'text-logo-heading'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: heading_tag, heading_content: shop.name,
+    section_subheading: true, classes: text_classes, data_aid: 'text-logo-heading'
+    %}"
+  position: 1516..1682
+{%- endcomment -%}

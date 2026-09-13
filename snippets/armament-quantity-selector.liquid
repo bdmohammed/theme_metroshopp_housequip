@@ -37,16 +37,9 @@
       aria-label="{{ 'products.product.quantity.decrease' | t: product: product_name | escape }}"
       data-aid="quantity-minus"
     >
-      {% render 'armament-icon' with icon: 'minus' %}
+      {% render 'armament-icon' with icon, icon: 'minus' %}
     </button>
-      {% render 'armament-input' with
-        type: 'number',
-        classes: 'border-0 text-center text-h6 font-heading heading-case',
-        id: id,
-        name: name,
-        value: value,
-        attributes: aria_label
-      %}
+      {% render 'armament-input' with type, type: 'number', classes: 'border-0 text-center text-h6 font-heading heading-case', id: id, name: name, value: value, attributes: aria_label %}
     <button
       type="button"
       class="{{ button_classes }}"
@@ -54,10 +47,36 @@
       aria-label="{{ 'products.product.quantity.increase' | t: product: product_name | escape }}"
       data-aid="quantity-plus"
     >
-      {% render 'armament-icon' with icon: 'plus' %}
+      {% render 'armament-icon' with icon, icon: 'plus' %}
     </button>
   </quantity-selector>
 </div>
 <safe-load-scripts>
   <script src="{{ 'component-quantity-selector.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="quantity-selector"></script>
 </safe-load-scripts>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-icon' with icon: 'minus' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'minus' %}"
+  position: 1830..1883
+- from: |-
+    {% render 'armament-input' with
+            type: 'number',
+            classes: 'border-0 text-center text-h6 font-heading heading-case',
+            id: id,
+            name: name,
+            value: value,
+            attributes: aria_label
+          %}
+  to: "{% render 'armament-input' with type, type: 'number', classes: 'border-0 text-center
+    text-h6 font-heading heading-case', id: id, name: name, value: value, attributes:
+    aria_label %}"
+  position: 1904..2084
+- from: "{% render 'armament-icon' with icon: 'plus' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'plus' %}"
+  position: 2311..2363
+{% endcomment %}

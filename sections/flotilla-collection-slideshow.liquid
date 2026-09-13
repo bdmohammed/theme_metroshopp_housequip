@@ -20,16 +20,10 @@
     {% if section.settings.subheading != blank or section.settings.heading != blank %}
       <div class="px-4 pt-5 pb-4 md:p-0{% if section.settings.text_alignment == 'center' %} text-center{% elsif section.settings.text_alignment == 'right' %} text-right{% endif %}">
         {% if section.settings.subheading != blank %}
-          {% render 'armament-heading' with tag: 'h4'
-            , heading_content: section.settings.subheading
-            , heading_type: 'heading-4'
-            , classes: 'mb-2 md:mb-3' %}
+          {% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading, heading_type: 'heading-4', classes: 'mb-2 md:mb-3' %}
         {% endif %}
         {% if section.settings.heading != blank %}
-          {% render 'armament-heading' with tag: 'h2'
-            , heading_content: section.settings.heading
-            , heading_type: 'section-heading'
-            , classes: 'md:mb-5' %}
+          {% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading, heading_type: 'section-heading', classes: 'md:mb-5' %}
         {% endif %}
       </div>
     {% endif %}
@@ -58,19 +52,7 @@
                   {% if section.settings.visible_collections_mobile == '2' %}
                     {% assign mobile_center_align = true %}
                   {% endif %}
-                  {% render 'ship-visual-card' with card_image: block.settings.collection.featured_image
-                    , card_text: collection_heading
-                    , button_label: block.settings.button_label
-                    , button_style: section.settings.button_style
-                    , url: block.settings.collection.url
-                    , overlay_color_scheme: block.settings.text_overlay_color_scheme
-                    , horizontal_alignment: block.settings.horizontal_text_alignment
-                    , mobile_center_align: mobile_center_align
-                    , vertical_alignment: block.settings.vertical_text_alignment
-                    , overlay_style: block.settings.overlay_color_scheme
-                    , overlay_opacity: block.settings.overlay_opacity
-                    , shopify_attributes: block.shopify_attributes placeholder: 'collection-1'
-                  %}
+                  {% render 'ship-visual-card' with card_image, card_image: block.settings.collection.featured_image, card_text: collection_heading, button_label: block.settings.button_label, button_style: section.settings.button_style, url: block.settings.collection.url, overlay_color_scheme: block.settings.text_overlay_color_scheme, horizontal_alignment: block.settings.horizontal_text_alignment, mobile_center_align: mobile_center_align, vertical_alignment: block.settings.vertical_text_alignment, overlay_style: block.settings.overlay_color_scheme, overlay_opacity: block.settings.overlay_opacity, shopify_attributes: block.shopify_attributes, placeholder: 'collection-1' %}
                 </div>
               </li>
             {% endfor %}
@@ -81,14 +63,9 @@
           {% if enable_slider == false %}
             {% assign arrow_classes = 'md:hidden' %}
           {% endif %}
-          {% render 'armament-slider-arrows' with hide_on_mobile: true
-            , classes: arrow_classes %}
+          {% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true, classes: arrow_classes %}
           <div data-name="mobile-indicator" class="block md:hidden">
-            {% render 'armament-scroll-bar' with classes: 'p-4'
-              , item_count: section.blocks.size
-              , parent: 'slider-engine'
-              , target: 'slider'
-              , indicator: 'progress' %}
+            {% render 'armament-scroll-bar' with classes, classes: 'p-4', item_count: section.blocks.size, parent: 'slider-engine', target: 'slider', indicator: 'progress' %}
           </div>
         </template>
       </slider-engine>
@@ -102,19 +79,7 @@
     {% else %}
       {% assign block = section.blocks[0] %}
       {% assign collection_heading = block.settings.collection_heading | default: block.settings.collection.title %}
-      {% render 'ship-visual-card' with card_image: block.settings.collection.featured_image
-        , card_text: collection_heading
-        , button_label: block.settings.button_label
-        , button_style: section.settings.button_style
-        , url: block.settings.collection.url
-        , overlay_color_scheme: section.settings.text_overlay_color_scheme
-        , horizontal_alignment: section.settings.horizontal_text_alignment
-        , vertical_alignment: section.settings.vertical_text_alignment
-        , overlay_style: section.settings.overlay_color_scheme
-        , overlay_opacity: section.settings.overlay_opacity
-        , placeholder: 'collection-1'
-        , shopify_attributes: block.shopify_attributes
-      %}
+      {% render 'ship-visual-card' with card_image, card_image: block.settings.collection.featured_image, card_text: collection_heading, button_label: block.settings.button_label, button_style: section.settings.button_style, url: block.settings.collection.url, overlay_color_scheme: section.settings.text_overlay_color_scheme, horizontal_alignment: section.settings.horizontal_text_alignment, vertical_alignment: section.settings.vertical_text_alignment, overlay_style: section.settings.overlay_color_scheme, overlay_opacity: section.settings.overlay_opacity, placeholder: 'collection-1', shopify_attributes: block.shopify_attributes %}
     {% endif %}
   </section>
 </div>
@@ -369,4 +334,85 @@
       "groups": ["header", "footer", "custom.overlay"]
     }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with tag: 'h4'
+                , heading_content: section.settings.subheading
+                , heading_type: 'heading-4'
+                , classes: 'mb-2 md:mb-3' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3' %}"
+  position: 899..1048
+- from: |-
+    {% render 'armament-heading' with tag: 'h2'
+                , heading_content: section.settings.heading
+                , heading_type: 'section-heading'
+                , classes: 'md:mb-5' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading,
+    heading_type: 'section-heading', classes: 'md:mb-5' %}"
+  position: 1130..1277
+- from: |-
+    {% render 'ship-visual-card' with card_image: block.settings.collection.featured_image
+                        , card_text: collection_heading
+                        , button_label: block.settings.button_label
+                        , button_style: section.settings.button_style
+                        , url: block.settings.collection.url
+                        , overlay_color_scheme: block.settings.text_overlay_color_scheme
+                        , horizontal_alignment: block.settings.horizontal_text_alignment
+                        , mobile_center_align: mobile_center_align
+                        , vertical_alignment: block.settings.vertical_text_alignment
+                        , overlay_style: block.settings.overlay_color_scheme
+                        , overlay_opacity: block.settings.overlay_opacity
+                        , shopify_attributes: block.shopify_attributes placeholder: 'collection-1'
+                      %}
+  to: "{% render 'ship-visual-card' with card_image, card_image: block.settings.collection.featured_image,
+    card_text: collection_heading, button_label: block.settings.button_label, button_style:
+    section.settings.button_style, url: block.settings.collection.url, overlay_color_scheme:
+    block.settings.text_overlay_color_scheme, horizontal_alignment: block.settings.horizontal_text_alignment,
+    mobile_center_align: mobile_center_align, vertical_alignment: block.settings.vertical_text_alignment,
+    overlay_style: block.settings.overlay_color_scheme, overlay_opacity: block.settings.overlay_opacity,
+    shopify_attributes: block.shopify_attributes, placeholder: 'collection-1' %}"
+  position: 2721..3383
+- from: |-
+    {% render 'armament-slider-arrows' with hide_on_mobile: true
+                , classes: arrow_classes %}
+  to: "{% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true,
+    classes: arrow_classes %}"
+  position: 3630..3733
+- from: |-
+    {% render 'armament-scroll-bar' with classes: 'p-4'
+                  , item_count: section.blocks.size
+                  , parent: 'slider-engine'
+                  , target: 'slider'
+                  , indicator: 'progress' %}
+  to: "{% render 'armament-scroll-bar' with classes, classes: 'p-4', item_count: section.blocks.size,
+    parent: 'slider-engine', target: 'slider', indicator: 'progress' %}"
+  position: 3815..3977
+- from: |-
+    {% render 'ship-visual-card' with card_image: block.settings.collection.featured_image
+            , card_text: collection_heading
+            , button_label: block.settings.button_label
+            , button_style: section.settings.button_style
+            , url: block.settings.collection.url
+            , overlay_color_scheme: section.settings.text_overlay_color_scheme
+            , horizontal_alignment: section.settings.horizontal_text_alignment
+            , vertical_alignment: section.settings.vertical_text_alignment
+            , overlay_style: section.settings.overlay_color_scheme
+            , overlay_opacity: section.settings.overlay_opacity
+            , placeholder: 'collection-1'
+            , shopify_attributes: block.shopify_attributes
+          %}
+  to: "{% render 'ship-visual-card' with card_image, card_image: block.settings.collection.featured_image,
+    card_text: collection_heading, button_label: block.settings.button_label, button_style:
+    section.settings.button_style, url: block.settings.collection.url, overlay_color_scheme:
+    section.settings.text_overlay_color_scheme, horizontal_alignment: section.settings.horizontal_text_alignment,
+    vertical_alignment: section.settings.vertical_text_alignment, overlay_style: section.settings.overlay_color_scheme,
+    overlay_opacity: section.settings.overlay_opacity, placeholder: 'collection-1',
+    shopify_attributes: block.shopify_attributes %}"
+  position: 4452..5082
+{%- endcomment -%}

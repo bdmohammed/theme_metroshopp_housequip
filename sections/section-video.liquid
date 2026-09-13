@@ -17,18 +17,18 @@
   {% if section.settings.subheading != blank or section.settings.heading != blank %}
     <div class="px-4 md:px-0 mb-4 md:mb-5 {{ text_align_class }}">
       {% if section.settings.subheading != blank %}
-        {% render 'armament-heading' with tag: 'h4', heading_content: section.settings.subheading, heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'video-subheading' %}
+        {% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading, heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'video-subheading' %}
       {% endif %}
       {% if section.settings.heading != blank %}
-        {% render 'armament-heading' with tag: 'h2', heading_content: section.settings.heading, heading_type: 'section-heading', data_aid: 'video-heading' %}
+        {% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading, heading_type: 'section-heading', data_aid: 'video-heading' %}
       {% endif %}
     </div>
   {% endif %}
 
   {% if section.settings.video %}
-    {% render 'armament-video' with video: section.settings.video, poster: section.settings.fallback_image, autoplay: true, loop: false, is_hero: false, attributes: 'data-aid="video"', classes: 'h-full', image_classes: image_classes, color_scheme: section.settings.section_color_scheme %}
+    {% render 'armament-video' with video, video: section.settings.video, poster: section.settings.fallback_image, autoplay: true, loop: false, is_hero: false, attributes: 'data-aid="video"', classes: 'h-full', image_classes: image_classes, color_scheme: section.settings.section_color_scheme %}
   {% elsif section.settings.video_url != blank %}
-    {% render 'armament-video' with url: section.settings.video_url, poster: section.settings.fallback_image, autoplay: true, loop: false, is_hero: false, attributes: 'data-aid="video"', classes: 'h-full', image_classes: image_classes, color_scheme: section.settings.section_color_scheme %}
+    {% render 'armament-video' with url, url: section.settings.video_url, poster: section.settings.fallback_image, autoplay: true, loop: false, is_hero: false, attributes: 'data-aid="video"', classes: 'h-full', image_classes: image_classes, color_scheme: section.settings.section_color_scheme %}
   {% endif %}
   {% if section.settings.section_width == 'narrow' %}</div>{% endif %}
 </section>
@@ -163,3 +163,40 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-heading' with tag: 'h4', heading_content: section.settings.subheading,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'video-subheading'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'video-subheading'
+    %}"
+  position: 896..1075
+- from: "{% render 'armament-heading' with tag: 'h2', heading_content: section.settings.heading,
+    heading_type: 'section-heading', data_aid: 'video-heading' %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading,
+    heading_type: 'section-heading', data_aid: 'video-heading' %}"
+  position: 1151..1305
+- from: '{% render ''armament-video'' with video: section.settings.video, poster:
+    section.settings.fallback_image, autoplay: true, loop: false, is_hero: false,
+    attributes: ''data-aid="video"'', classes: ''h-full'', image_classes: image_classes,
+    color_scheme: section.settings.section_color_scheme %}'
+  to: '{% render ''armament-video'' with video, video: section.settings.video, poster:
+    section.settings.fallback_image, autoplay: true, loop: false, is_hero: false,
+    attributes: ''data-aid="video"'', classes: ''h-full'', image_classes: image_classes,
+    color_scheme: section.settings.section_color_scheme %}'
+  position: 1388..1679
+- from: '{% render ''armament-video'' with url: section.settings.video_url, poster:
+    section.settings.fallback_image, autoplay: true, loop: false, is_hero: false,
+    attributes: ''data-aid="video"'', classes: ''h-full'', image_classes: image_classes,
+    color_scheme: section.settings.section_color_scheme %}'
+  to: '{% render ''armament-video'' with url, url: section.settings.video_url, poster:
+    section.settings.fallback_image, autoplay: true, loop: false, is_hero: false,
+    attributes: ''data-aid="video"'', classes: ''h-full'', image_classes: image_classes,
+    color_scheme: section.settings.section_color_scheme %}'
+  position: 1734..2025
+{% endcomment %}

@@ -32,10 +32,7 @@
               <li class="border flex flex-col p-3 md:p-4 my-3 md:my-4 first:mt-0 last:mb-0" id={{ post.id }}>
                 <div>
                   <div class="flex flex-col">
-                    {% render 'armament-heading' with tag: 'h5'
-                      , heading_content: post.author
-                      , classes: 'text-h5 mb-2'
-                      , data_aid: 'comment-author' %}
+                    {% render 'armament-heading' with tag, tag: 'h5', heading_content: post.author, classes: 'text-h5 mb-2', data_aid: 'comment-author' %}
                     <span class="mb-2 uppercase">{{ article.published_at | time_tag: '%b %d, %Y' }}</span>
                   </div>
                   <div class="comment-content">
@@ -60,8 +57,7 @@
                   data-armada-selector="previous_comment"
                   data-prev-url="{{ paginate.previous.url }}"
                   tabindex="0">
-                  {% render 'armament-icon' with icon: 'arrow-left'
-                    , classes: 'mr-3 cursor-pointer' %}<span class="sr-only">{{ prev_article }}</span>
+                  {% render 'armament-icon' with icon, icon: 'arrow-left', classes: 'mr-3 cursor-pointer' %}<span class="sr-only">{{ prev_article }}</span>
                 </div>
               {% endif %}
             </li>
@@ -77,8 +73,7 @@
                   data-armada-selector="next_comment"
                   data-next-url="{{ paginate.next.url }}"
                   tabindex="0">
-                  {% render 'armament-icon' with icon: 'arrow-right'
-                    , classes: 'ml-3 cursor-pointer' %}<span class="sr-only">{{ next_article }}</span>
+                  {% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'ml-3 cursor-pointer' %}<span class="sr-only">{{ next_article }}</span>
                 </div>
               {% endif %}
             </li>
@@ -90,8 +85,7 @@
               {% if paginate.previous.is_link %}
                 <a href="{{ paginate.previous.url }}">
               {% endif %}
-              {% render 'armament-icon' with icon: 'arrow-left'
-                , classes: 'mr-3' %}<span class="sr-only">{{ prev_article }}</span>
+              {% render 'armament-icon' with icon, icon: 'arrow-left', classes: 'mr-3' %}<span class="sr-only">{{ prev_article }}</span>
               {% if paginate.previous.is_link %}
                 </a>
               {% endif %}
@@ -105,8 +99,7 @@
               {% if paginate.next.is_link %}
                 <a href="{{ paginate.next.url }}">
               {% endif %}
-              {% render 'armament-icon' with icon: 'arrow-right'
-                , classes: 'ml-3' %}<span class="sr-only">{{ next_article }}</span>
+              {% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'ml-3' %}<span class="sr-only">{{ next_article }}</span>
               {% if paginate.next.is_link %}
                 </a>
               {% endif %}
@@ -116,4 +109,40 @@
       {% endif %}
     </article-comments>
   {% endpaginate %}
-</div>
+</div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with tag: 'h5'
+                          , heading_content: post.author
+                          , classes: 'text-h5 mb-2'
+                          , data_aid: 'comment-author' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h5', heading_content: post.author,
+    classes: 'text-h5 mb-2', data_aid: 'comment-author' %}"
+  position: 1395..1529
+- from: |-
+    {% render 'armament-icon' with icon: 'arrow-left'
+                        , classes: 'mr-3 cursor-pointer' %}
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-left', classes: 'mr-3 cursor-pointer'
+    %}"
+  position: 2444..2534
+- from: |-
+    {% render 'armament-icon' with icon: 'arrow-right'
+                        , classes: 'ml-3 cursor-pointer' %}
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'ml-3 cursor-pointer'
+    %}"
+  position: 3202..3293
+- from: |-
+    {% render 'armament-icon' with icon: 'arrow-left'
+                    , classes: 'mr-3' %}
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-left', classes: 'mr-3' %}"
+  position: 3751..3826
+- from: |-
+    {% render 'armament-icon' with icon: 'arrow-right'
+                    , classes: 'ml-3' %}
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'ml-3' %}"
+  position: 4402..4478
+{%- endcomment -%}

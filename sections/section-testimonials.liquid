@@ -7,10 +7,10 @@
 <section data-color-scheme="{{ section.settings.section_color_scheme }}" class="bg-page text-body text-center max-w-full py-5 px-4 md:px-7 md:py-6 flex justify-around" data-aid="testimonial-section">
   <div class="max-w-screen-lg flex-auto">
     {% if section.settings.section_subheading != blank %}
-      {% render 'armament-heading' with heading_content: section.settings.section_subheading, tag: 'h3', heading_type: 'section-subheading', classes: 'pb-2 md:pb-3', data_aid: 'testimonial-subheading' %}
+      {% render 'armament-heading' with heading_content, heading_content: section.settings.section_subheading, tag: 'h3', heading_type: 'section-subheading', classes: 'pb-2 md:pb-3', data_aid: 'testimonial-subheading' %}
     {% endif %}
     {% if section.settings.section_heading != blank %}
-      {% render 'armament-heading' with heading_content: section.settings.section_heading, tag: 'h2', heading_type: 'heading-2', classes: heading_classes, data_aid: 'testimonial-heading' %}
+      {% render 'armament-heading' with heading_content, heading_content: section.settings.section_heading, tag: 'h2', heading_type: 'heading-2', classes: heading_classes, data_aid: 'testimonial-heading' %}
     {% endif %}
 
     <fade-slider
@@ -44,7 +44,7 @@
             {% if forloop.first %}data-fade-slider-active{% endif %}
             {{ block.shopify_attributes }}
           >
-            {% render 'armament-star-rating' with count: block.settings.star_rating, classes: testimonial_classes %}
+            {% render 'armament-star-rating' with count, count: block.settings.star_rating, classes: testimonial_classes %}
             {% if block.settings.testimonial_content != blank %}
               <p class="md:px-6{% if block.settings.testimonial_author != blank %} pb-3 md:pb-4{% endif %} animate-fade-slider animate-fade-slider-delay-2">{{ block.settings.testimonial_content }}</p>
             {% endif %}
@@ -56,9 +56,9 @@
         {% endfor %}
       </div>
       <template>
-        {% render 'armament-slider-arrows' with hide_on_mobile: true, border: true %}
+        {% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true, border: true %}
         <div class="pt-3 md:hidden" data-name="mobile-indicator">
-          {% render 'armament-scroll-bar' with item_count: section.blocks.size, parent: 'fade-slider', target: 'fade-slider', indicator: 'progress', loop_forward: 'true', loop_backward: 'true' %}
+          {% render 'armament-scroll-bar' with item_count, item_count: section.blocks.size, parent: 'fade-slider', target: 'fade-slider', indicator: 'progress', loop_forward: 'true', loop_backward: 'true' %}
         </div>
       </template>
     </fade-slider>
@@ -171,4 +171,41 @@
     ]
   }
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-heading' with heading_content: section.settings.section_subheading,
+    tag: 'h3', heading_type: 'section-subheading', classes: 'pb-2 md:pb-3', data_aid:
+    'testimonial-subheading' %}"
+  to: "{% render 'armament-heading' with heading_content, heading_content: section.settings.section_subheading,
+    tag: 'h3', heading_type: 'section-subheading', classes: 'pb-2 md:pb-3', data_aid:
+    'testimonial-subheading' %}"
+  position: 401..615
+- from: "{% render 'armament-heading' with heading_content: section.settings.section_heading,
+    tag: 'h2', heading_type: 'heading-2', classes: heading_classes, data_aid: 'testimonial-heading'
+    %}"
+  to: "{% render 'armament-heading' with heading_content, heading_content: section.settings.section_heading,
+    tag: 'h2', heading_type: 'heading-2', classes: heading_classes, data_aid: 'testimonial-heading'
+    %}"
+  position: 693..893
+- from: "{% render 'armament-star-rating' with count: block.settings.star_rating,
+    classes: testimonial_classes %}"
+  to: "{% render 'armament-star-rating' with count, count: block.settings.star_rating,
+    classes: testimonial_classes %}"
+  position: 2125..2236
+- from: "{% render 'armament-slider-arrows' with hide_on_mobile: true, border: true
+    %}"
+  to: "{% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true,
+    border: true %}"
+  position: 2856..2949
+- from: "{% render 'armament-scroll-bar' with item_count: section.blocks.size, parent:
+    'fade-slider', target: 'fade-slider', indicator: 'progress', loop_forward: 'true',
+    loop_backward: 'true' %}"
+  to: "{% render 'armament-scroll-bar' with item_count, item_count: section.blocks.size,
+    parent: 'fade-slider', target: 'fade-slider', indicator: 'progress', loop_forward:
+    'true', loop_backward: 'true' %}"
+  position: 3026..3223
+{%- endcomment -%}

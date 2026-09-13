@@ -98,14 +98,14 @@
   <div class="relative w-full overflow-hidden flex flex-col {{ section_heights }}">
     {% liquid
       if section.settings.desktop_image != blank and section.settings.mobile_image != blank
-        render 'armament-image' with image: section.settings.desktop_image, classes: 'hidden lg:block w-full h-full object-cover'
-        render 'armament-image' with image: section.settings.mobile_image, classes: 'lg:hidden w-full h-full object-cover'
+        render 'armament-image' with image, image: section.settings.desktop_image, classes: 'hidden lg:block w-full h-full object-cover'
+        render 'armament-image' with image, image: section.settings.mobile_image, classes: 'lg:hidden w-full h-full object-cover'
       elsif section.settings.desktop_image and section.settings.mobile_image == blank
-        render 'armament-image' with image: section.settings.desktop_image, classes: 'object-cover h-full w-full object-cover'
+        render 'armament-image' with image, image: section.settings.desktop_image, classes: 'object-cover h-full w-full object-cover'
       elsif section.settings.desktop_image == blank and section.settings.mobile_image != blank
-        render 'armament-image' with image: section.settings.mobile_image, classes: 'w-full h-full object-cover'
+        render 'armament-image' with image, image: section.settings.mobile_image, classes: 'w-full h-full object-cover'
       elsif section.settings.desktop_image == blank and section.settings.mobile_image == blank
-        render 'armament-placeholder' with name: 'lifestyle-2', classes: 'block w-full h-full object-cover'
+        render 'armament-placeholder' with name, name: 'lifestyle-2', classes: 'block w-full h-full object-cover'
       endif
     %}
 
@@ -128,18 +128,7 @@
 
           {% when 'social_cta' %}
             {% comment %} SOCIAL CALL OUT {% endcomment %}
-            {%
-              render 'ship-social-callout' with
-              link: block.settings.social_link,
-              text: block.settings.social_link_text,
-              color_scheme: block.settings.social_color_scheme,
-              transparent: block.settings.transparent_bg,
-              social_icon: block.settings.social_icon,
-              icon_shape: block.settings.social_icon_shape,
-              icon_size: block.settings.icon_size,
-              animate: true,
-              shopify_attributes: block.shopify_attributes
-            %}
+            {% render 'ship-social-callout' with link, link: block.settings.social_link, text: block.settings.social_link_text, color_scheme: block.settings.social_color_scheme, transparent: block.settings.transparent_bg, social_icon: block.settings.social_icon, icon_shape: block.settings.social_icon_shape, icon_size: block.settings.icon_size, animate: true, shopify_attributes: block.shopify_attributes %}
         {% endcase %}
       {% endfor %}
     </div>
@@ -179,17 +168,17 @@
             {{ block.shopify_attributes }}
           >
             {% if block.settings.heading != blank %}
-              {% render 'armament-heading' with heading_content: block.settings.heading, tag: 'h3', heading_type: 'heading-3', data_aid: 'dynamic-image-heading', classes: 'text-center mb-3 last:mb-0 upto-sm:max-w-[250px] upto-sm:mx-auto upto-sm:leading-tight' %}
+              {% render 'armament-heading' with heading_content, heading_content: block.settings.heading, tag: 'h3', heading_type: 'heading-3', data_aid: 'dynamic-image-heading', classes: 'text-center mb-3 last:mb-0 upto-sm:max-w-[250px] upto-sm:mx-auto upto-sm:leading-tight' %}
             {% endif %}
 
             {% if buttons_enabled %}
               <div class="flex flex-row {% if section.settings.heading != blank %} mt-3 md:mt-4{% endif %} justify-center">
                 {% if block.settings.button_1_link != blank and block.settings.button_1_text != blank %}
-                  {% render 'armament-button' with url: block.settings.button_1_link, content: block.settings.button_1_text, style: block.settings.button_1_style, classes: button_spacing, data_aid: "dynamic-img-button-1" %}
+                  {% render 'armament-button' with url, url: block.settings.button_1_link, content: block.settings.button_1_text, style: block.settings.button_1_style, classes: button_spacing, data_aid: "dynamic-img-button-1" %}
                 {% endif %}
 
                 {% if block.settings.button_2_link != blank and block.settings.button_2_text != blank %}
-                  {% render 'armament-button' with url: block.settings.button_2_link, content: block.settings.button_2_text, style: block.settings.button_2_style, data_aid: "dynamic-img-button-2" %}
+                  {% render 'armament-button' with url, url: block.settings.button_2_link, content: block.settings.button_2_text, style: block.settings.button_2_style, data_aid: "dynamic-img-button-2" %}
                 {% endif %}
               </div>
             {% endif %}
@@ -630,3 +619,77 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "        render 'armament-image' with image: section.settings.desktop_image,
+    classes: 'hidden lg:block w-full h-full object-cover'"
+  to: "        render 'armament-image' with image, image: section.settings.desktop_image,
+    classes: 'hidden lg:block w-full h-full object-cover'"
+  position: 3744..3880
+- from: "        render 'armament-image' with image: section.settings.mobile_image,
+    classes: 'lg:hidden w-full h-full object-cover'"
+  to: "        render 'armament-image' with image, image: section.settings.mobile_image,
+    classes: 'lg:hidden w-full h-full object-cover'"
+  position: 3881..4010
+- from: "        render 'armament-image' with image: section.settings.desktop_image,
+    classes: 'object-cover h-full w-full object-cover'"
+  to: "        render 'armament-image' with image, image: section.settings.desktop_image,
+    classes: 'object-cover h-full w-full object-cover'"
+  position: 4097..4230
+- from: "        render 'armament-image' with image: section.settings.mobile_image,
+    classes: 'w-full h-full object-cover'"
+  to: "        render 'armament-image' with image, image: section.settings.mobile_image,
+    classes: 'w-full h-full object-cover'"
+  position: 4326..4445
+- from: "        render 'armament-placeholder' with name: 'lifestyle-2', classes:
+    'block w-full h-full object-cover'"
+  to: "        render 'armament-placeholder' with name, name: 'lifestyle-2', classes:
+    'block w-full h-full object-cover'"
+  position: 4541..4654
+- from: |-
+    {%
+                  render 'ship-social-callout' with
+                  link: block.settings.social_link,
+                  text: block.settings.social_link_text,
+                  color_scheme: block.settings.social_color_scheme,
+                  transparent: block.settings.transparent_bg,
+                  social_icon: block.settings.social_icon,
+                  icon_shape: block.settings.social_icon_shape,
+                  icon_size: block.settings.icon_size,
+                  animate: true,
+                  shopify_attributes: block.shopify_attributes
+                %}
+  to: "{% render 'ship-social-callout' with link, link: block.settings.social_link,
+    text: block.settings.social_link_text, color_scheme: block.settings.social_color_scheme,
+    transparent: block.settings.transparent_bg, social_icon: block.settings.social_icon,
+    icon_shape: block.settings.social_icon_shape, icon_size: block.settings.icon_size,
+    animate: true, shopify_attributes: block.shopify_attributes %}"
+  position: 5588..5984
+- from: "{% render 'armament-heading' with heading_content: block.settings.heading,
+    tag: 'h3', heading_type: 'heading-3', data_aid: 'dynamic-image-heading', classes:
+    'text-center mb-3 last:mb-0 upto-sm:max-w-[250px] upto-sm:mx-auto upto-sm:leading-tight'
+    %}"
+  to: "{% render 'armament-heading' with heading_content, heading_content: block.settings.heading,
+    tag: 'h3', heading_type: 'heading-3', data_aid: 'dynamic-image-heading', classes:
+    'text-center mb-3 last:mb-0 upto-sm:max-w-[250px] upto-sm:mx-auto upto-sm:leading-tight'
+    %}"
+  position: 7402..7667
+- from: '{% render ''armament-button'' with url: block.settings.button_1_link, content:
+    block.settings.button_1_text, style: block.settings.button_1_style, classes: button_spacing,
+    data_aid: "dynamic-img-button-1" %}'
+  to: '{% render ''armament-button'' with url, url: block.settings.button_1_link,
+    content: block.settings.button_1_text, style: block.settings.button_1_style, classes:
+    button_spacing, data_aid: "dynamic-img-button-1" %}'
+  position: 7977..8187
+- from: '{% render ''armament-button'' with url: block.settings.button_2_link, content:
+    block.settings.button_2_text, style: block.settings.button_2_style, data_aid:
+    "dynamic-img-button-2" %}'
+  to: '{% render ''armament-button'' with url, url: block.settings.button_2_link,
+    content: block.settings.button_2_text, style: block.settings.button_2_style, data_aid:
+    "dynamic-img-button-2" %}'
+  position: 8340..8525
+{% endcomment %}

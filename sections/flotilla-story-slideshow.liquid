@@ -19,17 +19,10 @@
     {% if section.settings.subheading != blank or section.settings.heading != blank %}
       <div class="pb-4 px-4 md:px-0 md:pb-5 {{ text_align_class }}">
         {% if section.settings.subheading != blank %}
-          {% render 'armament-heading' with tag: 'h4'
-            , heading_content: section.settings.subheading
-            , heading_type: 'heading-4'
-            , classes: 'mb-2 md:mb-3'
-            , data_aid: 'story-slideshow-subheading' %}
+          {% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading, heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'story-slideshow-subheading' %}
         {% endif %}
         {% if section.settings.heading != blank %}
-          {% render 'armament-heading' with tag: 'h2'
-            , heading_content: section.settings.heading
-            , heading_type: 'section-heading'
-            , data_aid: 'story-slideshow-subheading' %}
+          {% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading, heading_type: 'section-heading', data_aid: 'story-slideshow-subheading' %}
         {% endif %}
       </div>
     {% endif %}
@@ -59,24 +52,17 @@
                 data-name="peep-image"
                 data-color-scheme={{ section.settings.content_color_scheme }}>
                 {% if block.settings.image != blank %}
-                  {% render 'armament-image' with image: block.settings.image
-                    , classes: 'h-full w-full object-cover'
-                    , zoomout_animation: true %}
+                  {% render 'armament-image' with image, image: block.settings.image, classes: 'h-full w-full object-cover', zoomout_animation: true %}
                 {% else %}
                   <div class="bg-page h-full">
-                    {% render 'armament-placeholder' with name: 'product-1'
-                      , classes: 'h-full w-full object-cover' %}
+                    {% render 'armament-placeholder' with name, name: 'product-1', classes: 'h-full w-full object-cover' %}
                   </div>
                 {% endif %}
               </div>
               <div class="w-full md:w-1/2 h-full md:h-auto absolute md:relative left-2/3 md:left-0 transition-transform duration-500 {% if border %} md:border-l{% endif %}" data-name="peep-text">
                 <div class="h-full upto-md:p-4">
                   <div class="h-full bg-page" data-color-scheme={{ section.settings.content_color_scheme }}>
-                    {% render 'ship-text-card' with classes: 'h-full flex flex-col place-content-center bg-transparent'
-                      , heading: block.settings.heading
-                      , button_link: block.settings.button_link
-                      , button_label: block.settings.button_label
-                      , text: block.settings.text %}
+                    {% render 'ship-text-card' with classes, classes: 'h-full flex flex-col place-content-center bg-transparent', heading: block.settings.heading, button_link: block.settings.button_link, button_label: block.settings.button_label, text: block.settings.text %}
                   </div>
                 </div>
               </div>
@@ -90,23 +76,11 @@
         {% unless section.blocks.size > 2 %}
           {% assign arrow_classes = 'md:hidden' %}
         {% endunless %}
-        {% render 'armament-slider-arrows' with hide_on_mobile: true
-          , vertical_position_classes: 'top-[calc(50%-40px)] translate-y-0'
-          , classes: arrow_classes
-          , border: border %}
+        {% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true, vertical_position_classes: 'top-[calc(50%-40px)] translate-y-0', classes: arrow_classes, border: border %}
         <div data-name="mobile-indicator" class="{% if section.blocks.size > 1 %}block upto-md:mx-4{% else %}hidden{% endif %}{% if section.blocks.size < 3 %} md:hidden{% endif %}">
-          {% render 'armament-scroll-bar' with item_count: section.blocks.size
-            , parent: 'slider-engine'
-            , target: 'slider'
-            , indicator: 'progress'
-            , paused_forward: true
-            , classes: 'md:hidden' %}
+          {% render 'armament-scroll-bar' with item_count, item_count: section.blocks.size, parent: 'slider-engine', target: 'slider', indicator: 'progress', paused_forward: true, classes: 'md:hidden' %}
           {% assign desktop_scrollbar_count = section.blocks.size | minus: 1 %}
-          {% render 'armament-scroll-bar' with item_count: desktop_scrollbar_count
-            , parent: 'slider-engine'
-            , target: 'slider'
-            , indicator: 'progress'
-            , classes: 'hidden md:block' %}
+          {% render 'armament-scroll-bar' with item_count, item_count: desktop_scrollbar_count, parent: 'slider-engine', target: 'slider', indicator: 'progress', classes: 'hidden md:block' %}
         </div>
       </template>
     </slider-engine>
@@ -296,4 +270,81 @@
       "groups": ["header", "footer", "custom.overlay"]
     }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with tag: 'h4'
+                , heading_content: section.settings.subheading
+                , heading_type: 'heading-4'
+                , classes: 'mb-2 md:mb-3'
+                , data_aid: 'story-slideshow-subheading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'story-slideshow-subheading'
+    %}"
+  position: 755..944
+- from: |-
+    {% render 'armament-heading' with tag: 'h2'
+                , heading_content: section.settings.heading
+                , heading_type: 'section-heading'
+                , data_aid: 'story-slideshow-subheading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading,
+    heading_type: 'section-heading', data_aid: 'story-slideshow-subheading' %}"
+  position: 1026..1193
+- from: |-
+    {% render 'armament-image' with image: block.settings.image
+                        , classes: 'h-full w-full object-cover'
+                        , zoomout_animation: true %}
+  to: "{% render 'armament-image' with image, image: block.settings.image, classes:
+    'h-full w-full object-cover', zoomout_animation: true %}"
+  position: 2348..2481
+- from: |-
+    {% render 'armament-placeholder' with name: 'product-1'
+                          , classes: 'h-full w-full object-cover' %}
+  to: "{% render 'armament-placeholder' with name, name: 'product-1', classes: 'h-full
+    w-full object-cover' %}"
+  position: 2576..2679
+- from: |-
+    {% render 'ship-text-card' with classes: 'h-full flex flex-col place-content-center bg-transparent'
+                          , heading: block.settings.heading
+                          , button_link: block.settings.button_link
+                          , button_label: block.settings.button_label
+                          , text: block.settings.text %}
+  to: "{% render 'ship-text-card' with classes, classes: 'h-full flex flex-col place-content-center
+    bg-transparent', heading: block.settings.heading, button_link: block.settings.button_link,
+    button_label: block.settings.button_label, text: block.settings.text %}"
+  position: 3128..3383
+- from: |-
+    {% render 'armament-slider-arrows' with hide_on_mobile: true
+              , vertical_position_classes: 'top-[calc(50%-40px)] translate-y-0'
+              , classes: arrow_classes
+              , border: border %}
+  to: "{% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true,
+    vertical_position_classes: 'top-[calc(50%-40px)] translate-y-0', classes: arrow_classes,
+    border: border %}"
+  position: 3668..3852
+- from: |-
+    {% render 'armament-scroll-bar' with item_count: section.blocks.size
+                , parent: 'slider-engine'
+                , target: 'slider'
+                , indicator: 'progress'
+                , paused_forward: true
+                , classes: 'md:hidden' %}
+  to: "{% render 'armament-scroll-bar' with item_count, item_count: section.blocks.size,
+    parent: 'slider-engine', target: 'slider', indicator: 'progress', paused_forward:
+    true, classes: 'md:hidden' %}"
+  position: 4045..4238
+- from: |-
+    {% render 'armament-scroll-bar' with item_count: desktop_scrollbar_count
+                , parent: 'slider-engine'
+                , target: 'slider'
+                , indicator: 'progress'
+                , classes: 'hidden md:block' %}
+  to: "{% render 'armament-scroll-bar' with item_count, item_count: desktop_scrollbar_count,
+    parent: 'slider-engine', target: 'slider', indicator: 'progress', classes: 'hidden
+    md:block' %}"
+  position: 4329..4510
+{%- endcomment -%}

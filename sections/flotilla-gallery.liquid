@@ -43,19 +43,11 @@
     {% if section.settings.section_subheading != blank or section.settings.section_heading != blank %}
       <div class="{{ section.settings.heading_alignment }}{% if section.settings.section_width == 'full' %} px-4 md:px-6{% endif %}" data-aid="gallery-header">
         {% if section.settings.section_subheading != blank %}
-          {% render 'armament-heading' with tag: 'h3'
-            , heading_content: section.settings.section_subheading
-            , heading_type: 'section-subheading'
-            , classes: 'text-body mb-2 md:mb-3 z-40'
-            , data_aid: 'gallery-subheading' %}
+          {% render 'armament-heading' with tag, tag: 'h3', heading_content: section.settings.section_subheading, heading_type: 'section-subheading', classes: 'text-body mb-2 md:mb-3 z-40', data_aid: 'gallery-subheading' %}
         {% endif %}
 
         {% if section.settings.section_heading != blank %}
-          {% render 'armament-heading' with tag: 'h2'
-            , heading_content: section.settings.section_heading
-            , heading_type: 'section-heading'
-            , classes: 'text-body mb-4 md:mb-5 z-40'
-            , data_aid: 'gallery-heading' %}
+          {% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.section_heading, heading_type: 'section-heading', classes: 'text-body mb-4 md:mb-5 z-40', data_aid: 'gallery-heading' %}
         {% endif %}
       </div>
     {% endif %}
@@ -87,19 +79,7 @@
             data-aid="gallery-card"
             {{ block.shopify_attributes }}>
 
-            {% render 'ship-visual-card' with card_image: block.settings.image
-              , overlay_color_scheme: block.settings.text_color_scheme
-              , card_text: block.settings.heading
-              , button_label: block.settings.button_text
-              , url: block.settings.link
-              , vertical_alignment: vertical_text_alignment
-              , horizontal_alignment: horizontal_text_alignment
-              , overlay_style: block.settings.overlay_style
-              , overlay_opacity: block.settings.overlay_opacity
-              , button_style: block.settings.button_style
-              , truncate_heading: 5
-              , placeholder: 'collection-1'
-              , full_height: card_full_height %}
+            {% render 'ship-visual-card' with card_image, card_image: block.settings.image, overlay_color_scheme: block.settings.text_color_scheme, card_text: block.settings.heading, button_label: block.settings.button_text, url: block.settings.link, vertical_alignment: vertical_text_alignment, horizontal_alignment: horizontal_text_alignment, overlay_style: block.settings.overlay_style, overlay_opacity: block.settings.overlay_opacity, button_style: block.settings.button_style, truncate_heading: 5, placeholder: 'collection-1', full_height: card_full_height %}
 
           </li>
         {% endfor %}
@@ -424,4 +404,52 @@
       "groups": ["header", "custom.overlay"]
     }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with tag: 'h3'
+                , heading_content: section.settings.section_subheading
+                , heading_type: 'section-subheading'
+                , classes: 'text-body mb-2 md:mb-3 z-40'
+                , data_aid: 'gallery-subheading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h3', heading_content: section.settings.section_subheading,
+    heading_type: 'section-subheading', classes: 'text-body mb-2 md:mb-3 z-40', data_aid:
+    'gallery-subheading' %}"
+  position: 1921..2134
+- from: |-
+    {% render 'armament-heading' with tag: 'h2'
+                , heading_content: section.settings.section_heading
+                , heading_type: 'section-heading'
+                , classes: 'text-body mb-4 md:mb-5 z-40'
+                , data_aid: 'gallery-heading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.section_heading,
+    heading_type: 'section-heading', classes: 'text-body mb-4 md:mb-5 z-40', data_aid:
+    'gallery-heading' %}"
+  position: 2225..2429
+- from: |-
+    {% render 'ship-visual-card' with card_image: block.settings.image
+                  , overlay_color_scheme: block.settings.text_color_scheme
+                  , card_text: block.settings.heading
+                  , button_label: block.settings.button_text
+                  , url: block.settings.link
+                  , vertical_alignment: vertical_text_alignment
+                  , horizontal_alignment: horizontal_text_alignment
+                  , overlay_style: block.settings.overlay_style
+                  , overlay_opacity: block.settings.overlay_opacity
+                  , button_style: block.settings.button_style
+                  , truncate_heading: 5
+                  , placeholder: 'collection-1'
+                  , full_height: card_full_height %}
+  to: "{% render 'ship-visual-card' with card_image, card_image: block.settings.image,
+    overlay_color_scheme: block.settings.text_color_scheme, card_text: block.settings.heading,
+    button_label: block.settings.button_text, url: block.settings.link, vertical_alignment:
+    vertical_text_alignment, horizontal_alignment: horizontal_text_alignment, overlay_style:
+    block.settings.overlay_style, overlay_opacity: block.settings.overlay_opacity,
+    button_style: block.settings.button_style, truncate_heading: 5, placeholder: 'collection-1',
+    full_height: card_full_height %}"
+  position: 3855..4407
+{%- endcomment -%}

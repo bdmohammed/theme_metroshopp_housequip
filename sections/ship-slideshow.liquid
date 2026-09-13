@@ -113,16 +113,16 @@
               {% liquid
                 assign attrs = 'data-armada-selector="slideshow-image"'
                 if block.settings.desktop_image != blank and block.settings.mobile_image != blank
-                  render 'armament-image' with image: block.settings.desktop_image, classes: 'hidden md:block w-full h-full object-cover', attributes: attrs
-                  render 'armament-image' with image: block.settings.mobile_image, classes: 'md:hidden block w-full h-full object-cover', attributes: attrs
+                  render 'armament-image' with image, image: block.settings.desktop_image, classes: 'hidden md:block w-full h-full object-cover', attributes: attrs
+                  render 'armament-image' with image, image: block.settings.mobile_image, classes: 'md:hidden block w-full h-full object-cover', attributes: attrs
                 elsif block.settings.desktop_image != blank and block.settings.mobile_image == blank
-                  render 'armament-image' with image: block.settings.desktop_image, classes: 'object-cover h-full w-full', attributes: attrs
+                  render 'armament-image' with image, image: block.settings.desktop_image, classes: 'object-cover h-full w-full', attributes: attrs
                 elsif block.settings.desktop_image == blank and block.settings.mobile_image != blank
-                  render 'armament-placeholder' with name: 'lifestyle-2', classes: 'hidden md:block w-full', attributes: attrs
-                  render 'armament-image' with image: block.settings.mobile_image, classes: 'md:hidden block w-full h-full', attributes: attrs
+                  render 'armament-placeholder' with name, name: 'lifestyle-2', classes: 'hidden md:block w-full', attributes: attrs
+                  render 'armament-image' with image, image: block.settings.mobile_image, classes: 'md:hidden block w-full h-full', attributes: attrs
                 elsif block.settings.desktop_image == blank and block.settings.mobile_image == blank
-                  render 'armament-placeholder' with name: 'lifestyle-2', classes: 'hidden md:block w-full h-full object-cover', attributes: attrs
-                  render 'armament-placeholder' with name: 'collection-1', classes: 'md:hidden block w-full h-full object-cover', attributes: attrs
+                  render 'armament-placeholder' with name, name: 'lifestyle-2', classes: 'hidden md:block w-full h-full object-cover', attributes: attrs
+                  render 'armament-placeholder' with name, name: 'collection-1', classes: 'md:hidden block w-full h-full object-cover', attributes: attrs
                 endif
               %}
             </div>
@@ -147,7 +147,7 @@
                       class="icon-prev p-3 transition-opacity group"
                       aria-label="Go to previous slide"
                     >
-                      {% render 'armament-icon' with icon: 'arrow-left', width: 12, height: 12, classes: 'text-page mt-[1px]' %}
+                      {% render 'armament-icon' with icon, icon: 'arrow-left', width: 12, height: 12, classes: 'text-page mt-[1px]' %}
                     </div>
 
                     <div
@@ -180,7 +180,7 @@
                       class="icon-next p-3 transition-opacity group"
                       aria-label="Go to next slide"
                     >
-                      {% render 'armament-icon' with icon: 'arrow-right', width: 12, height: 12, classes: 'text-page mt-[1px]' %}
+                      {% render 'armament-icon' with icon, icon: 'arrow-right', width: 12, height: 12, classes: 'text-page mt-[1px]' %}
                     </div>
                   </div>
                   <div
@@ -205,7 +205,7 @@
                           assign bar_color = 'bg-page opacity-100'
                         endif
                       -%}
-                      {% render 'armament-progress-bar' with interval: interval, play: play, classes: '', track: true, track_color: track_color, bar_color: bar_color %}
+                      {% render 'armament-progress-bar' with interval, interval: interval, play: play, classes: '', track: true, track_color: track_color, bar_color: bar_color %}
                     </div>
                   </div>
                 </div>
@@ -218,7 +218,7 @@
                 >
                   {% if block.settings.heading_text != blank %}
                     {% assign heading_classes = animate_3 | append: ' text-body z-40' %}
-                    {% render 'armament-heading' with tag: 'h3', heading_content: block.settings.heading_text, heading_type: 'heading-3', classes: heading_classes, data_aid: 'slide-heading' %}
+                    {% render 'armament-heading' with tag, tag: 'h3', heading_content: block.settings.heading_text, heading_type: 'heading-3', classes: heading_classes, data_aid: 'slide-heading' %}
                   {% endif %}
 
                   {%- liquid
@@ -233,11 +233,11 @@
                     <div class="flex flex-row justify-center{% if block.settings.heading_text != blank %} mt-3 md:mt-4{% endif %}">
                       {% if block.settings.button_1_link != blank and block.settings.button_1_text != blank %}
                         {% assign button_classes = button_classes | append: ' ' | append: animate_4 %}
-                        {% render 'armament-button' with url: block.settings.button_1_link, content: block.settings.button_1_text, style: block.settings.button_1_style, classes: button_classes, data_aid: "slide-button-1" %}
+                        {% render 'armament-button' with url, url: block.settings.button_1_link, content: block.settings.button_1_text, style: block.settings.button_1_style, classes: button_classes, data_aid: "slide-button-1" %}
                       {% endif %}
 
                       {% if block.settings.button_2_link != blank and block.settings.button_2_text != blank %}
-                        {% render 'armament-button' with url: block.settings.button_2_link, content: block.settings.button_2_text, style: block.settings.button_2_style, data_aid: 'slide-button-2', classes: animate_5 %}
+                        {% render 'armament-button' with url, url: block.settings.button_2_link, content: block.settings.button_2_text, style: block.settings.button_2_style, data_aid: 'slide-button-2', classes: animate_5 %}
                       {% endif %}
                     </div>
                   {% endif %}
@@ -518,3 +518,82 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "                  render 'armament-image' with image: block.settings.desktop_image,
+    classes: 'hidden md:block w-full h-full object-cover', attributes: attrs"
+  to: "                  render 'armament-image' with image, image: block.settings.desktop_image,
+    classes: 'hidden md:block w-full h-full object-cover', attributes: attrs"
+  position: 4049..4212
+- from: "                  render 'armament-image' with image: block.settings.mobile_image,
+    classes: 'md:hidden block w-full h-full object-cover', attributes: attrs"
+  to: "                  render 'armament-image' with image, image: block.settings.mobile_image,
+    classes: 'md:hidden block w-full h-full object-cover', attributes: attrs"
+  position: 4213..4375
+- from: "                  render 'armament-image' with image: block.settings.desktop_image,
+    classes: 'object-cover h-full w-full', attributes: attrs"
+  to: "                  render 'armament-image' with image, image: block.settings.desktop_image,
+    classes: 'object-cover h-full w-full', attributes: attrs"
+  position: 4477..4624
+- from: "                  render 'armament-placeholder' with name: 'lifestyle-2',
+    classes: 'hidden md:block w-full', attributes: attrs"
+  to: "                  render 'armament-placeholder' with name, name: 'lifestyle-2',
+    classes: 'hidden md:block w-full', attributes: attrs"
+  position: 4726..4858
+- from: "                  render 'armament-image' with image: block.settings.mobile_image,
+    classes: 'md:hidden block w-full h-full', attributes: attrs"
+  to: "                  render 'armament-image' with image, image: block.settings.mobile_image,
+    classes: 'md:hidden block w-full h-full', attributes: attrs"
+  position: 4859..5008
+- from: "                  render 'armament-placeholder' with name: 'lifestyle-2',
+    classes: 'hidden md:block w-full h-full object-cover', attributes: attrs"
+  to: "                  render 'armament-placeholder' with name, name: 'lifestyle-2',
+    classes: 'hidden md:block w-full h-full object-cover', attributes: attrs"
+  position: 5110..5262
+- from: "                  render 'armament-placeholder' with name: 'collection-1',
+    classes: 'md:hidden block w-full h-full object-cover', attributes: attrs"
+  to: "                  render 'armament-placeholder' with name, name: 'collection-1',
+    classes: 'md:hidden block w-full h-full object-cover', attributes: attrs"
+  position: 5263..5416
+- from: "{% render 'armament-icon' with icon: 'arrow-left', width: 12, height: 12,
+    classes: 'text-page mt-[1px]' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-left', width: 12, height:
+    12, classes: 'text-page mt-[1px]' %}"
+  position: 6796..6908
+- from: "{% render 'armament-icon' with icon: 'arrow-right', width: 12, height: 12,
+    classes: 'text-page mt-[1px]' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-right', width: 12, height:
+    12, classes: 'text-page mt-[1px]' %}"
+  position: 8248..8361
+- from: "{% render 'armament-progress-bar' with interval: interval, play: play, classes:
+    '', track: true, track_color: track_color, bar_color: bar_color %}"
+  to: "{% render 'armament-progress-bar' with interval, interval: interval, play:
+    play, classes: '', track: true, track_color: track_color, bar_color: bar_color
+    %}"
+  position: 9279..9435
+- from: "{% render 'armament-heading' with tag: 'h3', heading_content: block.settings.heading_text,
+    heading_type: 'heading-3', classes: heading_classes, data_aid: 'slide-heading'
+    %}"
+  to: "{% render 'armament-heading' with tag, tag: 'h3', heading_content: block.settings.heading_text,
+    heading_type: 'heading-3', classes: heading_classes, data_aid: 'slide-heading'
+    %}"
+  position: 10024..10201
+- from: '{% render ''armament-button'' with url: block.settings.button_1_link, content:
+    block.settings.button_1_text, style: block.settings.button_1_style, classes: button_classes,
+    data_aid: "slide-button-1" %}'
+  to: '{% render ''armament-button'' with url, url: block.settings.button_1_link,
+    content: block.settings.button_1_text, style: block.settings.button_1_style, classes:
+    button_classes, data_aid: "slide-button-1" %}'
+  position: 10966..11170
+- from: "{% render 'armament-button' with url: block.settings.button_2_link, content:
+    block.settings.button_2_text, style: block.settings.button_2_style, data_aid:
+    'slide-button-2', classes: animate_5 %}"
+  to: "{% render 'armament-button' with url, url: block.settings.button_2_link, content:
+    block.settings.button_2_text, style: block.settings.button_2_style, data_aid:
+    'slide-button-2', classes: animate_5 %}"
+  position: 11341..11540
+{% endcomment %}

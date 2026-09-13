@@ -10,17 +10,10 @@
   {% assign no_heading = false %}
   <div class="bg-page text-body px-4 pb-4 pt-5 md:px-6 md:pb-5 md:pt-6 md:w-full text-center" data-color-scheme="{{ section.settings.bg_color_scheme }}">
     {% if section.settings.subheading != blank %}
-      {% render 'armament-heading' with tag: 'h4'
-        , heading_content: section.settings.subheading
-        , heading_type: 'heading-4'
-        , classes: 'mb-2 md:mb-3'
-        , data_aid: 'blog-posts-subheading' %}
+      {% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading, heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'blog-posts-subheading' %}
     {% endif %}
     {% if section.settings.heading != blank %}
-      {% render 'armament-heading' with tag: 'h2'
-        , heading_content: section.settings.heading
-        , heading_type: 'section-heading'
-        , data_aid: 'blog-posts-subheading' %}
+      {% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading, heading_type: 'section-heading', data_aid: 'blog-posts-subheading' %}
     {% endif %}
   </div>
 {% endif %}
@@ -37,13 +30,7 @@
         {% else %}
           {% assign summary_class = "" %}
         {% endif %}
-        {% render 'armament-accordion' with details_class: 'text-body'
-          , summary_class: summary_class
-          , summary_header: block.settings.accordion_item_header
-          , summary_content: block.settings.accordion_item_content
-          , prose: true
-          , shopify_attributes: block.shopify_attributes
-          , block_id: block.id %}
+        {% render 'armament-accordion' with details_class, details_class: 'text-body', summary_class: summary_class, summary_header: block.settings.accordion_item_header, summary_content: block.settings.accordion_item_content, prose: true, shopify_attributes: block.shopify_attributes, block_id: block.id %}
       {% endfor %}
     {% else %}
       <p class="p-3 md:py-4 text-center text-body" data-aid="accordion-with-image-onboarding-text">{{ 'general.onboarding.no_content' | t }}</p>
@@ -60,19 +47,7 @@
         assign placeholder = true
       endif
     -%}
-    {% render 'ship-image-and-text-card' with placeholder_image: placeholder
-      , image: section.settings.accordion_card_image
-      , image_size: section.settings.image_size
-      , heading: section.settings.card_heading
-      , text: section.settings.card_text
-      , url: section.settings.link
-      , button_label: section.settings.button_text
-      , button_style: section.settings.button_style
-      , text_alignment: section.settings.text_alignment
-      , classes: 'h-auto'
-      , prose: true
-      , border: border
-    %}
+    {% render 'ship-image-and-text-card' with placeholder_image, placeholder_image: placeholder, image: section.settings.accordion_card_image, image_size: section.settings.image_size, heading: section.settings.card_heading, text: section.settings.card_text, url: section.settings.link, button_label: section.settings.button_text, button_style: section.settings.button_style, text_alignment: section.settings.text_alignment, classes: 'h-auto', prose: true, border: border %}
   </div>
 </section>
 
@@ -277,4 +252,62 @@
       "groups": ["header", "footer", "custom.overlay"]
     }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with tag: 'h4'
+            , heading_content: section.settings.subheading
+            , heading_type: 'heading-4'
+            , classes: 'mb-2 md:mb-3'
+            , data_aid: 'blog-posts-subheading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'blog-posts-subheading'
+    %}"
+  position: 480..664
+- from: |-
+    {% render 'armament-heading' with tag: 'h2'
+            , heading_content: section.settings.heading
+            , heading_type: 'section-heading'
+            , data_aid: 'blog-posts-subheading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading,
+    heading_type: 'section-heading', data_aid: 'blog-posts-subheading' %}"
+  position: 734..896
+- from: |-
+    {% render 'armament-accordion' with details_class: 'text-body'
+              , summary_class: summary_class
+              , summary_header: block.settings.accordion_item_header
+              , summary_content: block.settings.accordion_item_content
+              , prose: true
+              , shopify_attributes: block.shopify_attributes
+              , block_id: block.id %}
+  to: "{% render 'armament-accordion' with details_class, details_class: 'text-body',
+    summary_class: summary_class, summary_header: block.settings.accordion_item_header,
+    summary_content: block.settings.accordion_item_content, prose: true, shopify_attributes:
+    block.shopify_attributes, block_id: block.id %}"
+  position: 1484..1783
+- from: |-
+    {% render 'ship-image-and-text-card' with placeholder_image: placeholder
+          , image: section.settings.accordion_card_image
+          , image_size: section.settings.image_size
+          , heading: section.settings.card_heading
+          , text: section.settings.card_text
+          , url: section.settings.link
+          , button_label: section.settings.button_text
+          , button_style: section.settings.button_style
+          , text_alignment: section.settings.text_alignment
+          , classes: 'h-auto'
+          , prose: true
+          , border: border
+        %}
+  to: "{% render 'ship-image-and-text-card' with placeholder_image, placeholder_image:
+    placeholder, image: section.settings.accordion_card_image, image_size: section.settings.image_size,
+    heading: section.settings.card_heading, text: section.settings.card_text, url:
+    section.settings.link, button_label: section.settings.button_text, button_style:
+    section.settings.button_style, text_alignment: section.settings.text_alignment,
+    classes: 'h-auto', prose: true, border: border %}"
+  position: 2303..2772
+{%- endcomment -%}

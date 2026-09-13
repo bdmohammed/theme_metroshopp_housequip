@@ -1,31 +1,21 @@
 <div class="w-full bg-page lg:pt-5">
   {% if product.media.size == 0 %}
-    {% render 'armament-placeholder' with name: 'product-1' %}
+    {% render 'armament-placeholder' with name, name: 'product-1' %}
   {% elsif product.media.size == 1 %}
     <div class="relative">
-      {% render 'armament-product-media' with media: product.media[0]
-        , enable_zoom: section.settings.enable_zoom
-        , title: product.title
-        , product_id: product.id %}
+      {% render 'armament-product-media' with media, media: product.media[0], enable_zoom: section.settings.enable_zoom, title: product.title, product_id: product.id %}
       {% if settings.custom_badges %}
         <div class="absolute top-0 left-0 z-50 pointer-events-none">
-          {% render 'engine-badges' with badges_product: product %}
+          {% render 'engine-badges' with badges_product, badges_product: product %}
         </div>
       {% endif %}
     </div>
   {% elsif section.settings.gallery_style == 'thumbnails' %}
-    {% render 'ship-product-thumbnail-gallery' with gallery_product: product
-      , zoom_enabled: section.settings.enable_zoom
-      , loop_enabled: section.settings.enable_video_looping %}
+    {% render 'ship-product-thumbnail-gallery' with gallery_product, gallery_product: product, zoom_enabled: section.settings.enable_zoom, loop_enabled: section.settings.enable_video_looping %}
   {% elsif section.settings.gallery_style == 'two_per_row' %}
-    {% render 'ship-product-collage-gallery' with product_id: product.id
-      , media: product.media
-      , zoom_enabled: section.settings.enable_zoom
-      , loop_enabled: section.settings.enable_video_looping %}
+    {% render 'ship-product-collage-gallery' with product_id, product_id: product.id, media: product.media, zoom_enabled: section.settings.enable_zoom, loop_enabled: section.settings.enable_video_looping %}
   {% else %}
-    {% render 'ship-product-slider-gallery' with slider_product: product
-      , zoom_enabled: section.settings.enable_zoom
-      , loop_enabled: section.settings.enable_video_looping %}
+    {% render 'ship-product-slider-gallery' with slider_product, slider_product: product, zoom_enabled: section.settings.enable_zoom, loop_enabled: section.settings.enable_video_looping %}
   {% endif %}
 </div>
 
@@ -68,4 +58,49 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-placeholder' with name: 'product-1' %}"
+  to: "{% render 'armament-placeholder' with name, name: 'product-1' %}"
+  position: 76..140
+- from: |-
+    {% render 'armament-product-media' with media: product.media[0]
+            , enable_zoom: section.settings.enable_zoom
+            , title: product.title
+            , product_id: product.id %}
+  to: "{% render 'armament-product-media' with media, media: product.media[0], enable_zoom:
+    section.settings.enable_zoom, title: product.title, product_id: product.id %}"
+  position: 212..374
+- from: "{% render 'engine-badges' with badges_product: product %}"
+  to: "{% render 'engine-badges' with badges_product, badges_product: product %}"
+  position: 492..565
+- from: |-
+    {% render 'ship-product-thumbnail-gallery' with gallery_product: product
+          , zoom_enabled: section.settings.enable_zoom
+          , loop_enabled: section.settings.enable_video_looping %}
+  to: "{% render 'ship-product-thumbnail-gallery' with gallery_product, gallery_product:
+    product, zoom_enabled: section.settings.enable_zoom, loop_enabled: section.settings.enable_video_looping
+    %}"
+  position: 675..864
+- from: |-
+    {% render 'ship-product-collage-gallery' with product_id: product.id
+          , media: product.media
+          , zoom_enabled: section.settings.enable_zoom
+          , loop_enabled: section.settings.enable_video_looping %}
+  to: "{% render 'ship-product-collage-gallery' with product_id, product_id: product.id,
+    media: product.media, zoom_enabled: section.settings.enable_zoom, loop_enabled:
+    section.settings.enable_video_looping %}"
+  position: 931..1133
+- from: |-
+    {% render 'ship-product-slider-gallery' with slider_product: product
+          , zoom_enabled: section.settings.enable_zoom
+          , loop_enabled: section.settings.enable_video_looping %}
+  to: "{% render 'ship-product-slider-gallery' with slider_product, slider_product:
+    product, zoom_enabled: section.settings.enable_zoom, loop_enabled: section.settings.enable_video_looping
+    %}"
+  position: 1151..1335
+{%- endcomment -%}

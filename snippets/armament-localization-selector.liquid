@@ -46,7 +46,7 @@
           {%- endfor -%}
         </select>
       </div>
-      {% render 'armament-button' with content: 'Update country/region', data_aid="noscript-country-button", classes: 'md:mt-2' %}
+      {% render 'armament-button' with content, content: 'Update country/region', classes: 'md:mt-2' %}
     {%- endform -%}
   </noscript>
 
@@ -70,7 +70,7 @@
               {{- localization.country.name }} ({{ localization.country.currency.iso_code }}
               {{ localization.country.currency.symbol }})</span
             >
-            {% render 'armament-icon' with icon: 'arrow-right', classes: 'rotate-90 ml-2', attributes: 'style="width:10px;height:10px"', no_animation: true %}
+            {% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'rotate-90 ml-2', attributes: 'style="width:10px;height:10px"', no_animation: true %}
           </button>
 
           <ul
@@ -151,7 +151,7 @@
           {%- endfor -%}
         </select>
       </div>
-      {% render 'armament-button' with content: 'Update language', data_aid="noscript-language-button", classes: 'md:mt-2' %}
+      {% render 'armament-button' with content, content: 'Update language', classes: 'md:mt-2' %}
     {%- endform -%}
   </noscript>
 
@@ -172,7 +172,7 @@
             data-aid="language-selector-button"
           >
             <span>{{ localization.language.endonym_name | capitalize }}</span>
-            {% render 'armament-icon' with icon: 'arrow-right', classes: 'rotate-90 ml-2', attributes: 'style="width:10px;height:10px"', no_animation: true %}
+            {% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'rotate-90 ml-2', attributes: 'style="width:10px;height:10px"', no_animation: true %}
           </button>
 
           <ul
@@ -216,3 +216,30 @@
     ></script>
   </safe-load-scripts>
 {%- endif -%}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render ''armament-button'' with content: ''Update country/region'', data_aid="noscript-country-button",
+    classes: ''md:mt-2'' %}'
+  to: "{% render 'armament-button' with content, content: 'Update country/region',
+    classes: 'md:mt-2' %}"
+  position: 1758..1855
+- from: '{% render ''armament-icon'' with icon: ''arrow-right'', classes: ''rotate-90
+    ml-2'', attributes: ''style="width:10px;height:10px"'', no_animation: true %}'
+  to: '{% render ''armament-icon'' with icon, icon: ''arrow-right'', classes: ''rotate-90
+    ml-2'', attributes: ''style="width:10px;height:10px"'', no_animation: true %}'
+  position: 2672..2824
+- from: '{% render ''armament-button'' with content: ''Update language'', data_aid="noscript-language-button",
+    classes: ''md:mt-2'' %}'
+  to: "{% render 'armament-button' with content, content: 'Update language', classes:
+    'md:mt-2' %}"
+  position: 5815..5906
+- from: '{% render ''armament-icon'' with icon: ''arrow-right'', classes: ''rotate-90
+    ml-2'', attributes: ''style="width:10px;height:10px"'', no_animation: true %}'
+  to: '{% render ''armament-icon'' with icon, icon: ''arrow-right'', classes: ''rotate-90
+    ml-2'', attributes: ''style="width:10px;height:10px"'', no_animation: true %}'
+  position: 6598..6750
+{% endcomment %}

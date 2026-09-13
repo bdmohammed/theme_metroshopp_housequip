@@ -6,10 +6,7 @@
 <section data-color-scheme="{{ section.settings.section_color_scheme }}" class="bg-page text-body px-4 md:px-6 py-5 md:py-6 flex justify-around">
   <div class="max-w-screen-xl flex-auto">
     {% if section.settings.form_title != blank %}
-      {% render 'armament-heading' with heading_content: section.settings.form_title
-        , heading_type: 'heading-5'
-        , classes: 'mb-3 md:mb-4'
-        , data_aid: 'contact-form-heading' %}
+      {% render 'armament-heading' with heading_content, heading_content: section.settings.form_title, heading_type: 'heading-5', classes: 'mb-3 md:mb-4', data_aid: 'contact-form-heading' %}
     {% endif %}
 
     {% form 'contact'
@@ -77,95 +74,37 @@
               assign formId = 'form_' | append: nameInputString | downcase | handleize
               assign input_attr = 'aria-labelledby="' | append: formId | append: '" data-aid="name-input"'
             %}
-            {% render 'armament-input' with type: 'text'
-              , has_label: true
-              , animate_label: true
-              , label_text: nameInputString
-              , id: formId
-              , placeholder: nameInputString
-              , classes: 'w-full text-body'
-              , container_classes: input_width
-              , value: nameInputVal
-              , name: formName
-              , required: block.settings.required
-              , attributes: input_attr %}
+            {% render 'armament-input' with type, type: 'text', has_label: true, animate_label: true, label_text: nameInputString, id: formId, placeholder: nameInputString, classes: 'w-full text-body', container_classes: input_width, value: nameInputVal, name: formName, required: block.settings.required, attributes: input_attr %}
           {% when 'email_input' %}
             {% liquid
               assign formId = 'form_' | append: emailInputString | downcase | handleize
               assign input_attr = 'aria-labelledby="' | append: formId | append: '" data-aid="email-input"'
             %}
-            {% render 'armament-input' with type: 'email'
-              , has_label: true
-              , animate_label: true
-              , label_text: emailInputString
-              , id: formId
-              , placeholder: emailInputString
-              , classes: 'w-full text-body'
-              , container_classes: input_width
-              , value: emailInputVal
-              , name: formEmailName
-              , required: block.settings.required
-              , attributes: input_attr %}
+            {% render 'armament-input' with type, type: 'email', has_label: true, animate_label: true, label_text: emailInputString, id: formId, placeholder: emailInputString, classes: 'w-full text-body', container_classes: input_width, value: emailInputVal, name: formEmailName, required: block.settings.required, attributes: input_attr %}
           {% when 'tel_input' %}
             {% liquid
               assign formId = 'form_' | append: telInputString | downcase | handleize
               assign input_attr = 'aria-labelledby="' | append: formId | append: '" data-aid="tel-input"'
             %}
-            {% render 'armament-input' with type: 'tel'
-              , has_label: true
-              , animate_label: true
-              , label_text: telInputString
-              , id: formId
-              , placeholder: telInputString
-              , classes: 'w-full text-body'
-              , container_classes: input_width
-              , value: phoneInputVal
-              , name: formTelName
-              , required: block.settings.required
-              , attributes: input_attr %}
+            {% render 'armament-input' with type, type: 'tel', has_label: true, animate_label: true, label_text: telInputString, id: formId, placeholder: telInputString, classes: 'w-full text-body', container_classes: input_width, value: phoneInputVal, name: formTelName, required: block.settings.required, attributes: input_attr %}
           {% when 'message_input' %}
             {% liquid
               assign formId = 'form_' | append: msgInputString | downcase | handleize
               assign input_attr = 'aria-labelledby="' | append: formId | append: '" data-aid="message-input"'
             %}
-            {% render 'armament-textarea' with id: formId
-              , classes: 'py-3 w-full text-body'
-              , placeholder: msgInputString
-              , name: formMsgName
-              , has_label: true
-              , animate_label: true
-              , label_text: msgInputString
-              , attributes: input_attr
-              , required: block.settings.required
-              , content: form.body
-              , container_classes: input_width %}
+            {% render 'armament-textarea' with id, id: formId, classes: 'py-3 w-full text-body', placeholder: msgInputString, name: formMsgName, has_label: true, animate_label: true, label_text: msgInputString, attributes: input_attr, required: block.settings.required, content: form.body, container_classes: input_width %}
           {% when 'custom_input' %}
             {% liquid
               assign formId = 'form_' | append: block.settings.placeholder | downcase | handleize
               assign inputName = 'contact[' | append: block.settings.placeholder | append: ']'
               assign input_attr = 'aria-labelledby="' | append: formId | append: '" data-aid="' | append: formId | append: '"'
             %}
-            {% render 'armament-input' with type: 'text'
-              , has_label: true
-              , animate_label: true
-              , label_text: block.settings.placeholder
-              , id: formId
-              , placeholder: block.settings.placeholder
-              , classes: 'w-full text-body'
-              , container_classes: input_width
-              , value: form.body
-              , name: inputName
-              , required: block.settings.required
-              , attributes: input_attr %}
+            {% render 'armament-input' with type, type: 'text', has_label: true, animate_label: true, label_text: block.settings.placeholder, id: formId, placeholder: block.settings.placeholder, classes: 'w-full text-body', container_classes: input_width, value: form.body, name: inputName, required: block.settings.required, attributes: input_attr %}
         {% endcase %}
       {% endfor %}
       {% if section.blocks.size > 0 %}
         <div class="w-full">
-          {% render 'armament-button' with type: 'submit'
-            , content: submit_btn_text
-            , attributes: submit_btn_attrs
-            , classes: 'max-w-max mt-2 md:mt-3'
-            , data_aid: 'data-aid="contact-form-submit-button"' %}
+          {% render 'armament-button' with type, type: 'submit', content: submit_btn_text, attributes: submit_btn_attrs, classes: 'max-w-max mt-2 md:mt-3', data_aid: 'data-aid="contact-form-submit-button"' %}
         </div>
       {% endif %}
     {% endform %}
@@ -400,4 +339,119 @@
       "templates": ["page"]
     }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with heading_content: section.settings.form_title
+            , heading_type: 'heading-5'
+            , classes: 'mb-3 md:mb-4'
+            , data_aid: 'contact-form-heading' %}
+  to: "{% render 'armament-heading' with heading_content, heading_content: section.settings.form_title,
+    heading_type: 'heading-5', classes: 'mb-3 md:mb-4', data_aid: 'contact-form-heading'
+    %}"
+  position: 402..586
+- from: |-
+    {% render 'armament-input' with type: 'text'
+                  , has_label: true
+                  , animate_label: true
+                  , label_text: nameInputString
+                  , id: formId
+                  , placeholder: nameInputString
+                  , classes: 'w-full text-body'
+                  , container_classes: input_width
+                  , value: nameInputVal
+                  , name: formName
+                  , required: block.settings.required
+                  , attributes: input_attr %}
+  to: "{% render 'armament-input' with type, type: 'text', has_label: true, animate_label:
+    true, label_text: nameInputString, id: formId, placeholder: nameInputString, classes:
+    'w-full text-body', container_classes: input_width, value: nameInputVal, name:
+    formName, required: block.settings.required, attributes: input_attr %}"
+  position: 3187..3506
+- from: |-
+    {% render 'armament-input' with type: 'email'
+                  , has_label: true
+                  , animate_label: true
+                  , label_text: emailInputString
+                  , id: formId
+                  , placeholder: emailInputString
+                  , classes: 'w-full text-body'
+                  , container_classes: input_width
+                  , value: emailInputVal
+                  , name: formEmailName
+                  , required: block.settings.required
+                  , attributes: input_attr %}
+  to: "{% render 'armament-input' with type, type: 'email', has_label: true, animate_label:
+    true, label_text: emailInputString, id: formId, placeholder: emailInputString,
+    classes: 'w-full text-body', container_classes: input_width, value: emailInputVal,
+    name: formEmailName, required: block.settings.required, attributes: input_attr
+    %}"
+  position: 3787..4115
+- from: |-
+    {% render 'armament-input' with type: 'tel'
+                  , has_label: true
+                  , animate_label: true
+                  , label_text: telInputString
+                  , id: formId
+                  , placeholder: telInputString
+                  , classes: 'w-full text-body'
+                  , container_classes: input_width
+                  , value: phoneInputVal
+                  , name: formTelName
+                  , required: block.settings.required
+                  , attributes: input_attr %}
+  to: "{% render 'armament-input' with type, type: 'tel', has_label: true, animate_label:
+    true, label_text: telInputString, id: formId, placeholder: telInputString, classes:
+    'w-full text-body', container_classes: input_width, value: phoneInputVal, name:
+    formTelName, required: block.settings.required, attributes: input_attr %}"
+  position: 4390..4710
+- from: |-
+    {% render 'armament-textarea' with id: formId
+                  , classes: 'py-3 w-full text-body'
+                  , placeholder: msgInputString
+                  , name: formMsgName
+                  , has_label: true
+                  , animate_label: true
+                  , label_text: msgInputString
+                  , attributes: input_attr
+                  , required: block.settings.required
+                  , content: form.body
+                  , container_classes: input_width %}
+  to: "{% render 'armament-textarea' with id, id: formId, classes: 'py-3 w-full text-body',
+    placeholder: msgInputString, name: formMsgName, has_label: true, animate_label:
+    true, label_text: msgInputString, attributes: input_attr, required: block.settings.required,
+    content: form.body, container_classes: input_width %}"
+  position: 4993..5304
+- from: |-
+    {% render 'armament-input' with type: 'text'
+                  , has_label: true
+                  , animate_label: true
+                  , label_text: block.settings.placeholder
+                  , id: formId
+                  , placeholder: block.settings.placeholder
+                  , classes: 'w-full text-body'
+                  , container_classes: input_width
+                  , value: form.body
+                  , name: inputName
+                  , required: block.settings.required
+                  , attributes: input_attr %}
+  to: "{% render 'armament-input' with type, type: 'text', has_label: true, animate_label:
+    true, label_text: block.settings.placeholder, id: formId, placeholder: block.settings.placeholder,
+    classes: 'w-full text-body', container_classes: input_width, value: form.body,
+    name: inputName, required: block.settings.required, attributes: input_attr %}"
+  position: 5710..6049
+- from: |-
+    {% render 'armament-button' with type: 'submit'
+                , content: submit_btn_text
+                , attributes: submit_btn_attrs
+                , classes: 'max-w-max mt-2 md:mt-3'
+                , data_aid: 'data-aid="contact-form-submit-button"' %}
+  to: '{% render ''armament-button'' with type, type: ''submit'', content: submit_btn_text,
+    attributes: submit_btn_attrs, classes: ''max-w-max mt-2 md:mt-3'', data_aid: ''data-aid="contact-form-submit-button"''
+    %}'
+  position: 6169..6367
+{%- endcomment -%}

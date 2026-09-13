@@ -134,7 +134,7 @@
                   {%- for i in (0..2) -%}
                     {%- assign cols_limit = arr_cols_limit[i] | plus: 0 -%}
                     {%- capture list_continue -%}
-                      {%- cycle listing_continue1,listing_continue2,listing_continue2 -%}
+                      {%- cycle listing_continue1, listing_continue2, listing_continue2 -%}
                      {%- endcapture -%}
 
                     <div class="layout__switch is--{% cycle 'mobile d-md-flex d-md-none', 'tablet d-none d-md-flex d-lg-none', 'desktop d-none d-lg-flex' %}">
@@ -147,12 +147,12 @@
                           data-btn-as-a
                           data-breakpoint="{{arr_breakpoint[i]}}"
                           data-col="{{arr_cols_layout[j]}}"
-                          {% if [col_active] == arr_cols_layout[j] %}
+                          {% if self[col_active] == arr_cols_layout[j] %}
                             class="is--active"
                           {% endif %}
                         >
                           {%- assign icon_col_j = 'icon_col_' | append: j -%}
-                          {{ [icon_col_j] }}
+                          {{ self[icon_col_j] }}
                         </button>
                       {%- endfor -%}
                     </div>
@@ -1279,3 +1279,19 @@
   }
 }
 {%- endschema -%}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- cycle listing_continue1,listing_continue2,listing_continue2 -%}"
+  to: "{%- cycle listing_continue1, listing_continue2, listing_continue2 -%}"
+  position: 6182..6251
+- from: "{% if [col_active] == arr_cols_layout[j] %}"
+  to: "{% if self[col_active] == arr_cols_layout[j] %}"
+  position: 6912..6959
+- from: "{{ [icon_col_j] }}"
+  to: "{{ self[icon_col_j] }}"
+  position: 7175..7197
+{% endcomment %}

@@ -58,12 +58,12 @@
                   assign icon_class = icon_class | append: ' lg:rotate-90'
                 endif
               -%}
-              {% render 'armament-icon' with icon: icon, width: 14, height: 14, classes: icon_class, no_animation: true %}
+              {% render 'armament-icon' with icon, icon: icon, width: 14, height: 14, classes: icon_class, no_animation: true %}
               {% if heading_link %}
-                <a class="hidden lg:inline" href="{{ heading_link }}">{% render 'armament-heading' with heading_content: heading, tag: 'h5', heading_type: 'heading-5' %}</a>
-                <span class="lg:hidden">{% render 'armament-heading' with heading_content: heading, tag: 'h5', heading_type: 'heading-5' %}</span>
+                <a class="hidden lg:inline" href="{{ heading_link }}">{% render 'armament-heading' with heading_content, heading_content: heading, tag: 'h5', heading_type: 'heading-5' %}</a>
+                <span class="lg:hidden">{% render 'armament-heading' with heading_content, heading_content: heading, tag: 'h5', heading_type: 'heading-5' %}</span>
               {% else %}
-                <span>{% render 'armament-heading' with heading_content: heading, tag: 'h5', heading_type: 'heading-5' %}</span>
+                <span>{% render 'armament-heading' with heading_content, heading_content: heading, tag: 'h5', heading_type: 'heading-5' %}</span>
               {% endif %}
             </span>
           </div>
@@ -77,29 +77,29 @@
               {% endif %}
               {% if image_1 %}
                 <div class="w-1/2 lg:w-1/4 grow lg:grow-0">
-                  {% render 'armament-navigation-image' with image: image_1, image_heading: image_heading_1, image_link: image_link_1, overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes: 'animate-menu-image animate-menu-image-delay-1' %}
+                  {% render 'armament-navigation-image' with image, image: image_1, image_heading: image_heading_1, image_link: image_link_1, overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes: 'animate-menu-image animate-menu-image-delay-1' %}
                 </div>
               {% endif %}
               {% if image_2 %}
                 <div class="w-1/2 lg:w-1/4 grow lg:grow-0">
-                  {% render 'armament-navigation-image' with image: image_2, image_heading: image_heading_2, image_link: image_link_2, overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes: 'animate-menu-image animate-menu-image-delay-2' %}
+                  {% render 'armament-navigation-image' with image, image: image_2, image_heading: image_heading_2, image_link: image_link_2, overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes: 'animate-menu-image animate-menu-image-delay-2' %}
                 </div>
               {% endif %}
               {% if image_3 %}
                 <div class="w-1/2 lg:w-1/4 grow lg:grow-0">
-                  {% render 'armament-navigation-image' with image: image_3, image_heading: image_heading_3, image_link: image_link_3, overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes: 'animate-menu-image animate-menu-image-delay-3' %}
+                  {% render 'armament-navigation-image' with image, image: image_3, image_heading: image_heading_3, image_link: image_link_3, overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes: 'animate-menu-image animate-menu-image-delay-3' %}
                 </div>
               {% endif %}
               {% if image_4 %}
                 <div class="w-1/2 lg:w-1/4 grow lg:grow-0">
-                  {% render 'armament-navigation-image' with image: image_4, image_heading: image_heading_4, image_link: image_link_4, overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes: 'animate-menu-image animate-menu-image-delay-4' %}
+                  {% render 'armament-navigation-image' with image, image: image_4, image_heading: image_heading_4, image_link: image_link_4, overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes: 'animate-menu-image animate-menu-image-delay-4' %}
                 </div>
               {% endif %}
               {% if no_images %}
                 {% for i in (1..4) %}
                   <div class="w-1/2 lg:w-1/4 grow lg:grow-0 overflow-hidden">
                     <div class='animate-menu-image animate-menu-image-delay-{{ forloop.index }}'>
-                      {% render 'armament-placeholder' with name: 'image' %}
+                      {% render 'armament-placeholder' with name, name: 'image' %}
                     </div>
                   </div>
                 {% endfor %}
@@ -110,7 +110,7 @@
               {% for link in navigation %}
                 <div data-armada-selector="navigation-item-link" class="lg:pt-5 lg:px-5{% if navigation.size < 11 %} animate-menu-up animate-menu-up-delay-{{ forloop.index }}{% endif %}" data-has-child-links="{% if link.links != blank %}true{% else %}false{% endif %}">
                   <a data-armada-selector="navigation-item-parent" data-name="{{ link.title }}" class="flex items-baseline justify-between lg:inline-block w-full py-[12px] lg:py-0 lg:font-heading lg:text-h5 navigation-item-parent lg:hover:opacity-50 lg:transition-opacity lg:duration-150" href="{{ link.url | escape }}">
-                    {% render 'armament-heading' with heading_content: link.title, tag: 'h5', heading_type: 'heading-5' %}
+                    {% render 'armament-heading' with heading_content, heading_content: link.title, tag: 'h5', heading_type: 'heading-5' %}
                     {% if link.links != blank %}
                       {%- liquid
                         assign icon_class = 'lg:hidden'
@@ -118,7 +118,7 @@
                           assign icon_class = icon_class | append: ' lg:rotate-90'
                         endif
                       -%}
-                      {% render 'armament-icon' with icon: icon, width: 14, height: 14, classes: icon_class, no_animation: true %}
+                      {% render 'armament-icon' with icon, icon: icon, width: 14, height: 14, classes: icon_class, no_animation: true %}
                     {% endif %}
                   </a>
                   {% if link.links != blank %}
@@ -134,7 +134,7 @@
                                   assign icon_class = icon_class | append: ' lg:rotate-90'
                                 endif
                               -%}
-                              {% render 'armament-icon' with icon: icon, width: 14, height: 14, no_animation: true, classes: 'lg:hidden' | append: icon_class %}
+                              {% render 'armament-icon' with icon, icon: icon, width: 14, height: 14, no_animation: true, classes: 'lg:hidden', append: icon_class %}
                             {% endif %}
                           </a>
                           {% if child_link.links != blank %}
@@ -162,7 +162,7 @@
                     assign grid_class = 'row-end-4 col-end-6'
                   endif
                 -%}
-                {% render 'armament-navigation-image' with image: image_1, image_heading: image_heading_1, image_link: image_link_1, classes: grid_class, overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color %}
+                {% render 'armament-navigation-image' with image, image: image_1, image_heading: image_heading_1, image_link: image_link_1, classes: grid_class, overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color %}
               {% endif %}
               {% if image_2 %}
                 {%- liquid
@@ -172,10 +172,10 @@
                     assign grid_class = 'row-end-4 col-end-6'
                   endif
                 -%}
-                {% render 'armament-navigation-image' with image: image_2, image_heading: image_heading_2, image_link: image_link_2, classes: grid_class, overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color %}
+                {% render 'armament-navigation-image' with image, image: image_2, image_heading: image_heading_2, image_link: image_link_2, classes: grid_class, overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color %}
               {% endif %}
               {% if image_3 %}
-                {% render 'armament-navigation-image' with image: image_3, image_heading: image_heading_3, image_link: image_link_3, classes: 'row-end-4 col-end-6', overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color %}
+                {% render 'armament-navigation-image' with image, image: image_3, image_heading: image_heading_3, image_link: image_link_3, classes: 'row-end-4 col-end-6', overlay_bg: overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color %}
               {% endif %}
             </div>
           {% endif %}
@@ -185,7 +185,7 @@
         <div data-armada-selector="navigation-item-drawer" class="absolute top-0 left-0 right-0 h-full translate-x-full invisible bg-page z-[1] lg:hidden navigation-item-drawer{% unless visual %} px-4{% endunless %}">
           <div class="relative group{% if visual %} px-4{% endif %}">
             <button data-armada-selector="navigation-item-close" type="button" aria-label="Back to previous navigation" class="w-full py-3 font-heading text-h5 text-center"></button>
-            {% render 'armament-icon' with icon: 'arrow-left', classes: 'absolute top-1/2 -translate-y-1/2 pointer-events-none' %}
+            {% render 'armament-icon' with icon, icon: 'arrow-left', classes: 'absolute top-1/2 -translate-y-1/2 pointer-events-none' %}
           </div>
         </div>
       </template>
@@ -194,9 +194,123 @@
     <div class="navigation-item-link-only border-b border-b-border-opacity-10 md:border-b-0 lg:h-full{% if menu_index < 11 %} animate-menu-right animate-menu-right-delay-{{ menu_index }}{% endif %}">
       <div class="relative lg:h-full lg:flex lg:items-center {{ underline_classes }} lg:hover:after:scale-x-100">
         <nav-link class="list-none flex items-baseline lg:p-2 font-heading text-h5">
-          <a class="w-full py-3 lg:p-0" href="{{ heading_link }}">{% render 'armament-heading' with heading_content: heading, tag: 'h5', heading_type: 'heading-5' %}</a>
+          <a class="w-full py-3 lg:p-0" href="{{ heading_link }}">{% render 'armament-heading' with heading_content, heading_content: heading, tag: 'h5', heading_type: 'heading-5' %}</a>
         </nav-link>
       </div>
     </div>
   {% endif %}
 </li>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-icon' with icon: icon, width: 14, height: 14, classes:
+    icon_class, no_animation: true %}"
+  to: "{% render 'armament-icon' with icon, icon: icon, width: 14, height: 14, classes:
+    icon_class, no_animation: true %}"
+  position: 3084..3198
+- from: "{% render 'armament-heading' with heading_content: heading, tag: 'h5', heading_type:
+    'heading-5' %}"
+  to: "{% render 'armament-heading' with heading_content, heading_content: heading,
+    tag: 'h5', heading_type: 'heading-5' %}"
+  position: 3305..3421
+- from: "{% render 'armament-heading' with heading_content: heading, tag: 'h5', heading_type:
+    'heading-5' %}"
+  to: "{% render 'armament-heading' with heading_content, heading_content: heading,
+    tag: 'h5', heading_type: 'heading-5' %}"
+  position: 3466..3582
+- from: "{% render 'armament-heading' with heading_content: heading, tag: 'h5', heading_type:
+    'heading-5' %}"
+  to: "{% render 'armament-heading' with heading_content, heading_content: heading,
+    tag: 'h5', heading_type: 'heading-5' %}"
+  position: 3637..3753
+- from: "{% render 'armament-navigation-image' with image: image_1, image_heading:
+    image_heading_1, image_link: image_link_1, overlay_bg: overlay_bg, bg_opacity:
+    bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes:
+    'animate-menu-image animate-menu-image-delay-1' %}"
+  to: "{% render 'armament-navigation-image' with image, image: image_1, image_heading:
+    image_heading_1, image_link: image_link_1, overlay_bg: overlay_bg, bg_opacity:
+    bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes:
+    'animate-menu-image animate-menu-image-delay-1' %}"
+  position: 4521..4814
+- from: "{% render 'armament-navigation-image' with image: image_2, image_heading:
+    image_heading_2, image_link: image_link_2, overlay_bg: overlay_bg, bg_opacity:
+    bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes:
+    'animate-menu-image animate-menu-image-delay-2' %}"
+  to: "{% render 'armament-navigation-image' with image, image: image_2, image_heading:
+    image_heading_2, image_link: image_link_2, overlay_bg: overlay_bg, bg_opacity:
+    bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes:
+    'animate-menu-image animate-menu-image-delay-2' %}"
+  position: 4973..5266
+- from: "{% render 'armament-navigation-image' with image: image_3, image_heading:
+    image_heading_3, image_link: image_link_3, overlay_bg: overlay_bg, bg_opacity:
+    bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes:
+    'animate-menu-image animate-menu-image-delay-3' %}"
+  to: "{% render 'armament-navigation-image' with image, image: image_3, image_heading:
+    image_heading_3, image_link: image_link_3, overlay_bg: overlay_bg, bg_opacity:
+    bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes:
+    'animate-menu-image animate-menu-image-delay-3' %}"
+  position: 5425..5718
+- from: "{% render 'armament-navigation-image' with image: image_4, image_heading:
+    image_heading_4, image_link: image_link_4, overlay_bg: overlay_bg, bg_opacity:
+    bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes:
+    'animate-menu-image animate-menu-image-delay-4' %}"
+  to: "{% render 'armament-navigation-image' with image, image: image_4, image_heading:
+    image_heading_4, image_link: image_link_4, overlay_bg: overlay_bg, bg_opacity:
+    bg_opacity, aspect: aspect, text_color: image_text_color, image_container_classes:
+    'animate-menu-image animate-menu-image-delay-4' %}"
+  position: 5877..6170
+- from: "{% render 'armament-placeholder' with name: 'image' %}"
+  to: "{% render 'armament-placeholder' with name, name: 'image' %}"
+  position: 6489..6549
+- from: "{% render 'armament-heading' with heading_content: link.title, tag: 'h5',
+    heading_type: 'heading-5' %}"
+  to: "{% render 'armament-heading' with heading_content, heading_content: link.title,
+    tag: 'h5', heading_type: 'heading-5' %}"
+  position: 7394..7513
+- from: "{% render 'armament-icon' with icon: icon, width: 14, height: 14, classes:
+    icon_class, no_animation: true %}"
+  to: "{% render 'armament-icon' with icon, icon: icon, width: 14, height: 14, classes:
+    icon_class, no_animation: true %}"
+  position: 7862..7976
+- from: "{% render 'armament-icon' with icon: icon, width: 14, height: 14, no_animation:
+    true, classes: 'lg:hidden' | append: icon_class %}"
+  to: "{% render 'armament-icon' with icon, icon: icon, width: 14, height: 14, no_animation:
+    true, classes: 'lg:hidden', append: icon_class %}"
+  position: 9288..9423
+- from: "{% render 'armament-navigation-image' with image: image_1, image_heading:
+    image_heading_1, image_link: image_link_1, classes: grid_class, overlay_bg: overlay_bg,
+    bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color %}"
+  to: "{% render 'armament-navigation-image' with image, image: image_1, image_heading:
+    image_heading_1, image_link: image_link_1, classes: grid_class, overlay_bg: overlay_bg,
+    bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color %}"
+  position: 10713..10953
+- from: "{% render 'armament-navigation-image' with image: image_2, image_heading:
+    image_heading_2, image_link: image_link_2, classes: grid_class, overlay_bg: overlay_bg,
+    bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color %}"
+  to: "{% render 'armament-navigation-image' with image, image: image_2, image_heading:
+    image_heading_2, image_link: image_link_2, classes: grid_class, overlay_bg: overlay_bg,
+    bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color %}"
+  position: 11274..11514
+- from: "{% render 'armament-navigation-image' with image: image_3, image_heading:
+    image_heading_3, image_link: image_link_3, classes: 'row-end-4 col-end-6', overlay_bg:
+    overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color
+    %}"
+  to: "{% render 'armament-navigation-image' with image, image: image_3, image_heading:
+    image_heading_3, image_link: image_link_3, classes: 'row-end-4 col-end-6', overlay_bg:
+    overlay_bg, bg_opacity: bg_opacity, aspect: aspect, text_color: image_text_color
+    %}"
+  position: 11588..11839
+- from: "{% render 'armament-icon' with icon: 'arrow-left', classes: 'absolute top-1/2
+    -translate-y-1/2 pointer-events-none' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-left', classes: 'absolute
+    top-1/2 -translate-y-1/2 pointer-events-none' %}"
+  position: 12439..12563
+- from: "{% render 'armament-heading' with heading_content: heading, tag: 'h5', heading_type:
+    'heading-5' %}"
+  to: "{% render 'armament-heading' with heading_content, heading_content: heading,
+    tag: 'h5', heading_type: 'heading-5' %}"
+  position: 13115..13231
+{% endcomment %}

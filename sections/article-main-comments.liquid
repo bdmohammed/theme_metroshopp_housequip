@@ -28,12 +28,7 @@
 
               <div class="pt-5 md:pt-6 last:pb-5 md:last:pb-6" {{ block.shopify_attributes }}>
                 {% if block.settings.comments_heading %}
-                  {%
-                    render 'armament-heading' with tag: 'h5'
-                    , heading_content: comments_heading
-                    , classes: 'text-h5'
-                    , data_aid: 'comment-count'
-                  %}
+                  {% render 'armament-heading' with tag, tag: 'h5', heading_content: comments_heading, classes: 'text-h5', data_aid: 'comment-count' %}
                 {% endif %}
 
                 <div>
@@ -65,12 +60,7 @@
                               <li class="border flex flex-col p-3 md:p-4 my-3 md:my-4 first:mt-0 last:mb-0" id="{{ post.id }}">
                                 <div>
                                   <div class="flex flex-col">
-                                    {%
-                                      render 'armament-heading' with tag: 'h5'
-                                      , heading_content: post.author
-                                      , classes: 'text-h5 mb-2'
-                                      , data_aid: 'comment-author'
-                                    %}
+                                    {% render 'armament-heading' with tag, tag: 'h5', heading_content: post.author, classes: 'text-h5 mb-2', data_aid: 'comment-author' %}
                                     <span class="mb-2 uppercase">
                                       {{- article.published_at | time_tag: '%b %d, %Y' -}}
                                     </span>
@@ -95,10 +85,7 @@
                                   data-armada-selector="previous_comment"
                                   data-prev-url="{{ paginate.previous.url }}"
                                   tabindex="0">
-                                  {%
-                                    render 'armament-icon' with icon: 'arrow-left'
-                                    , classes: 'mr-3 cursor-pointer'
-                                  -%}
+                                  {% render 'armament-icon' with icon, icon: 'arrow-left', classes: 'mr-3 cursor-pointer' -%}
                                   <span class="sr-only">{{ prev_article }}</span>
                                 </div>
                               {% endif %}
@@ -119,10 +106,7 @@
                                   data-armada-selector="next_comment"
                                   data-next-url="{{ paginate.next.url }}"
                                   tabindex="0">
-                                  {%
-                                    render 'armament-icon' with icon: 'arrow-right'
-                                    , classes: 'ml-3 cursor-pointer'
-                                  -%}
+                                  {% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'ml-3 cursor-pointer' -%}
                                   <span class="sr-only">{{ next_article }}</span>
                                 </div>
                               {% endif %}
@@ -135,10 +119,7 @@
                               {% if paginate.previous.is_link %}
                                 <a href="{{ paginate.previous.url }}">
                               {% endif %}
-                              {%
-                                render 'armament-icon' with icon: 'arrow-left'
-                                , classes: 'mr-3'
-                              -%}
+                              {% render 'armament-icon' with icon, icon: 'arrow-left', classes: 'mr-3' -%}
                               <span class="sr-only">{{ prev_article }}</span>
                               {% if paginate.previous.is_link %}
                                 </a>
@@ -157,10 +138,7 @@
                               {% if paginate.next.is_link %}
                                 <a href="{{ paginate.next.url }}">
                               {% endif %}
-                              {%
-                                render 'armament-icon' with icon: 'arrow-right'
-                                , classes: 'ml-3'
-                              -%}
+                              {% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'ml-3' -%}
                               <span class="sr-only">{{ next_article }}</span>
                               {% if paginate.next.is_link %}
                                 </a>
@@ -176,12 +154,7 @@
 
             {% when 'article_form' %}
               <div class="pt-5 md:pt-6 last:pb-5 md:last:pb-6" {{ block.shopify_attributes }}>
-                {%
-                  render 'armament-heading' with type: 'h6'
-                  , heading_content: block.settings.form_heading
-                  , classes: 'text-h5 mb-3 md:mb-4'
-                  , data_aid: 'article-form-title'
-                %}
+                {% render 'armament-heading' with type, type: 'h6', heading_content: block.settings.form_heading, classes: 'text-h5 mb-3 md:mb-4', data_aid: 'article-form-title' %}
 
                 {% form 'new_comment'
                   , article %}
@@ -220,58 +193,13 @@
                     %}
 
                     <div class="grid grid-cols-2 grid-rows-[repeat(4,minmax(0,auto))] md:grid-rows-[repeat(3,minmax(0,auto))]">
-                      {%
-                        render 'armament-input' with has_label: true
-                        , animate_label: true
-                        , label_text: nameLabel
-                        , id: "comment_name"
-                        , placeholder: nameLabel
-                        , classes: "w-full mb-3 md:mb-4 md:mr-4"
-                        , container_classes: 'col-start-1 col-end-3 md:col-end-2 row-start-1 row-end-2'
-                        , value: form.author
-                        , name: "comment[author]"
-                        , attributes: ''
-                        , required: true
-                        , data_aid: 'comment-form-name'
-                      %}
+                      {% render 'armament-input' with has_label, has_label: true, animate_label: true, label_text: nameLabel, id: "comment_name", placeholder: nameLabel, classes: "w-full mb-3 md:mb-4 md:mr-4", container_classes: 'col-start-1 col-end-3 md:col-end-2 row-start-1 row-end-2', value: form.author, name: "comment[author]", attributes: '', required: true, data_aid: 'comment-form-name' %}
 
-                      {%
-                        render 'armament-input' with type: 'email'
-                        , has_label: true
-                        , animate_label: true
-                        , label_text: emailLabel
-                        , id: "comment_email"
-                        , placeholder: emailLabel
-                        , classes: "w-full mb-3 md:mb-4"
-                        , container_classes: 'col-start-1 md:col-start-2 col-end-3 row-start-2 row-end-3 md:row-start-1 md:row-end-2'
-                        , value: form.email
-                        , name: "comment[email]"
-                        , attributes: ''
-                        , required: true
-                        , data_aid: 'comment-form-email'
-                      %}
+                      {% render 'armament-input' with type, type: 'email', has_label: true, animate_label: true, label_text: emailLabel, id: "comment_email", placeholder: emailLabel, classes: "w-full mb-3 md:mb-4", container_classes: 'col-start-1 md:col-start-2 col-end-3 row-start-2 row-end-3 md:row-start-1 md:row-end-2', value: form.email, name: "comment[email]", attributes: '', required: true, data_aid: 'comment-form-email' %}
 
-                      {%
-                        render 'armament-textarea' with id: 'article-comment'
-                        , classes: 'py-3 w-full mb-4 md:mb-5'
-                        , container_classes: 'col-start-1 col-end-3 row-start-3 row-end-4 md:row-start-2 md:row-end-3'
-                        , has_label: true
-                        , label_text: commentLabel
-                        , placeholder: commentLabel
-                        , name: 'comment[body]'
-                        , attributes: 'aria-label="article comments"'
-                        , required: true
-                        , rows: 10
-                        , content: form.body
-                        , animate_label: true
-                        , data_aid: 'comment-form-message'
-                      %}
+                      {% render 'armament-textarea' with id, id: 'article-comment', classes: 'py-3 w-full mb-4 md:mb-5', container_classes: 'col-start-1 col-end-3 row-start-3 row-end-4 md:row-start-2 md:row-end-3', has_label: true, label_text: commentLabel, placeholder: commentLabel, name: 'comment[body]', attributes: 'aria-label="article comments"', required: true, rows: 10, content: form.body, animate_label: true, data_aid: 'comment-form-message' %}
 
-                      {%
-                        render 'armament-button' with content: commentBtnLabel
-                        , attributes: 'aria-label="Submit comment"'
-                        , classes: 'max-w-max col-start-1 col-end-3 row-start-4 row-end-5 md:row-start-3 md:row-end-4'
-                      %}
+                      {% render 'armament-button' with content, content: commentBtnLabel, attributes: 'aria-label="Submit comment"', classes: 'max-w-max col-start-1 col-end-3 row-start-4 row-end-5 md:row-start-3 md:row-end-4' %}
                     </div>
                   </div>
                 {% endform %}
@@ -373,4 +301,147 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%
+                        render 'armament-heading' with tag: 'h5'
+                        , heading_content: comments_heading
+                        , classes: 'text-h5'
+                        , data_aid: 'comment-count'
+                      %}
+  to: "{% render 'armament-heading' with tag, tag: 'h5', heading_content: comments_heading,
+    classes: 'text-h5', data_aid: 'comment-count' %}"
+  position: 1238..1371
+- from: |-
+    {%
+                                          render 'armament-heading' with tag: 'h5'
+                                          , heading_content: post.author
+                                          , classes: 'text-h5 mb-2'
+                                          , data_aid: 'comment-author'
+                                        %}
+  to: "{% render 'armament-heading' with tag, tag: 'h5', heading_content: post.author,
+    classes: 'text-h5 mb-2', data_aid: 'comment-author' %}"
+  position: 3095..3229
+- from: |-
+    {%
+                                        render 'armament-icon' with icon: 'arrow-left'
+                                        , classes: 'mr-3 cursor-pointer'
+                                      -%}
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-left', classes: 'mr-3 cursor-pointer'
+    -%}"
+  position: 4572..4663
+- from: |-
+    {%
+                                        render 'armament-icon' with icon: 'arrow-right'
+                                        , classes: 'ml-3 cursor-pointer'
+                                      -%}
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'ml-3 cursor-pointer'
+    -%}"
+  position: 5720..5812
+- from: |-
+    {%
+                                    render 'armament-icon' with icon: 'arrow-left'
+                                    , classes: 'mr-3'
+                                  -%}
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-left', classes: 'mr-3' -%}"
+  position: 6497..6573
+- from: |-
+    {%
+                                    render 'armament-icon' with icon: 'arrow-right'
+                                    , classes: 'ml-3'
+                                  -%}
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'ml-3' -%}"
+  position: 7502..7579
+- from: |-
+    {%
+                      render 'armament-heading' with type: 'h6'
+                      , heading_content: block.settings.form_heading
+                      , classes: 'text-h5 mb-3 md:mb-4'
+                      , data_aid: 'article-form-title'
+                    %}
+  to: "{% render 'armament-heading' with type, type: 'h6', heading_content: block.settings.form_heading,
+    classes: 'text-h5 mb-3 md:mb-4', data_aid: 'article-form-title' %}"
+  position: 8204..8368
+- from: |-
+    {%
+                            render 'armament-input' with has_label: true
+                            , animate_label: true
+                            , label_text: nameLabel
+                            , id: "comment_name"
+                            , placeholder: nameLabel
+                            , classes: "w-full mb-3 md:mb-4 md:mr-4"
+                            , container_classes: 'col-start-1 col-end-3 md:col-end-2 row-start-1 row-end-2'
+                            , value: form.author
+                            , name: "comment[author]"
+                            , attributes: ''
+                            , required: true
+                            , data_aid: 'comment-form-name'
+                          %}
+  to: '{% render ''armament-input'' with has_label, has_label: true, animate_label:
+    true, label_text: nameLabel, id: "comment_name", placeholder: nameLabel, classes:
+    "w-full mb-3 md:mb-4 md:mr-4", container_classes: ''col-start-1 col-end-3 md:col-end-2
+    row-start-1 row-end-2'', value: form.author, name: "comment[author]", attributes:
+    '''', required: true, data_aid: ''comment-form-name'' %}'
+  position: 10226..10602
+- from: |-
+    {%
+                            render 'armament-input' with type: 'email'
+                            , has_label: true
+                            , animate_label: true
+                            , label_text: emailLabel
+                            , id: "comment_email"
+                            , placeholder: emailLabel
+                            , classes: "w-full mb-3 md:mb-4"
+                            , container_classes: 'col-start-1 md:col-start-2 col-end-3 row-start-2 row-end-3 md:row-start-1 md:row-end-2'
+                            , value: form.email
+                            , name: "comment[email]"
+                            , attributes: ''
+                            , required: true
+                            , data_aid: 'comment-form-email'
+                          %}
+  to: '{% render ''armament-input'' with type, type: ''email'', has_label: true, animate_label:
+    true, label_text: emailLabel, id: "comment_email", placeholder: emailLabel, classes:
+    "w-full mb-3 md:mb-4", container_classes: ''col-start-1 md:col-start-2 col-end-3
+    row-start-2 row-end-3 md:row-start-1 md:row-end-2'', value: form.email, name:
+    "comment[email]", attributes: '''', required: true, data_aid: ''comment-form-email''
+    %}'
+  position: 10626..11036
+- from: |-
+    {%
+                            render 'armament-textarea' with id: 'article-comment'
+                            , classes: 'py-3 w-full mb-4 md:mb-5'
+                            , container_classes: 'col-start-1 col-end-3 row-start-3 row-end-4 md:row-start-2 md:row-end-3'
+                            , has_label: true
+                            , label_text: commentLabel
+                            , placeholder: commentLabel
+                            , name: 'comment[body]'
+                            , attributes: 'aria-label="article comments"'
+                            , required: true
+                            , rows: 10
+                            , content: form.body
+                            , animate_label: true
+                            , data_aid: 'comment-form-message'
+                          %}
+  to: '{% render ''armament-textarea'' with id, id: ''article-comment'', classes:
+    ''py-3 w-full mb-4 md:mb-5'', container_classes: ''col-start-1 col-end-3 row-start-3
+    row-end-4 md:row-start-2 md:row-end-3'', has_label: true, label_text: commentLabel,
+    placeholder: commentLabel, name: ''comment[body]'', attributes: ''aria-label="article
+    comments"'', required: true, rows: 10, content: form.body, animate_label: true,
+    data_aid: ''comment-form-message'' %}'
+  position: 11060..11493
+- from: |-
+    {%
+                            render 'armament-button' with content: commentBtnLabel
+                            , attributes: 'aria-label="Submit comment"'
+                            , classes: 'max-w-max col-start-1 col-end-3 row-start-4 row-end-5 md:row-start-3 md:row-end-4'
+                          %}
+  to: '{% render ''armament-button'' with content, content: commentBtnLabel, attributes:
+    ''aria-label="Submit comment"'', classes: ''max-w-max col-start-1 col-end-3 row-start-4
+    row-end-5 md:row-start-3 md:row-end-4'' %}'
+  position: 11517..11723
+{%- endcomment -%}

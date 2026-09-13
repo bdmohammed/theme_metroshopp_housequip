@@ -13,21 +13,12 @@
   {% unless settings.show_smart_checkout %}
     {% assign button_wrapper_classes = 'mb-4' %}
   {% endunless %}
-  {% render 'ship-product-form' with form_product: product
-    , dynamic_buttons: settings.show_smart_checkout
-    , block_order: block_order
-    , option_classes: 'flex flex-col'
-    , select_wrapper_classes: 'w-full mb-3 md:mb-4' button_style: 'outline'
-    , button_wrapper_classes: button_wrapper_classes
-    , price_classes: 'mb-3 md:mb-4'
-    , regular_price_classes: 'text-h4 font-heading heading-case leading-none' %}
+  {% render 'ship-product-form' with form_product, form_product: product, dynamic_buttons: settings.show_smart_checkout, block_order: block_order, option_classes: 'flex flex-col', select_wrapper_classes: 'w-full mb-3 md:mb-4', button_style: 'outline', button_wrapper_classes: button_wrapper_classes, price_classes: 'mb-3 md:mb-4', regular_price_classes: 'text-h4 font-heading heading-case leading-none' %}
 </div>
 
 {% if settings.product_form_sticky %}
   <div data-armada-selector="sticky-atc-form-wrapper" class="max-w-full">
-    {% render 'ship-product-form-sticky' with sticky_product: product
-      , dynamic_buttons: false
-      , section_id: section.id %}
+    {% render 'ship-product-form-sticky' with sticky_product, sticky_product: product, dynamic_buttons: false, section_id: section.id %}
   </div>
 {% endif %}
 
@@ -518,4 +509,32 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'ship-product-form' with form_product: product
+        , dynamic_buttons: settings.show_smart_checkout
+        , block_order: block_order
+        , option_classes: 'flex flex-col'
+        , select_wrapper_classes: 'w-full mb-3 md:mb-4' button_style: 'outline'
+        , button_wrapper_classes: button_wrapper_classes
+        , price_classes: 'mb-3 md:mb-4'
+        , regular_price_classes: 'text-h4 font-heading heading-case leading-none' %}
+  to: "{% render 'ship-product-form' with form_product, form_product: product, dynamic_buttons:
+    settings.show_smart_checkout, block_order: block_order, option_classes: 'flex
+    flex-col', select_wrapper_classes: 'w-full mb-3 md:mb-4', button_style: 'outline',
+    button_wrapper_classes: button_wrapper_classes, price_classes: 'mb-3 md:mb-4',
+    regular_price_classes: 'text-h4 font-heading heading-case leading-none' %}"
+  position: 596..999
+- from: |-
+    {% render 'ship-product-form-sticky' with sticky_product: product
+          , dynamic_buttons: false
+          , section_id: section.id %}
+  to: "{% render 'ship-product-form-sticky' with sticky_product, sticky_product: product,
+    dynamic_buttons: false, section_id: section.id %}"
+  position: 1124..1256
+{%- endcomment -%}

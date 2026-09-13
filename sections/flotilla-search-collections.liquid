@@ -13,20 +13,9 @@
     -%}
 
     {% if handles != blank %}
-      {% render 'flotilla-collection-list' with handles: handles
-        , desktop_rows: section.settings.collections_per_row_desktop
-        , mobile_rows: section.settings.collections_per_row_mobile
-        , text_overlay_color_scheme: section.settings.text_overlay_color_scheme
-        , overlay_color_scheme: section.settings.overlay_color_scheme
-        , overlay_opacity: section.settings.overlay_opacity
-        , vertical_text_alignment: section.settings.vertical_text_alignment
-        , horizontal_text_alignment: section.settings.horizontal_text_alignment
-        , button_label: section.settings.button_label
-        , button_style: section.settings.button_style
-        , loadin_animation_threshold: "0"
-      %}
+      {% render 'flotilla-collection-list' with handles, handles: handles, desktop_rows: section.settings.collections_per_row_desktop, mobile_rows: section.settings.collections_per_row_mobile, text_overlay_color_scheme: section.settings.text_overlay_color_scheme, overlay_color_scheme: section.settings.overlay_color_scheme, overlay_opacity: section.settings.overlay_opacity, vertical_text_alignment: section.settings.vertical_text_alignment, horizontal_text_alignment: section.settings.horizontal_text_alignment, button_label: section.settings.button_label, button_style: section.settings.button_style, loadin_animation_threshold: "0" %}
     {% else %}
-      {% render 'ship-search-no-results' with type: 'collection' %}
+      {% render 'ship-search-no-results' with type, type: 'collection' %}
     {% endif %}
   </div>
 {% endif %}
@@ -179,4 +168,34 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'flotilla-collection-list' with handles: handles
+            , desktop_rows: section.settings.collections_per_row_desktop
+            , mobile_rows: section.settings.collections_per_row_mobile
+            , text_overlay_color_scheme: section.settings.text_overlay_color_scheme
+            , overlay_color_scheme: section.settings.overlay_color_scheme
+            , overlay_opacity: section.settings.overlay_opacity
+            , vertical_text_alignment: section.settings.vertical_text_alignment
+            , horizontal_text_alignment: section.settings.horizontal_text_alignment
+            , button_label: section.settings.button_label
+            , button_style: section.settings.button_style
+            , loadin_animation_threshold: "0"
+          %}
+  to: '{% render ''flotilla-collection-list'' with handles, handles: handles, desktop_rows:
+    section.settings.collections_per_row_desktop, mobile_rows: section.settings.collections_per_row_mobile,
+    text_overlay_color_scheme: section.settings.text_overlay_color_scheme, overlay_color_scheme:
+    section.settings.overlay_color_scheme, overlay_opacity: section.settings.overlay_opacity,
+    vertical_text_alignment: section.settings.vertical_text_alignment, horizontal_text_alignment:
+    section.settings.horizontal_text_alignment, button_label: section.settings.button_label,
+    button_style: section.settings.button_style, loadin_animation_threshold: "0" %}'
+  position: 611..1243
+- from: "{% render 'ship-search-no-results' with type: 'collection' %}"
+  to: "{% render 'ship-search-no-results' with type, type: 'collection' %}"
+  position: 1265..1332
+{%- endcomment -%}

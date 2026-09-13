@@ -24,9 +24,9 @@
     data-action="play"
     data-aid="model-3d-play"
   >
-    <div class="z-10 h-full w-full grid place-content-center text-body" style="grid-area: 1 / 1 / 2 / 2">{% render 'armament-icon' with icon: '3d-model' %}</div>
+    <div class="z-10 h-full w-full grid place-content-center text-body" style="grid-area: 1 / 1 / 2 / 2">{% render 'armament-icon' with icon, icon: '3d-model' %}</div>
     <div class="z-0 h-full w-full grid place-items-center" style="grid-area: 1 / 1 / 2 / 2">
-      {% render 'armament-image' with image: model.preview_image %}
+      {% render 'armament-image' with image, image: model.preview_image %}
     </div>
   </button>
   <template>
@@ -42,6 +42,23 @@
   assign attrs = 'aria-label="' | append: ariaLabel | append: '" data-shopify-xr data-shopify-title="' | append: titleEscaped | append: '" data-shopify-model3d-id="' | append: model.id | append: '" data-shopify-xr-hidden data-aid="3d-model-button-view-in-space"'
 %}
 
-{% render 'armament-button' with content: textLabel, attributes: attrs, classes: 'w-full' %}
+{% render 'armament-button' with content, content: textLabel, attributes: attrs, classes: 'w-full' %}
 
-<script src="{{ 'component-model-3d.min.js' | asset_url }}" defer="defer" type="module"></script>
+<script src="{{ 'component-model-3d.min.js' | asset_url }}" defer="defer" type="module"></script>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-icon' with icon: '3d-model' %}"
+  to: "{% render 'armament-icon' with icon, icon: '3d-model' %}"
+  position: 812..868
+- from: "{% render 'armament-image' with image: model.preview_image %}"
+  to: "{% render 'armament-image' with image, image: model.preview_image %}"
+  position: 974..1042
+- from: "{% render 'armament-button' with content: textLabel, attributes: attrs, classes:
+    'w-full' %}"
+  to: "{% render 'armament-button' with content, content: textLabel, attributes: attrs,
+    classes: 'w-full' %}"
+  position: 1696..1797
+{%- endcomment -%}

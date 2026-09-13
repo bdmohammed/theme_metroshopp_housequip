@@ -15,7 +15,19 @@
 >
   <span class="flex items-center">
     {{ label | escape }}
-    {% render 'armament-icon' with icon: 'cancel', width: 10, height: 10, margin: '0 0 0 10px' %}
+    {% render 'armament-icon' with icon, icon: 'cancel', width: 10, height: 10, margin: '0 0 0 10px' %}
   </span>
   <span class="sr-only">{{ 'products.facets.clear_filter' | t }}</span>
 </a>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-icon' with icon: 'cancel', width: 10, height: 10, margin:
+    '0 0 0 10px' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'cancel', width: 10, height: 10,
+    margin: '0 0 0 10px' %}"
+  position: 530..629
+{% endcomment %}

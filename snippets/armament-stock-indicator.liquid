@@ -25,7 +25,7 @@
         {% unless inventory_variant == current_variant %}class="hidden"{% endunless %}
       >
         {% if inventory_variant.inventory_quantity > inventory_stock_amt %}
-          <span class="flex items-center mb-3 md:mb-4">{% render 'armament-icon' with icon: 'tick', classes: 'mr-2' %} {{ 'products.product.in_stock' | t }}
+          <span class="flex items-center mb-3 md:mb-4">{% render 'armament-icon' with icon, icon: 'tick', classes: 'mr-2' %} {{ 'products.product.in_stock' | t }}
             {% if show_stock_count %}
               <span class="mx-2">-</span> <span class="mr-1" data-armada-selector="variant_stock_count">{{ inventory_variant.inventory_quantity }}</span> {{ 'products.product.stock_left' | t }}
             {% endif %}
@@ -34,13 +34,13 @@
             {% endif %}
           </span>
         {% elsif inventory_variant.available == false %}
-          <span class="flex items-center mb-3 md:mb-4">{% render 'armament-icon' with icon: 'exclamation', classes: 'mr-1' %} {{ 'products.product.out_of_stock' | t }}
+          <span class="flex items-center mb-3 md:mb-4">{% render 'armament-icon' with icon, icon: 'exclamation', classes: 'mr-1' %} {{ 'products.product.out_of_stock' | t }}
             {% if in_stock_message != blank %}
               <span class="mx-2">-</span> {{ out_of_stock_message }}
             {% endif %}
           </span>
         {% else %}
-          <span class="flex items-center mb-3 md:mb-4">{% render 'armament-icon' with icon: 'exclamation', classes: 'mr-1' %} {{ 'products.product.low_stock' | t }}
+          <span class="flex items-center mb-3 md:mb-4">{% render 'armament-icon' with icon, icon: 'exclamation', classes: 'mr-1' %} {{ 'products.product.low_stock' | t }}
             {% if show_stock_count %}
               <span class="mx-2">-</span> <span class="mr-1" data-armada-selector="variant_stock_count">{{ inventory_variant.inventory_quantity }}</span> {{ 'products.product.stock_left' | t }}
             {% endif %}
@@ -56,3 +56,19 @@
 <safe-load-scripts>
   <script src="{{ 'component-stock-level-indicator.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="stock-level-indicator"></script>
 </safe-load-scripts>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-icon' with icon: 'tick', classes: 'mr-2' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'tick', classes: 'mr-2' %}"
+  position: 1351..1420
+- from: "{% render 'armament-icon' with icon: 'exclamation', classes: 'mr-1' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'exclamation', classes: 'mr-1' %}"
+  position: 1981..2057
+- from: "{% render 'armament-icon' with icon: 'exclamation', classes: 'mr-1' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'exclamation', classes: 'mr-1' %}"
+  position: 2332..2408
+{% endcomment %}

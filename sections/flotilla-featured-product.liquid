@@ -37,17 +37,10 @@
       {% if section.settings.subheading != blank or section.settings.heading != blank %}
         <div class="pb-4 px-4 md:px-0 md:pb-5 text-{{ section.settings.heading_alignment }}">
           {% if section.settings.subheading != blank %}
-            {% render 'armament-heading' with tag: 'h4'
-              , heading_content: section.settings.subheading
-              , heading_type: 'heading-4'
-              , classes: 'mb-2 md:mb-3'
-              , data_aid: 'featured-product-subheading' %}
+            {% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading, heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'featured-product-subheading' %}
           {% endif %}
           {% if section.settings.heading != blank %}
-            {% render 'armament-heading' with tag: 'h2'
-              , heading_content: section.settings.heading
-              , heading_type: 'section-heading'
-              , data_aid: 'featured-product-subheading' %}
+            {% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading, heading_type: 'section-heading', data_aid: 'featured-product-subheading' %}
           {% endif %}
         </div>
       {% endif %}
@@ -56,27 +49,22 @@
       <div class="product-main-gallery grow max-w-full {{ quick_view_gallery_class }}">
         <div class="w-full">
           {% if section.settings.product == blank and is_quick_view == false %}
-            {% render 'armament-placeholder' with name: 'product-1' %}
+            {% render 'armament-placeholder' with name, name: 'product-1' %}
           {% elsif featured_product.media.size == 0 %}
-            {% render 'armament-placeholder' with name: 'product-1' %}
+            {% render 'armament-placeholder' with name, name: 'product-1' %}
           {% elsif featured_product.media.size == 1 %}
             <div class="relative">
-              {% render 'armament-product-media' with media: featured_product.media[0]
-                , animate_featured_img: animate_featured_img
-                , title: featured_product.title
-                , product_id: featured_product.id %}
+              {% render 'armament-product-media' with media, media: featured_product.media[0], animate_featured_img: animate_featured_img, title: featured_product.title, product_id: featured_product.id %}
               {% if settings.custom_badges %}
                 <div class="absolute top-0 left-0 z-50 pointer-events-none">
-                  {% render 'engine-badges' with badges_product: featured_product %}
+                  {% render 'engine-badges' with badges_product, badges_product: featured_product %}
                 </div>
               {% endif %}
             </div>
           {% elsif gallery_style == 'thumbnails' %}
-            {% render 'ship-product-thumbnail-gallery' with gallery_product: featured_product
-              , scope_id: section.id %}
+            {% render 'ship-product-thumbnail-gallery' with gallery_product, gallery_product: featured_product, scope_id: section.id %}
           {% else %}
-            {% render 'ship-product-slider-gallery' with slider_product: featured_product
-              , scope_id: section.id %}
+            {% render 'ship-product-slider-gallery' with slider_product, slider_product: featured_product, scope_id: section.id %}
           {% endif %}
         </div>
       </div>
@@ -86,43 +74,17 @@
           {% if settings.enable_animations and is_quick_view == false %}
           data-fadeup-animation{% endif %}>
           {% if section.settings.product == blank and is_quick_view == false %}
-            {% render 'armament-heading' with heading_content: 'Product name'
-              , heading_type: 'heading-3'
-              , classes: 'mb-2'
-              , data_aid: 'featured-product-placeholder-title' %}
+            {% render 'armament-heading' with heading_content, heading_content: 'Product name', heading_type: 'heading-3', classes: 'mb-2', data_aid: 'featured-product-placeholder-title' %}
             <div class="mb-3 md:mb-4">
-              {% render 'armament-price' with manual_price: 1999
-                , price_only: true
-                , regular_price_classes: 'text-h4 font-heading heading-case leading-none'
-                , discount_type: 'hide'
-                , show_tax_included: true %}
+              {% render 'armament-price' with manual_price, manual_price: 1999, price_only: true, regular_price_classes: 'text-h4 font-heading heading-case leading-none', discount_type: 'hide', show_tax_included: true %}
             </div>
-            {% render 'armament-quantity-selector' with id: 'example-product'
-              , product_name: 'example product'
-              , name: 'quantity'
-              , value: '1'
-              , min: '1'
-              , classes: 'mb-3 md:mb-4'
-              , label: 'Quantity' %}
+            {% render 'armament-quantity-selector' with id, id: 'example-product', product_name: 'example product', name: 'quantity', value: '1', min: '1', classes: 'mb-3 md:mb-4', label: 'Quantity' %}
             <div>
               {% assign sold_out_string = 'products.product.sold_out' | t %}
-              {% render 'armament-button' with type: 'submit'
-                , content: sold_out_string
-                , attributes: 'disabled'
-                , classes: 'w-full'
-                , style: 'outline' %}
+              {% render 'armament-button' with type, type: 'submit', content: sold_out_string, attributes: 'disabled', classes: 'w-full', style: 'outline' %}
             </div>
           {% else %}
-            {% render 'ship-product-form' with form_product: featured_product
-              , scope_id: section.id
-              , dynamic_buttons: settings.show_smart_checkout
-              , block_order: block_order
-              , option_classes: 'flex flex-col'
-              , select_wrapper_classes: 'w-full mb-3 md:mb-4' button_style: 'outline'
-              , price_classes: 'mb-3 md:mb-4'
-              , regular_price_classes: 'text-h4 font-heading heading-case leading-none'
-              , is_quick_view: is_quick_view
-              , option_type: 'buttons' %}
+            {% render 'ship-product-form' with form_product, form_product: featured_product, scope_id: section.id, dynamic_buttons: settings.show_smart_checkout, block_order: block_order, option_classes: 'flex flex-col', select_wrapper_classes: 'w-full mb-3 md:mb-4', button_style: 'outline', price_classes: 'mb-3 md:mb-4', regular_price_classes: 'text-h4 font-heading heading-case leading-none', is_quick_view: is_quick_view, option_type: 'buttons' %}
             <a class="underline hover:no-underline text-h6 font-heading heading-case" href="{{ featured_product.url }}">{{ 'sections.featured_product.view_product' | t }}</a>
           {% endif %}
         </div>
@@ -652,4 +614,117 @@
       ]
     }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with tag: 'h4'
+                  , heading_content: section.settings.subheading
+                  , heading_type: 'heading-4'
+                  , classes: 'mb-2 md:mb-3'
+                  , data_aid: 'featured-product-subheading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3', data_aid: 'featured-product-subheading'
+    %}"
+  position: 1496..1686
+- from: |-
+    {% render 'armament-heading' with tag: 'h2'
+                  , heading_content: section.settings.heading
+                  , heading_type: 'section-heading'
+                  , data_aid: 'featured-product-subheading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading,
+    heading_type: 'section-heading', data_aid: 'featured-product-subheading' %}"
+  position: 1774..1942
+- from: "{% render 'armament-placeholder' with name: 'product-1' %}"
+  to: "{% render 'armament-placeholder' with name, name: 'product-1' %}"
+  position: 2271..2335
+- from: "{% render 'armament-placeholder' with name: 'product-1' %}"
+  to: "{% render 'armament-placeholder' with name, name: 'product-1' %}"
+  position: 2403..2467
+- from: |-
+    {% render 'armament-product-media' with media: featured_product.media[0]
+                    , animate_featured_img: animate_featured_img
+                    , title: featured_product.title
+                    , product_id: featured_product.id %}
+  to: "{% render 'armament-product-media' with media, media: featured_product.media[0],
+    animate_featured_img: animate_featured_img, title: featured_product.title, product_id:
+    featured_product.id %}"
+  position: 2572..2762
+- from: "{% render 'engine-badges' with badges_product: featured_product %}"
+  to: "{% render 'engine-badges' with badges_product, badges_product: featured_product
+    %}"
+  position: 2904..2986
+- from: |-
+    {% render 'ship-product-thumbnail-gallery' with gallery_product: featured_product
+                  , scope_id: section.id %}
+  to: "{% render 'ship-product-thumbnail-gallery' with gallery_product, gallery_product:
+    featured_product, scope_id: section.id %}"
+  position: 3119..3242
+- from: |-
+    {% render 'ship-product-slider-gallery' with slider_product: featured_product
+                  , scope_id: section.id %}
+  to: "{% render 'ship-product-slider-gallery' with slider_product, slider_product:
+    featured_product, scope_id: section.id %}"
+  position: 3276..3394
+- from: |-
+    {% render 'armament-heading' with heading_content: 'Product name'
+                  , heading_type: 'heading-3'
+                  , classes: 'mb-2'
+                  , data_aid: 'featured-product-placeholder-title' %}
+  to: "{% render 'armament-heading' with heading_content, heading_content: 'Product
+    name', heading_type: 'heading-3', classes: 'mb-2', data_aid: 'featured-product-placeholder-title'
+    %}"
+  position: 3773..3950
+- from: |-
+    {% render 'armament-price' with manual_price: 1999
+                    , price_only: true
+                    , regular_price_classes: 'text-h4 font-heading heading-case leading-none'
+                    , discount_type: 'hide'
+                    , show_tax_included: true %}
+  to: "{% render 'armament-price' with manual_price, manual_price: 1999, price_only:
+    true, regular_price_classes: 'text-h4 font-heading heading-case leading-none',
+    discount_type: 'hide', show_tax_included: true %}"
+  position: 4004..4210
+- from: |-
+    {% render 'armament-quantity-selector' with id: 'example-product'
+                  , product_name: 'example product'
+                  , name: 'quantity'
+                  , value: '1'
+                  , min: '1'
+                  , classes: 'mb-3 md:mb-4'
+                  , label: 'Quantity' %}
+  to: "{% render 'armament-quantity-selector' with id, id: 'example-product', product_name:
+    'example product', name: 'quantity', value: '1', min: '1', classes: 'mb-3 md:mb-4',
+    label: 'Quantity' %}"
+  position: 4242..4431
+- from: |-
+    {% render 'armament-button' with type: 'submit'
+                    , content: sold_out_string
+                    , attributes: 'disabled'
+                    , classes: 'w-full'
+                    , style: 'outline' %}
+  to: "{% render 'armament-button' with type, type: 'submit', content: sold_out_string,
+    attributes: 'disabled', classes: 'w-full', style: 'outline' %}"
+  position: 4541..4684
+- from: |-
+    {% render 'ship-product-form' with form_product: featured_product
+                  , scope_id: section.id
+                  , dynamic_buttons: settings.show_smart_checkout
+                  , block_order: block_order
+                  , option_classes: 'flex flex-col'
+                  , select_wrapper_classes: 'w-full mb-3 md:mb-4' button_style: 'outline'
+                  , price_classes: 'mb-3 md:mb-4'
+                  , regular_price_classes: 'text-h4 font-heading heading-case leading-none'
+                  , is_quick_view: is_quick_view
+                  , option_type: 'buttons' %}
+  to: "{% render 'ship-product-form' with form_product, form_product: featured_product,
+    scope_id: section.id, dynamic_buttons: settings.show_smart_checkout, block_order:
+    block_order, option_classes: 'flex flex-col', select_wrapper_classes: 'w-full
+    mb-3 md:mb-4', button_style: 'outline', price_classes: 'mb-3 md:mb-4', regular_price_classes:
+    'text-h4 font-heading heading-case leading-none', is_quick_view: is_quick_view,
+    option_type: 'buttons' %}"
+  position: 4737..5177
+{%- endcomment -%}

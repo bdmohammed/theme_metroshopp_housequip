@@ -1,19 +1,10 @@
 <section
   class="bg-page text-body relative w-screen section-collection-grid"
 >
-  {%
-    render 'flotilla-collection-grid' with
-    collection: collection,
-    products_per_row: section.settings.products_per_row,
-    products_per_row_mobile: section.settings.products_per_row_mobile,
-    products_per_page: section.settings.products_per_page,
-    has_pagination: true,
-    pagination_type: section.settings.pagination_type,
-    loadin_animation_threshold: "0"
-  %}
+  {% render 'flotilla-collection-grid' with collection, collection: collection, products_per_row: section.settings.products_per_row, products_per_row_mobile: section.settings.products_per_row_mobile, products_per_page: section.settings.products_per_page, has_pagination: true, pagination_type: section.settings.pagination_type, loadin_animation_threshold: "0" %}
 
   <noscript>
-    {% render 'flotilla-collection-grid-noscript' with grid_section: section, collection: collection, products_per_row: section.settings.products_per_row, products_per_row_mobile: section.settings.products_per_row_mobile, products_per_page: section.settings.products_per_page, has_pagination: true, pagination_type: 'paged' %}
+    {% render 'flotilla-collection-grid-noscript' with grid_section, grid_section: section, collection: collection, products_per_row: section.settings.products_per_row, products_per_row_mobile: section.settings.products_per_row_mobile, products_per_page: section.settings.products_per_page, has_pagination: true, pagination_type: 'paged' %}
   </noscript>
 </section>
 
@@ -102,3 +93,37 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%
+        render 'flotilla-collection-grid' with
+        collection: collection,
+        products_per_row: section.settings.products_per_row,
+        products_per_row_mobile: section.settings.products_per_row_mobile,
+        products_per_page: section.settings.products_per_page,
+        has_pagination: true,
+        pagination_type: section.settings.pagination_type,
+        loadin_animation_threshold: "0"
+      %}
+  to: '{% render ''flotilla-collection-grid'' with collection, collection: collection,
+    products_per_row: section.settings.products_per_row, products_per_row_mobile:
+    section.settings.products_per_row_mobile, products_per_page: section.settings.products_per_page,
+    has_pagination: true, pagination_type: section.settings.pagination_type, loadin_animation_threshold:
+    "0" %}'
+  position: 83..443
+- from: "{% render 'flotilla-collection-grid-noscript' with grid_section: section,
+    collection: collection, products_per_row: section.settings.products_per_row, products_per_row_mobile:
+    section.settings.products_per_row_mobile, products_per_page: section.settings.products_per_page,
+    has_pagination: true, pagination_type: 'paged' %}"
+  to: "{% render 'flotilla-collection-grid-noscript' with grid_section, grid_section:
+    section, collection: collection, products_per_row: section.settings.products_per_row,
+    products_per_row_mobile: section.settings.products_per_row_mobile, products_per_page:
+    section.settings.products_per_page, has_pagination: true, pagination_type: 'paged'
+    %}"
+  position: 462..798
+{% endcomment %}

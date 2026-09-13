@@ -79,9 +79,25 @@
 
     {% assign name = section.id | append: '-product-' | append: swatch_product.id | append: '-option-' | append: option_index %}
     {% assign radio_id = name | append: '-value-' | append: forloop.index0 %}
-    {% render 'armament-swatch-option' with name: name, id: radio_id, value: value, disabled: disabled, color_dropper: dropper_value, image_upload: image_value, attributes: 'data-name="product-option-radio" data-aid="armament-radio-item-color"' %}
+    {% render 'armament-swatch-option' with name, name: name, id: radio_id, value: value, disabled: disabled, color_dropper: dropper_value, image_upload: image_value, attributes: 'data-name="product-option-radio" data-aid="armament-radio-item-color"' %}
   {% endfor %}
 </color-swatch>
 <safe-load-scripts>
   <script src="{{ 'component-color-swatch.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="color-swatch"></script>
 </safe-load-scripts>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render ''armament-swatch-option'' with name: name, id: radio_id, value:
+    value, disabled: disabled, color_dropper: dropper_value, image_upload: image_value,
+    attributes: ''data-name="product-option-radio" data-aid="armament-radio-item-color"''
+    %}'
+  to: '{% render ''armament-swatch-option'' with name, name: name, id: radio_id, value:
+    value, disabled: disabled, color_dropper: dropper_value, image_upload: image_value,
+    attributes: ''data-name="product-option-radio" data-aid="armament-radio-item-color"''
+    %}'
+  position: 3261..3510
+{% endcomment %}

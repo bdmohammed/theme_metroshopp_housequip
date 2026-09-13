@@ -5,29 +5,17 @@
   {% if section.settings.subheading != blank or section.settings.heading != blank %}
     <div class="{{ section.settings.alignment }} mb-4 md:mb-5 px-4 md:px-6" data-aid="featured-collection-header">
       {% if section.settings.subheading != blank %}
-        {% render 'armament-heading' with tag: 'h4'
-          , heading_content: section.settings.subheading
-          , heading_type: 'heading-4'
-          , classes: 'mb-2 md:mb-3' %}
+        {% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading, heading_type: 'heading-4', classes: 'mb-2 md:mb-3' %}
       {% endif %}
       {% if section.settings.heading != blank %}
-        {% render 'armament-heading' with tag: 'h2'
-          , heading_content: section.settings.heading
-          , heading_type: 'section-heading' %}
+        {% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading, heading_type: 'section-heading' %}
       {% endif %}
     </div>
   {% endif %}
 
   {% if section.settings.collection != blank %}
     <div data-aid="featured-collection-grid">
-      {% render 'flotilla-collection-grid' with collection: section.settings.collection
-        , products_per_row: section.settings.products_per_row
-        , products_per_row_mobile: section.settings.products_per_row_mobile
-        , products_per_page: section.settings.products_per_page
-        , has_pagination: false
-        , enable_filtering: false
-        , enable_sorting: false
-        , grid_container_classes: 'pt-0 pb-0 lg:pb-0' %}
+      {% render 'flotilla-collection-grid' with collection, collection: section.settings.collection, products_per_row: section.settings.products_per_row, products_per_row_mobile: section.settings.products_per_row_mobile, products_per_page: section.settings.products_per_page, has_pagination: false, enable_filtering: false, enable_sorting: false, grid_container_classes: 'pt-0 pb-0 lg:pb-0' %}
     </div>
   {% else %}
     {% if settings.enable_animations %}
@@ -40,10 +28,9 @@
           loadin-animation-delay
           class="md:flex-1 w-[calc(50%-10px)] md:w-full flex flex-col">
           {% assign placeholder = 'product-' | append: forloop.index %}
-          {% render 'armament-placeholder' with name: placeholder %}
+          {% render 'armament-placeholder' with name, name: placeholder %}
           <div class="text-{{ settings.product_info_position }} px-3 pt-2">
-            {% render 'armament-heading' with tag: 'h5'
-              , heading_content: 'Example product title' %}
+            {% render 'armament-heading' with tag, tag: 'h5', heading_content: 'Example product title' %}
             <span>{{ 1999 | money }}</span>
           </div>
         </li>
@@ -178,4 +165,49 @@
       "groups": ["header", "footer", "custom.overlay"]
     }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with tag: 'h4'
+              , heading_content: section.settings.subheading
+              , heading_type: 'heading-4'
+              , classes: 'mb-2 md:mb-3' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h4', heading_content: section.settings.subheading,
+    heading_type: 'heading-4', classes: 'mb-2 md:mb-3' %}"
+  position: 402..551
+- from: |-
+    {% render 'armament-heading' with tag: 'h2'
+              , heading_content: section.settings.heading
+              , heading_type: 'section-heading' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h2', heading_content: section.settings.heading,
+    heading_type: 'section-heading' %}"
+  position: 627..754
+- from: |-
+    {% render 'flotilla-collection-grid' with collection: section.settings.collection
+            , products_per_row: section.settings.products_per_row
+            , products_per_row_mobile: section.settings.products_per_row_mobile
+            , products_per_page: section.settings.products_per_page
+            , has_pagination: false
+            , enable_filtering: false
+            , enable_sorting: false
+            , grid_container_classes: 'pt-0 pb-0 lg:pb-0' %}
+  to: "{% render 'flotilla-collection-grid' with collection, collection: section.settings.collection,
+    products_per_row: section.settings.products_per_row, products_per_row_mobile:
+    section.settings.products_per_row_mobile, products_per_page: section.settings.products_per_page,
+    has_pagination: false, enable_filtering: false, enable_sorting: false, grid_container_classes:
+    'pt-0 pb-0 lg:pb-0' %}"
+  position: 899..1286
+- from: "{% render 'armament-placeholder' with name: placeholder %}"
+  to: "{% render 'armament-placeholder' with name, name: placeholder %}"
+  position: 1808..1872
+- from: |-
+    {% render 'armament-heading' with tag: 'h5'
+                  , heading_content: 'Example product title' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h5', heading_content: 'Example
+    product title' %}"
+  position: 1961..2054
+{%- endcomment -%}

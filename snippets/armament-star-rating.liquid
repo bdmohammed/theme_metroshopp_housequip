@@ -15,10 +15,26 @@
 
 <div class="flex{% if classes %} {{ classes }}{% endif %}" data-aid="star-rating">
   {% for star in (1..count) %}
-    {% render 'armament-icon' with icon: 'star', attributes: 'data-aid="filled-star"' %}
+    {% render 'armament-icon' with icon, icon: 'star', attributes: 'data-aid="filled-star"' %}
   {% endfor %}
 
   {% for star in (1..inactive) %}
-    {% render 'armament-icon' with icon: 'star', classes: 'opacity-25', attributes: 'data-aid="empty-star"' %}
+    {% render 'armament-icon' with icon, icon: 'star', classes: 'opacity-25', attributes: 'data-aid="empty-star"' %}
   {% endfor %}
-</div>
+</div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render ''armament-icon'' with icon: ''star'', attributes: ''data-aid="filled-star"''
+    %}'
+  to: '{% render ''armament-icon'' with icon, icon: ''star'', attributes: ''data-aid="filled-star"''
+    %}'
+  position: 611..701
+- from: '{% render ''armament-icon'' with icon: ''star'', classes: ''opacity-25'',
+    attributes: ''data-aid="empty-star"'' %}'
+  to: '{% render ''armament-icon'' with icon, icon: ''star'', classes: ''opacity-25'',
+    attributes: ''data-aid="empty-star"'' %}'
+  position: 756..868
+{%- endcomment -%}

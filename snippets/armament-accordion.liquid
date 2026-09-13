@@ -35,11 +35,11 @@
 {% endif %}
 
 {% capture plus_icon %}
-  {% render 'armament-icon' with icon: 'plus', classes: 'plus-icon' %}
+  {% render 'armament-icon' with icon, icon: 'plus', classes: 'plus-icon' %}
 {% endcapture %}
 
 {% capture minus_icon %}
-  {% render 'armament-icon' with icon: 'minus', classes: 'minus-icon' %}
+  {% render 'armament-icon' with icon, icon: 'minus', classes: 'minus-icon' %}
 {% endcapture %}
 
 <details
@@ -71,7 +71,7 @@
     </summary>
     <div class="animate-details-content">
       {% if textarea_id %}
-        {% render 'armament-textarea' with id: textarea_id, name: textarea_name, content: textarea_content, classes: 'w-full pb-3 md:pb-4', rows: 5 %}
+        {% render 'armament-textarea' with id, id: textarea_id, name: textarea_name, content: textarea_content, classes: 'w-full pb-3 md:pb-4', rows: 5 %}
       {% elsif prose %}
         <div class="pb-3 md:pb-4 prose prose-strong:text-body prose-blockquote:text-body prose-figcaption:text-body !max-w-full">{{ summary_content }}</div>
       {% else %}
@@ -94,3 +94,21 @@
     <script src="{{ 'component-accordion-accessibility.min.js' | asset_url }}" defer="defer" type="module" data-armada-load-key="accordion-accessibility"></script>
   </safe-load-scripts>
 {% endif %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-icon' with icon: 'plus', classes: 'plus-icon' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'plus', classes: 'plus-icon' %}"
+  position: 2157..2231
+- from: "{% render 'armament-icon' with icon: 'minus', classes: 'minus-icon' %}"
+  to: "{% render 'armament-icon' with icon, icon: 'minus', classes: 'minus-icon' %}"
+  position: 2277..2353
+- from: "{% render 'armament-textarea' with id: textarea_id, name: textarea_name,
+    content: textarea_content, classes: 'w-full pb-3 md:pb-4', rows: 5 %}"
+  to: "{% render 'armament-textarea' with id, id: textarea_id, name: textarea_name,
+    content: textarea_content, classes: 'w-full pb-3 md:pb-4', rows: 5 %}"
+  position: 4139..4285
+{% endcomment %}

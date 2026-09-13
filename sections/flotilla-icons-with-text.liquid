@@ -37,22 +37,13 @@
             data-fade-slider-index="{{ forloop.index0 }}"
             {% if forloop.first %}
             data-fade-slider-active{% endif %}>
-            {% render 'ship-icon-and-text-card' with icon_image: block.settings.icon_image
-              , text_alignment: section.settings.text_alignment
-              , heading: block.settings.heading
-              , text: block.settings.text
-              , link_url: block.settings.link
-            %}
+            {% render 'ship-icon-and-text-card' with icon_image, icon_image: block.settings.icon_image, text_alignment: section.settings.text_alignment, heading: block.settings.heading, text: block.settings.text, link_url: block.settings.link %}
           </li>
         {% endfor %}
       </ul>
       <template>
         <div data-name="mobile-indicator">
-          {% render 'armament-scroll-bar' with classes: 'pb-4 md:hidden'
-            , item_count: section.blocks.size
-            , parent: 'fade-slider'
-            , target: 'fade-slider'
-            , indicator: 'progress' %}
+          {% render 'armament-scroll-bar' with classes, classes: 'pb-4 md:hidden', item_count: section.blocks.size, parent: 'fade-slider', target: 'fade-slider', indicator: 'progress' %}
         </div>
       </template>
     </fade-slider>
@@ -185,4 +176,31 @@
       "groups": ["header", "custom.overlay"]
     }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'ship-icon-and-text-card' with icon_image: block.settings.icon_image
+                  , text_alignment: section.settings.text_alignment
+                  , heading: block.settings.heading
+                  , text: block.settings.text
+                  , link_url: block.settings.link
+                %}
+  to: "{% render 'ship-icon-and-text-card' with icon_image, icon_image: block.settings.icon_image,
+    text_alignment: section.settings.text_alignment, heading: block.settings.heading,
+    text: block.settings.text, link_url: block.settings.link %}"
+  position: 1443..1676
+- from: |-
+    {% render 'armament-scroll-bar' with classes: 'pb-4 md:hidden'
+                , item_count: section.blocks.size
+                , parent: 'fade-slider'
+                , target: 'fade-slider'
+                , indicator: 'progress' %}
+  to: "{% render 'armament-scroll-bar' with classes, classes: 'pb-4 md:hidden', item_count:
+    section.blocks.size, parent: 'fade-slider', target: 'fade-slider', indicator:
+    'progress' %}"
+  position: 1796..1972
+{%- endcomment -%}

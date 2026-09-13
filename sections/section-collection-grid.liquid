@@ -1,12 +1,4 @@
-{% render 'flotilla-collection-list' with desktop_rows: section.settings.collections_per_row_desktop
-  , mobile_rows: section.settings.collections_per_row_mobile
-  , headings_text_alignment: section.settings.text_alignment
-  , section_color_scheme: section.settings.section_color_scheme
-  , container_classes: 'pt-3 md:pt-0'
-  , subheading: section.settings.subheading
-  , heading: section.settings.heading
-  , blocks: section.blocks
-%}
+{% render 'flotilla-collection-list' with desktop_rows, desktop_rows: section.settings.collections_per_row_desktop, mobile_rows: section.settings.collections_per_row_mobile, headings_text_alignment: section.settings.text_alignment, section_color_scheme: section.settings.section_color_scheme, container_classes: 'pt-3 md:pt-0', subheading: section.settings.subheading, heading: section.settings.heading, blocks: section.blocks %}
 
 {% schema %}
   {
@@ -259,4 +251,26 @@
       "groups": ["header", "footer", "custom.overlay"]
     }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'flotilla-collection-list' with desktop_rows: section.settings.collections_per_row_desktop
+      , mobile_rows: section.settings.collections_per_row_mobile
+      , headings_text_alignment: section.settings.text_alignment
+      , section_color_scheme: section.settings.section_color_scheme
+      , container_classes: 'pt-3 md:pt-0'
+      , subheading: section.settings.subheading
+      , heading: section.settings.heading
+      , blocks: section.blocks
+    %}
+  to: "{% render 'flotilla-collection-list' with desktop_rows, desktop_rows: section.settings.collections_per_row_desktop,
+    mobile_rows: section.settings.collections_per_row_mobile, headings_text_alignment:
+    section.settings.text_alignment, section_color_scheme: section.settings.section_color_scheme,
+    container_classes: 'pt-3 md:pt-0', subheading: section.settings.subheading, heading:
+    section.settings.heading, blocks: section.blocks %}"
+  position: 0..429
+{%- endcomment -%}

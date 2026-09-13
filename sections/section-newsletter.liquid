@@ -43,11 +43,11 @@
   <div class="flex flex-col {{ section_align }}">
     {% liquid
       if section.settings.section_subheading != blank
-        render 'armament-heading' with heading_content: section.settings.section_subheading, tag: 'h3', heading_type: 'section-subheading', classes: subheading_classes, data_aid: 'newsletter-subheading'
+        render 'armament-heading' with heading_content, heading_content: section.settings.section_subheading, tag: 'h3', heading_type: 'section-subheading', classes: subheading_classes, data_aid: 'newsletter-subheading'
       endif
 
       if section.settings.section_heading != blank
-        render 'armament-heading' with heading_content: section.settings.section_heading, tag: 'h2', heading_type: 'section-heading', classes: text_align, data_aid: 'newsletter-heading'
+        render 'armament-heading' with heading_content, heading_content: section.settings.section_heading, tag: 'h2', heading_type: 'section-heading', classes: text_align, data_aid: 'newsletter-heading'
       endif
     %}
 
@@ -70,29 +70,10 @@
           defer="defer"
           type="module"></script>
       {% endif %}
-      {% render 'armament-input' with type: 'hidden'
-        , name: 'contact[tags]' %}
-      {%
-        render 'armament-input' with name: 'contact[email]'
-        , type: 'email'
-        , value: form.email
-        , id: newsletter_id
-        , attributes: 'aria-required="true" autocorrect="off" autocapitalize="off" autocomplete="email" required'
-        , classes: 'inline-block border-1 bg-page text-body border-body mb-10 min-w-[200px] md:min-w-[380px] '
-        , has_label: true
-        , label_class: 'hidden'
-        , placeholder: 'Drop Your Email Here!'
-        , label_text: label_text
-      %}
+      {% render 'armament-input' with type, type: 'hidden', name: 'contact[tags]' %}
+      {% render 'armament-input' with name, name: 'contact[email]', type: "email", value: form.email, id: newsletter_id, attributes: 'aria-required="true" autocorrect="off" autocapitalize="off" autocomplete="email" required', classes: 'inline-block border-1 bg-page text-body border-body mb-10 min-w-[200px] md:min-w-[380px] ', has_label: true, label_class: 'hidden', placeholder: 'Drop Your Email Here!', label_text: label_text %}
 
-      {%
-        render 'armament-button' with content: btn_text
-        , type: 'submit'
-        , attributes: button_attributes
-        , classes: 'inline-block py-[8px] mb-10 min-w-[120px] md:min-w-[150px] min-w-[fit-content]'
-        , loading: true
-        , data_aid: 'newsletter_submit'
-      %}
+      {% render 'armament-button' with content, content: btn_text, type: 'submit', attributes: button_attributes, classes: 'inline-block py-[8px] mb-10 min-w-[120px] md:min-w-[150px] min-w-[fit-content]', loading: true, data_aid: 'newsletter_submit' %}
     {% endform %}
   </div>
   {% if section.settings.section_width == 'narrow' %}</div>{% endif %}
@@ -191,4 +172,62 @@
       "groups": ["header", "custom.overlay"]
     }
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "        render 'armament-heading' with heading_content: section.settings.section_subheading,
+    tag: 'h3', heading_type: 'section-subheading', classes: subheading_classes, data_aid:
+    'newsletter-subheading'"
+  to: "        render 'armament-heading' with heading_content, heading_content: section.settings.section_subheading,
+    tag: 'h3', heading_type: 'section-subheading', classes: subheading_classes, data_aid:
+    'newsletter-subheading'"
+  position: 1717..1936
+- from: "        render 'armament-heading' with heading_content: section.settings.section_heading,
+    tag: 'h2', heading_type: 'section-heading', classes: text_align, data_aid: 'newsletter-heading'"
+  to: "        render 'armament-heading' with heading_content, heading_content: section.settings.section_heading,
+    tag: 'h2', heading_type: 'section-heading', classes: text_align, data_aid: 'newsletter-heading'"
+  position: 2001..2203
+- from: |-
+    {% render 'armament-input' with type: 'hidden'
+            , name: 'contact[tags]' %}
+  to: "{% render 'armament-input' with type, type: 'hidden', name: 'contact[tags]'
+    %}"
+  position: 2920..2998
+- from: |-
+    {%
+            render 'armament-input' with name: 'contact[email]'
+            , type: 'email'
+            , value: form.email
+            , id: newsletter_id
+            , attributes: 'aria-required="true" autocorrect="off" autocapitalize="off" autocomplete="email" required'
+            , classes: 'inline-block border-1 bg-page text-body border-body mb-10 min-w-[200px] md:min-w-[380px] '
+            , has_label: true
+            , label_class: 'hidden'
+            , placeholder: 'Drop Your Email Here!'
+            , label_text: label_text
+          %}
+  to: '{% render ''armament-input'' with name, name: ''contact[email]'', type: "email",
+    value: form.email, id: newsletter_id, attributes: ''aria-required="true" autocorrect="off"
+    autocapitalize="off" autocomplete="email" required'', classes: ''inline-block
+    border-1 bg-page text-body border-body mb-10 min-w-[200px] md:min-w-[380px] '',
+    has_label: true, label_class: ''hidden'', placeholder: ''Drop Your Email Here!'',
+    label_text: label_text %}'
+  position: 3005..3430
+- from: |-
+    {%
+            render 'armament-button' with content: btn_text
+            , type: 'submit'
+            , attributes: button_attributes
+            , classes: 'inline-block py-[8px] mb-10 min-w-[120px] md:min-w-[150px] min-w-[fit-content]'
+            , loading: true
+            , data_aid: 'newsletter_submit'
+          %}
+  to: "{% render 'armament-button' with content, content: btn_text, type: 'submit',
+    attributes: button_attributes, classes: 'inline-block py-[8px] mb-10 min-w-[120px]
+    md:min-w-[150px] min-w-[fit-content]', loading: true, data_aid: 'newsletter_submit'
+    %}"
+  position: 3438..3684
+{%- endcomment -%}

@@ -1,7 +1,7 @@
 <section data-color-scheme="{{ section.settings.section_color_scheme }}" class="bg-page text-body">
   {% if section.settings.blog_navigation != blank %}
     <div class="px-3 md:px-4 lg:px-6 py-4">
-      {% render 'armament-navigation-banner' with nav_item: section.settings.blog_navigation.links, container_classes: 'justify-center flex-wrap' %}
+      {% render 'armament-navigation-banner' with nav_item, nav_item: section.settings.blog_navigation.links, container_classes: 'justify-center flex-wrap' %}
     </div>
   {% elsif section.settings.blog_navigation == blank and request.design_mode %}
     <div class="px-3 md:px-4 lg:px-6 py-4">
@@ -62,3 +62,15 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-navigation-banner' with nav_item: section.settings.blog_navigation.links,
+    container_classes: 'justify-center flex-wrap' %}"
+  to: "{% render 'armament-navigation-banner' with nav_item, nav_item: section.settings.blog_navigation.links,
+    container_classes: 'justify-center flex-wrap' %}"
+  position: 203..355
+{% endcomment %}

@@ -94,17 +94,17 @@
             {%- if url -%}
               <a href="{{ url }}" class="h-full">
             {%- endif -%}
-              {% render 'armament-image' with image: media, classes: classes %}
+              {% render 'armament-image' with image, image: media, classes: classes %}
             {%- if url -%}
               </a>
             {%- endif -%}
             {% if media.media_type == 'model' %}
               <div data-icon-type="model" class="absolute top-3 right-3 z-10">
-                {% render 'armament-icon' with icon: '3d-model', no_animation: true %}
+                {% render 'armament-icon' with icon, icon: '3d-model', no_animation: true %}
               </div>
             {% elsif media.media_type contains 'video' %}
               <div data-icon-type="video" class="absolute top-3 right-3 z-10">
-                {% render 'armament-icon' with icon: 'play', no_animation: true %}
+                {% render 'armament-icon' with icon, icon: 'play', no_animation: true %}
               </div>
             {% endif %}
           </div>
@@ -115,12 +115,44 @@
 
   {% comment %} Slider-specific elements {% endcomment %}
   <template>
-    {% render 'armament-slider-arrows' with hide_on_mobile: true, classes: 'opacity-0 group-hover:opacity-100 group-focus:opacity-100', left_position_classes: '-left-6 group-hover:-left-0 group-focus:-left-0', right_position_classes: '-right-6 group-hover:-right-0 group-focus:-right-0' %}
+    {% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true, classes: 'opacity-0 group-hover:opacity-100 group-focus:opacity-100', left_position_classes: '-left-6 group-hover:-left-0 group-focus:-left-0', right_position_classes: '-right-6 group-hover:-right-0 group-focus:-right-0' %}
     <div data-name="mobile-indicator" class="block xl:hidden">
-      {% render 'armament-scroll-bar' with classes: 'pb-4', item_count: media.size, parent: 'slider-engine', target: 'slider', indicator: 'progress', loop_forward: 'true' %}
+      {% render 'armament-scroll-bar' with classes, classes: 'pb-4', item_count: media.size, parent: 'slider-engine', target: 'slider', indicator: 'progress', loop_forward: 'true' %}
     </div>
   </template>
 </slider-engine>
 
 <script src="{{ 'engine-slider.min.js' | asset_url }}" defer="defer" type="module"></script>
 
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'armament-image' with image: media, classes: classes %}"
+  to: "{% render 'armament-image' with image, image: media, classes: classes %}"
+  position: 2990..3062
+- from: "{% render 'armament-icon' with icon: '3d-model', no_animation: true %}"
+  to: "{% render 'armament-icon' with icon, icon: '3d-model', no_animation: true %}"
+  position: 3279..3355
+- from: "{% render 'armament-icon' with icon: 'play', no_animation: true %}"
+  to: "{% render 'armament-icon' with icon, icon: 'play', no_animation: true %}"
+  position: 3530..3602
+- from: "{% render 'armament-slider-arrows' with hide_on_mobile: true, classes: 'opacity-0
+    group-hover:opacity-100 group-focus:opacity-100', left_position_classes: '-left-6
+    group-hover:-left-0 group-focus:-left-0', right_position_classes: '-right-6 group-hover:-right-0
+    group-focus:-right-0' %}"
+  to: "{% render 'armament-slider-arrows' with hide_on_mobile, hide_on_mobile: true,
+    classes: 'opacity-0 group-hover:opacity-100 group-focus:opacity-100', left_position_classes:
+    '-left-6 group-hover:-left-0 group-focus:-left-0', right_position_classes: '-right-6
+    group-hover:-right-0 group-focus:-right-0' %}"
+  position: 3793..4094
+- from: "{% render 'armament-scroll-bar' with classes: 'pb-4', item_count: media.size,
+    parent: 'slider-engine', target: 'slider', indicator: 'progress', loop_forward:
+    'true' %}"
+  to: "{% render 'armament-scroll-bar' with classes, classes: 'pb-4', item_count:
+    media.size, parent: 'slider-engine', target: 'slider', indicator: 'progress',
+    loop_forward: 'true' %}"
+  position: 4164..4340
+{% endcomment %}

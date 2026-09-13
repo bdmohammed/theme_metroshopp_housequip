@@ -18,10 +18,7 @@
 
           {% if article.tags.size > 0 %}
             <div class="flex flex-col pb-3 md:pb-4" {{ block.shopify_attributes }}>
-              {% render 'armament-heading' with tag: 'h6'
-                , heading_content: tags_heading
-                , classes: 'text-h5 mb-2'
-                , data_aid: 'article-tags' %}
+              {% render 'armament-heading' with tag, tag: 'h6', heading_content: tags_heading, classes: 'text-h5 mb-2', data_aid: 'article-tags' %}
               <span class="mb-3 last:mb-0">{{ article.tags | join: ', ' }}</span>
             </div>
           {% endif %}
@@ -44,20 +41,12 @@
           %}
 
           <div class="pb-3 md:pb-4" {{ block.shopify_attributes }}>
-            {% render 'armament-heading' with tag: 'h6'
-              , heading_content: comments_heading
-              , classes: 'text-h5 mb-2'
-              , data_aid: 'comment-count' %}
+            {% render 'armament-heading' with tag, tag: 'h6', heading_content: comments_heading, classes: 'text-h5 mb-2', data_aid: 'comment-count' %}
             <span>{{ number_of_comments }} {{ comments_text }}</span>
           </div>
 
         {% when "article_social_sharing" %}
-          {% render 'ship-social-sharing' with share_object: 'article'
-            , show_facebook: settings.share_facebook
-            , show_twitter: settings.share_twitter
-            , show_pinterest: settings.share_pinterest
-            , alignment: 'left'
-            , shopify_attributes: block.shopify_attributes %}
+          {% render 'ship-social-sharing' with share_object, share_object: 'article', show_facebook: settings.share_facebook, show_twitter: settings.share_twitter, show_pinterest: settings.share_pinterest, alignment: 'left', shopify_attributes: block.shopify_attributes %}
 
         {% when "article_pagination" %}
           {% if blog.previous_article or blog.next_article %}
@@ -67,17 +56,13 @@
                 {% if blog.previous_article %}
                   {% assign prev_article = 'general.pagination.previous' | t %}
                   <div class="article-previous-article col-start-1 col-end-2">
-                    <a class="flex items-center justify-center group" href="{{ blog.previous_article }}">{% render 'armament-icon' with icon: 'arrow-left'
-  , classes: 'mr-3' %}<span class="sr-only">{{ prev_article }}</span>
+                    <a class="flex items-center justify-center group" href="{{ blog.previous_article }}">{% render 'armament-icon' with icon, icon: 'arrow-left', classes: 'mr-3' %}<span class="sr-only">{{ prev_article }}</span>
                     </a>
                   </div>
                 {% endif %}
 
                 <div class="article-heading col-start-2 col-end-3 text-center">
-                  {% render 'armament-heading' with type: 'h6'
-                    , heading_content: article.title
-                    , classes: 'text-h5'
-                    , data_aid: 'article-title' %}
+                  {% render 'armament-heading' with type, type: 'h6', heading_content: article.title, classes: 'text-h5', data_aid: 'article-title' %}
                 </div>
 
                 {% if blog.next_article %}
@@ -85,8 +70,7 @@
                   <div class="article-next-article col-start-3 col-end-4">
                     <a class="flex items-center justify-center group" href="{{ blog.next_article }}">
                       <span class="sr-only">{{ next_article }}</span>
-                      {% render 'armament-icon' with icon: 'arrow-right'
-                        , classes: 'ml-3' %}</a>
+                      {% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'ml-3' %}</a>
                   </div>
                 {% endif %}
 
@@ -171,4 +155,56 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'armament-heading' with tag: 'h6'
+                    , heading_content: tags_heading
+                    , classes: 'text-h5 mb-2'
+                    , data_aid: 'article-tags' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h6', heading_content: tags_heading,
+    classes: 'text-h5 mb-2', data_aid: 'article-tags' %}"
+  position: 923..1056
+- from: |-
+    {% render 'armament-heading' with tag: 'h6'
+                  , heading_content: comments_heading
+                  , classes: 'text-h5 mb-2'
+                  , data_aid: 'comment-count' %}
+  to: "{% render 'armament-heading' with tag, tag: 'h6', heading_content: comments_heading,
+    classes: 'text-h5 mb-2', data_aid: 'comment-count' %}"
+  position: 2011..2149
+- from: |-
+    {% render 'ship-social-sharing' with share_object: 'article'
+                , show_facebook: settings.share_facebook
+                , show_twitter: settings.share_twitter
+                , show_pinterest: settings.share_pinterest
+                , alignment: 'left'
+                , shopify_attributes: block.shopify_attributes %}
+  to: "{% render 'ship-social-sharing' with share_object, share_object: 'article',
+    show_facebook: settings.share_facebook, show_twitter: settings.share_twitter,
+    show_pinterest: settings.share_pinterest, alignment: 'left', shopify_attributes:
+    block.shopify_attributes %}"
+  position: 2292..2554
+- from: |-
+    {% render 'armament-icon' with icon: 'arrow-left'
+      , classes: 'mr-3' %}
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-left', classes: 'mr-3' %}"
+  position: 3212..3287
+- from: |-
+    {% render 'armament-heading' with type: 'h6'
+                        , heading_content: article.title
+                        , classes: 'text-h5'
+                        , data_aid: 'article-title' %}
+  to: "{% render 'armament-heading' with type, type: 'h6', heading_content: article.title,
+    classes: 'text-h5', data_aid: 'article-title' %}"
+  position: 3512..3644
+- from: |-
+    {% render 'armament-icon' with icon: 'arrow-right'
+                            , classes: 'ml-3' %}
+  to: "{% render 'armament-icon' with icon, icon: 'arrow-right', classes: 'ml-3' %}"
+  position: 4057..4133
+{%- endcomment -%}
